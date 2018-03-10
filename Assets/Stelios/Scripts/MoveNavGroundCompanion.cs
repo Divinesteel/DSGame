@@ -69,6 +69,6 @@ public class MoveNavGroundCompanion : MonoBehaviour
             isFollowingTarget = true;
         }
 
-        anim.SetFloat("Walking", navMeshAgent.velocity.sqrMagnitude);
+        anim.SetFloat("Walking", navMeshAgent.velocity.magnitude/navMeshAgent.speed);
     }
 }
