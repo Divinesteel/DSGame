@@ -27,6 +27,10 @@ public class HasItemToInteract : MonoBehaviour {
                 {
                     anim.Play("Open_Chest");
                 }
+                else
+                {
+                    anim.Play("Locked_Chest");
+                }
             }
 
         }

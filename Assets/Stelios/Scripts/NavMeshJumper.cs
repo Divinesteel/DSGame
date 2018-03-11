@@ -7,7 +7,7 @@ public class NavMeshJumper : MonoBehaviour
 {
     public float height;
     public float duration;
-    public List<GameObject> MeshLinks = new List<GameObject>();
+
     private string OffMeshName;
 
     public IEnumerator Start()

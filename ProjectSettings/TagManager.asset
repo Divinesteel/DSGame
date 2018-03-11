@@ -7,9 +7,10 @@ TagManager:
   - GroundPet
   - FlyingPet
   - FlyingPet_Link
-  - lb_groundTarget
-  - lb_perchTarget
   - FlyingInteractable
+  - Item
+  - GroundDig
+  - PlayerInteractable
   layers:
   - Default
   - TransparentFX

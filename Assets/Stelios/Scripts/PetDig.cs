@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PetDig : MonoBehaviour {
 
-    public GameObject chest;
+    public GameObject digobject;
     private Animation anim;
 
 	// Use this for initialization
 	void Start () {
-        anim = chest.GetComponent<Animation>();
+        anim = digobject.GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -23,9 +23,7 @@ public class PetDig : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                chest.SetActive(true);
-                anim.Play("Chest_Dig");
-                
+                digobject.SetActive(true);         
             }
         }
     }
