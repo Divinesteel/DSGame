@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class PlayAnimationPillar : MonoBehaviour {
 
-	public GameObject Player;
 	private Animation anim;
 	public GameObject Link_Obstacle;
 	private NavMeshLink[] Scripts;
@@ -37,15 +36,13 @@ public class PlayAnimationPillar : MonoBehaviour {
 
 			}
 		}
-		
-
 	}
 
 	void OnTriggerStay(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
 		{
-			if (Input.GetKeyDown(KeyCode.E) && !IsAnimPlayed)
+			if (other.gameObject.GetComponent<PlayerInteract>().isInteracting && !IsAnimPlayed)
 			{
 				Link_Obstacle.SetActive(true);
 				anim.Play();

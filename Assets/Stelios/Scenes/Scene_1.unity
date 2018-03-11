@@ -1166,18 +1166,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.37, y: 1, z: 1.97}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &119364421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 119364415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f7b522f5df63e48909ddea1a6ed0b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 689467001}
 --- !u!114 &119364422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4518,6 +4506,19 @@ GameObject:
   m_PrefabParentObject: {fileID: 1308185164055028, guid: 6af5beaf315c45748b65950433d2412d,
     type: 2}
   m_PrefabInternal: {fileID: 1311711170}
+--- !u!114 &689466995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 689466994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a760cca1103f648a0d08e4f658ebb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteracting: 0
+  keycode: 101
 --- !u!114 &689467001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8414,7 +8415,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1289060950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1859332533}
+        m_MethodName: Dig
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1289060950
@@ -13016,6 +13028,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.01, y: 1.09, z: 2}
   m_Center: {x: -0.76, y: 0, z: 0}
+--- !u!1 &1859332525 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1564344912798684, guid: 6eedf2a6b8f6cb44d98fa488931684bd,
+    type: 2}
+  m_PrefabInternal: {fileID: 183229549}
+--- !u!114 &1859332533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1859332525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632208e8b1ce7df4caa572aba938e84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBarking: 0
+  BarkingKey: 122
+  isDigging: 0
+  DiggingKey: 120
 --- !u!1 &1867349889
 GameObject:
   m_ObjectHideFlags: 0

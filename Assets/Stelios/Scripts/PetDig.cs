@@ -5,11 +5,9 @@ using UnityEngine;
 public class PetDig : MonoBehaviour {
 
     public GameObject digobject;
-    private Animation anim;
 
 	// Use this for initialization
 	void Start () {
-        anim = digobject.GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -21,7 +19,7 @@ public class PetDig : MonoBehaviour {
     {
         if(other.gameObject.tag == "GroundPet")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (other.gameObject.GetComponent<GroundPetInteract>().isDigging)
             {
                 digobject.SetActive(true);         
             }
