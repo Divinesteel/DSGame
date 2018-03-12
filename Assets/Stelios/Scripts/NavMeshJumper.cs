@@ -37,10 +37,13 @@ public class NavMeshJumper : MonoBehaviour
         OffMeshLinkData data = agent.currentOffMeshLinkData;
         Vector3 startPos = agent.transform.position;
         Vector3 endPos = data.endPos;
-     
-        Vector3 relativePos = endPos - agent.transform.position;
+
+
+        Vector3 relativePos = (endPos - agent.transform.position);
+        //relativePos.Set(relativePos.x, 0, relativePos.z);
 
         Quaternion rotation = Quaternion.LookRotation(relativePos);
+        rotation.Set(0, rotation.y, 0, 1);
 
         float time = 0f;
         float timerot = 0f;
@@ -52,7 +55,7 @@ public class NavMeshJumper : MonoBehaviour
 
             agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, rotation, timerot);
 
-            timerot += Time.deltaTime / (float)0.5;
+            timerot += Time.deltaTime / duration;
 
             time += Time.deltaTime / duration;
             yield return null;
