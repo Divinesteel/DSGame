@@ -43,7 +43,7 @@ public class NavMeshJumper : MonoBehaviour
         //relativePos.Set(relativePos.x, 0, relativePos.z);
 
         Quaternion rotation = Quaternion.LookRotation(relativePos);
-        rotation.Set(0, rotation.y, 0, 1);
+        rotation.Set(0, rotation.y, 0, rotation.w);
 
         float time = 0f;
         float timerot = 0f;
