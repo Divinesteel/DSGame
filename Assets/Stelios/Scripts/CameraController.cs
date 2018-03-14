@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour {
 
     public Vector3 panLimit = new Vector3(5f,5f,5f);
     public float panSpeed;
-    public float panBorderThickness = 10f;
+    public float panBorderThickness;
 
     public Vector3 MovingCameraPosition;
 
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour {
 
     public bool isReturning;
     private Vector3 StartReturningPos;
-    private float returningTimer;
+    public float returningTimer;
 
 
     void Start()
@@ -36,9 +36,45 @@ public class CameraController : MonoBehaviour {
         }
 
 
-        if (!isReturning)
+        if (!isReturning && (Input.mousePosition.y >= Screen.height - panBorderThickness || 
+                            Input.mousePosition.y <= panBorderThickness || 
+                            Input.mousePosition.x <= panBorderThickness || 
+                            Input.mousePosition.x >= Screen.width - panBorderThickness) 
+                         && !Input.GetKey(KeyCode.W)
+                         && !Input.GetKey(KeyCode.A)
+                         && !Input.GetKey(KeyCode.S)
+                         && !Input.GetKey(KeyCode.D))
         {
-            if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+            if(Input.mousePosition.y >= Screen.height - panBorderThickness && Input.mousePosition.x <= panBorderThickness) 
+            {
+                isFollowingTarget = false;
+                MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
+                                                transform.position.y,
+                                                transform.position.z - panSpeed * Time.deltaTime);
+            }
+            else if (Input.mousePosition.y >= Screen.height - panBorderThickness && Input.mousePosition.x >= Screen.width - panBorderThickness)
+            {
+                isFollowingTarget = false;
+                MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
+                                                transform.position.y,
+                                                transform.position.z - panSpeed * Time.deltaTime);
+            }
+            else if (Input.mousePosition.y <= panBorderThickness && Input.mousePosition.x <= panBorderThickness)
+            {
+                isFollowingTarget = false;
+                MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
+                                                transform.position.y,
+                                                transform.position.z + panSpeed * Time.deltaTime);
+            }
+            else if (Input.mousePosition.y <= panBorderThickness && Input.mousePosition.x >= Screen.width - panBorderThickness)
+            {
+                isFollowingTarget = false;
+                MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
+                                                transform.position.y,
+                                                transform.position.z + panSpeed * Time.deltaTime);
+            }
+
+            else if (Input.mousePosition.y >= Screen.height - panBorderThickness)
             {
                 isFollowingTarget = false;
                 MovingCameraPosition = new Vector3(transform.position.x,
@@ -59,7 +95,7 @@ public class CameraController : MonoBehaviour {
                                                 transform.position.y,
                                                 transform.position.z);
             }
-            else if (Input.mousePosition.x >= Screen.width + panBorderThickness)
+            else if (Input.mousePosition.x >= Screen.width - panBorderThickness)
             {
                 isFollowingTarget = false;
                 MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
@@ -93,8 +129,8 @@ public class CameraController : MonoBehaviour {
                     returningTimer = 0;
                 }
 
-                transform.position = Vector3.Lerp(StartReturningPos, target.position + offset, returningTimer);
-                returningTimer += Time.deltaTime / 0.5f;
+                transform.position = Vector3.Lerp(StartReturningPos, target.position + offset, -Mathf.Pow(2,-returningTimer + 1) +2/*-(returningTimer - 1) * (returningTimer - 1) + 1*/);
+                returningTimer += Time.deltaTime / 0.3f;
             }
             else
             {
