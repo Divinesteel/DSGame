@@ -8,8 +8,10 @@ public class CameraController : MonoBehaviour {
     public Transform target;
     public Vector3 offset = new Vector3(0f, 18f, 15.5f);
 
-    public Vector3 panLimit = new Vector3(5f,5f,5f);
-    public float panSpeed;
+    public Vector3 panLimit = new Vector3(5f, 5f, 5f);
+
+    public float cameraSpeed;
+    private float panSpeed;
     public float panBorderThickness;
 
     public Vector3 MovingCameraPosition;
@@ -20,11 +22,19 @@ public class CameraController : MonoBehaviour {
     private Vector3 StartReturningPos;
     public float returningTimer;
 
+    private float time;
+
+    enum Direction {Up,Down,Left,Right,UpLeft,UpRight,DownLeft,DownRight};
+
+    Direction direction;
+      
+
 
     void Start()
     {
         transform.position = target.position + offset;
         isFollowingTarget = true;
+        panSpeed = 0;
     }
 
     // Update is called once per frame
@@ -36,80 +46,131 @@ public class CameraController : MonoBehaviour {
         }
 
 
-        if (!isReturning && (Input.mousePosition.y >= Screen.height - panBorderThickness || 
+        if (panSpeed > 0 || (!isReturning && (Input.mousePosition.y >= Screen.height - panBorderThickness || 
                             Input.mousePosition.y <= panBorderThickness || 
                             Input.mousePosition.x <= panBorderThickness || 
                             Input.mousePosition.x >= Screen.width - panBorderThickness) 
                          && !Input.GetKey(KeyCode.W)
                          && !Input.GetKey(KeyCode.A)
                          && !Input.GetKey(KeyCode.S)
-                         && !Input.GetKey(KeyCode.D))
-        {
-            if(Input.mousePosition.y >= Screen.height - panBorderThickness && Input.mousePosition.x <= panBorderThickness) 
-            {
+                         && !Input.GetKey(KeyCode.D)))
+        {           
+
+            if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x <= panBorderThickness + 20) 
+            {              
+                direction = Direction.UpLeft;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
-                                                transform.position.y,
-                                                transform.position.z - panSpeed * Time.deltaTime);
+                time = 0;
             }
-            else if (Input.mousePosition.y >= Screen.height - panBorderThickness && Input.mousePosition.x >= Screen.width - panBorderThickness)
+            else if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
+                direction = Direction.UpRight;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
-                                                transform.position.y,
-                                                transform.position.z - panSpeed * Time.deltaTime);
+                time = 0;
             }
-            else if (Input.mousePosition.y <= panBorderThickness && Input.mousePosition.x <= panBorderThickness)
+            else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x <= panBorderThickness + 20)
             {
+                direction = Direction.DownLeft;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
-                                                transform.position.y,
-                                                transform.position.z + panSpeed * Time.deltaTime);
+                time = 0;
             }
-            else if (Input.mousePosition.y <= panBorderThickness && Input.mousePosition.x >= Screen.width - panBorderThickness)
+            else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
+                direction = Direction.DownRight;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
-                                                transform.position.y,
-                                                transform.position.z + panSpeed * Time.deltaTime);
+                time = 0;
             }
 
             else if (Input.mousePosition.y >= Screen.height - panBorderThickness)
             {
+                direction = Direction.Up;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x,
-                                                transform.position.y,
-                                                transform.position.z - panSpeed * Time.deltaTime);
+                time = 0;
             }
             else if (Input.mousePosition.y <= panBorderThickness)
             {
+                direction = Direction.Down;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x,
-                                                transform.position.y,
-                                                transform.position.z + panSpeed * Time.deltaTime);
+                time = 0;
             }
             else if (Input.mousePosition.x <= panBorderThickness)
             {
+                direction = Direction.Left;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
-                                                transform.position.y,
-                                                transform.position.z);
+                time = 0;
             }
             else if (Input.mousePosition.x >= Screen.width - panBorderThickness)
             {
+                direction = Direction.Right;
+                panSpeed = cameraSpeed;
                 isFollowingTarget = false;
-                MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
+                time = 0;
+            }
+         
+            if (isFollowingTarget == false)
+            {
+                if(panSpeed > 0)
+                {
+                    switch (direction)
+                    {
+                        case Direction.Up:
+                            MovingCameraPosition = new Vector3(transform.position.x,
+                                                transform.position.y,
+                                                transform.position.z - panSpeed * Time.deltaTime);
+                            break;
+                        case Direction.Down:
+                            MovingCameraPosition = new Vector3(transform.position.x,
+                                               transform.position.y,
+                                               transform.position.z + panSpeed * Time.deltaTime);
+                            break;
+                        case Direction.Left:
+                            MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
+                                               transform.position.y,
+                                               transform.position.z);
+                            break;
+                        case Direction.Right:
+                            MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
                                                 transform.position.y,
                                                 transform.position.z);
-            }
+                            break;
+                        case Direction.UpLeft:
+                            MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
+                                               transform.position.y,
+                                               transform.position.z - panSpeed * Time.deltaTime);
+                            break;
+                        case Direction.UpRight:
+                            MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
+                                                transform.position.y,
+                                                transform.position.z - panSpeed * Time.deltaTime);
+                            break;
+                        case Direction.DownLeft:
+                            MovingCameraPosition = new Vector3(transform.position.x + panSpeed * Time.deltaTime,
+                                               transform.position.y,
+                                               transform.position.z + panSpeed * Time.deltaTime);
+                            break;
+                        case Direction.DownRight:
+                            MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
+                                               transform.position.y,
+                                               transform.position.z + panSpeed * Time.deltaTime);
+                            break;
+                    }
 
-            MovingCameraPosition.Set(Mathf.Clamp(MovingCameraPosition.x, target.position.x + offset.x - panLimit.x, target.position.x + offset.x + panLimit.x),
+                    MovingCameraPosition.Set(Mathf.Clamp(MovingCameraPosition.x, target.position.x + offset.x - panLimit.x, target.position.x + offset.x + panLimit.x),
                     MovingCameraPosition.y,
                     Mathf.Clamp(MovingCameraPosition.z, target.position.z + offset.z - panLimit.z, target.position.z + offset.z + panLimit.z));
 
-            if (isFollowingTarget == false)
-            {
-                transform.position = MovingCameraPosition; 
+                    panSpeed -= panSpeed * time;
+                    time += Time.deltaTime / (float)0.5;
+
+                }
+                transform.position = MovingCameraPosition;
             }
         }
        

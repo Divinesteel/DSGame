@@ -51,7 +51,7 @@ public class Aggro : MonoBehaviour {
         if (agent.velocity.magnitude == 0 && isReturning)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, startingPosition.rotation, Time.deltaTime * 5);
-            if (Vector3.Angle(transform.forward, startingPosition.forward) < .1)
+            if (Vector3.Angle(transform.forward, startingPosition.forward) < .2)
             {
                 isReturning = false;
             }
