@@ -13,8 +13,6 @@ public class MoveNavFlightCompanion : MonoBehaviour
     public float maxDistance;
     private Animator anim;
     public float stoppingDistance;
-    public Inventory inventory;
-    public float PickingUpDistance;
 
 
     // Use this for initialization
@@ -23,6 +21,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
         isFollowingTarget = true;
         navMeshAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -59,31 +58,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray.origin, ray.direction, out hit))
                 {
-                   
-                        if (hit.collider.gameObject.tag == "Item")
-                        {
-                            Vector3 FlyingCompanionItemDistance = new Vector3((transform.position - hit.collider.gameObject.transform.position).x,
-                            (transform.position - hit.collider.gameObject.transform.position).y,
-                            (transform.position - hit.collider.gameObject.transform.position).z);
-
-                            if (Mathf.Abs(FlyingCompanionItemDistance.magnitude) < PickingUpDistance)
-                            {
-
-                                hit.collider.gameObject.SetActive(false);
-
-                                switch (hit.collider.gameObject.name)
-                                {
-                                    case "Key":
-                                        inventory.Key = true;
-                                        break;
-                                }
-                                return;
-                            }
-                        }
-
-                        navMeshAgent.destination = hit.point;
-                    
-                   
+                    navMeshAgent.destination = hit.point;
 
                 }
             }
