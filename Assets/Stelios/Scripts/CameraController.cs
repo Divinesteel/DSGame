@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour {
     enum Direction {Up,Down,Left,Right,UpLeft,UpRight,DownLeft,DownRight};
 
     Direction direction;
-      
 
+    public bool invertCamera;
 
     void Start()
     {
@@ -57,29 +57,33 @@ public class CameraController : MonoBehaviour {
         {           
 
             if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x <= panBorderThickness + 20) 
-            {              
-                direction = Direction.UpLeft;
+            {   
+                if(invertCamera) direction = Direction.DownRight;
+                else direction = Direction.UpLeft;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
-                direction = Direction.UpRight;
+                if(invertCamera) direction = Direction.DownLeft;
+                else direction = Direction.UpRight;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x <= panBorderThickness + 20)
             {
-                direction = Direction.DownLeft;
+                if(invertCamera) direction = Direction.UpRight;
+                else direction = Direction.DownLeft;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
-                direction = Direction.DownRight;
+                if(invertCamera) direction = Direction.UpLeft;
+                else direction = Direction.DownRight;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
@@ -87,28 +91,32 @@ public class CameraController : MonoBehaviour {
 
             else if (Input.mousePosition.y >= Screen.height - panBorderThickness)
             {
-                direction = Direction.Up;
+                if(invertCamera) direction = Direction.Down;
+                else direction = Direction.Up;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.y <= panBorderThickness)
             {
-                direction = Direction.Down;
+                if(invertCamera) direction = Direction.Up;
+                else direction = Direction.Down;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.x <= panBorderThickness)
             {
-                direction = Direction.Left;
+                if(invertCamera) direction = Direction.Right;
+                else direction = Direction.Left;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;
             }
             else if (Input.mousePosition.x >= Screen.width - panBorderThickness)
             {
-                direction = Direction.Right;
+                if(invertCamera) direction = Direction.Left;
+                else direction = Direction.Right;
                 panSpeed = cameraSpeed;
                 isFollowingTarget = false;
                 time = 0;

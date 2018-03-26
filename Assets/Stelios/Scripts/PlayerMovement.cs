@@ -16,7 +16,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator anim;
 
-    float time;
+    public bool invertHorizontal;
+    public bool invertVertical;
+
+    private float time;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +37,10 @@ public class PlayerMovement : MonoBehaviour {
         float lh = Input.GetAxis("Horizontal");
         float lv = Input.GetAxis("Vertical");
 
-        moveInput = new Vector3(lh, 0f, lv);
+        moveInput = new Vector3(lh * InvertAxis(invertHorizontal), 0f, lv * InvertAxis(invertVertical));
+        
+
+
         Vector3 cameraForward = mainCamera.transform.forward;
         cameraForward.y = 0;
 
@@ -68,4 +76,11 @@ public class PlayerMovement : MonoBehaviour {
             rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
                
     }
+
+    private int InvertAxis(bool direction)
+    {
+        if (direction) return -1;
+        else return 1;
+    }
+
 }
