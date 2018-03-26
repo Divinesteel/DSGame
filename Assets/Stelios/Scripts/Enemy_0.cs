@@ -22,7 +22,7 @@ public class Enemy_0 : MonoBehaviour
 
     bool arrived;
     private int prevDestPoint;
-    bool canSee;
+    public bool canSee;
 
     Vector3 lookTowards;
 
@@ -34,11 +34,11 @@ public class Enemy_0 : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        lastKnownPosition = transform.position;
-        canSee = false;
         destIndex = 0;
+        lastKnownPosition = patrolTargetsPosition[destIndex].position;
+        canSee = false;
         RotateTime = 0;
-        patrolling = true;
+        patrolling = false;
     }
 
     // Update is called once per frame
@@ -55,12 +55,21 @@ public class Enemy_0 : MonoBehaviour
             {
                 if (!arrived)
                 {
+                    if(agent.velocity == Vector3.zero) {
+                        transform.rotation = Quaternion.Slerp(transform.rotation, patrolTargetsPosition[destIndex].rotation, RotateTime);
+                        RotateTime += Time.deltaTime / RotateDuration;
 
-                    transform.rotation = Quaternion.Slerp(transform.rotation, patrolTargetsPosition[destIndex].rotation, RotateTime);
-                    RotateTime += Time.deltaTime / RotateDuration;
-                    if (RotateTime >= 1)
+                        if(Vector3.Angle(transform.forward,patrolTargetsPosition[destIndex].forward) < 0.1)
+                        {
+                            transform.rotation = patrolTargetsPosition[destIndex].rotation;
+                        }
+
+                    }
+                    
+                    if (transform.rotation == patrolTargetsPosition[destIndex].rotation)
                     {
                         hasRotated = true;
+                        RotateTime = 0;
                     }
                     
 
@@ -81,8 +90,12 @@ public class Enemy_0 : MonoBehaviour
 
         if (canSee)
         {
-            agent.SetDestination(target.transform.position);
-            patrolling = false;
+
+            
+            lastKnownPosition = patrolTargetsPosition[destIndex].position;
+
+            agent.SetDestination(target.position);
+
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 //anim.SetBool("Attack", true);
@@ -98,14 +111,15 @@ public class Enemy_0 : MonoBehaviour
             if (!patrolling)
             {
                 agent.SetDestination(lastKnownPosition);
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-                    patrolling = true;
-                    StartCoroutine("GoToNextPoint");
-                }
+                hasRotated = false;
+                arrived = false;
+                patrolling = true;
+                
             }
         }
         anim.SetFloat("Forward", agent.velocity.sqrMagnitude);
+        Debug.Log(destIndex);
+        Debug.Log(hasRotated);
     }
 
     IEnumerator GoToNextPoint()
@@ -125,11 +139,11 @@ public class Enemy_0 : MonoBehaviour
         hasRotated = false;
     }
 
-
-    void onTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag=="Player")
         {
+            patrolling = false;
             canSee = true;
             target = other.gameObject.transform;
         }
