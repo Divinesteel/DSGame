@@ -7,15 +7,16 @@ public class Aggro : MonoBehaviour {
 
     private NavMeshAgent agent;
     public Transform PlayerTransform;
-    private bool IsTargetInRange;
+    public bool IsTargetInRange;
     private Collider[] colliders;
     public Transform startingPosition;
-    private bool isReturning;
+    public bool isReturning;
     public float chaseDistance;
     Vector3 dest;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         agent = GetComponent<NavMeshAgent>();
         colliders = GetComponents<CapsuleCollider>();
         isReturning = false;
@@ -50,8 +51,9 @@ public class Aggro : MonoBehaviour {
         
         if (agent.velocity.magnitude == 0 && isReturning)
         {
+
             transform.rotation = Quaternion.Slerp(transform.rotation, startingPosition.rotation, Time.deltaTime * 5);
-            if (Vector3.Angle(transform.forward, startingPosition.forward) < .2)
+            if (Vector3.Angle(transform.forward, startingPosition.forward) < 1.1)
             {
                 isReturning = false;
             }
@@ -61,10 +63,7 @@ public class Aggro : MonoBehaviour {
             }       
 
         }
-
-   
-
-
+        
 	}
 
     void OnTriggerEnter(Collider other)
