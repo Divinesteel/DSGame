@@ -1314,9 +1314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6b78bda52457041a55d56a4f66ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolTargetsPosition: []
-  patrolTargetsTime: []
-  RotateDuration: 30
+  patrolTargetsPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolTargetsTime:
+  - 3
+  - 3
+  RotateDuration: 0.5
   canSee: 0
 --- !u!136 &136124933556857132
 CapsuleCollider:

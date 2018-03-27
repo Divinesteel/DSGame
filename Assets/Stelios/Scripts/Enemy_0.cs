@@ -56,22 +56,44 @@ public class Enemy_0 : MonoBehaviour
                 if (!arrived)
                 {
                     if(agent.velocity == Vector3.zero) {
+                   
                         transform.rotation = Quaternion.Slerp(transform.rotation, patrolTargetsPosition[destIndex].rotation, RotateTime);
-                        RotateTime += Time.deltaTime / RotateDuration;
 
-                        if(Vector3.Angle(transform.forward,patrolTargetsPosition[destIndex].forward) < 0.1)
+                        if (transform.rotation.eulerAngles.y < patrolTargetsPosition[destIndex].rotation.eulerAngles.y)
                         {
-                            transform.rotation = patrolTargetsPosition[destIndex].rotation;
+                            if (patrolTargetsPosition[destIndex].rotation.eulerAngles.y - transform.rotation.eulerAngles.y < 180)
+                            {
+                                AnimTurnRight();                                
+                            }
+                            else
+                            {
+                                AnimTurnLeft();
+                            }
+                        }
+                        else
+                        {
+                            if (transform.rotation.eulerAngles.y - patrolTargetsPosition[destIndex].rotation.eulerAngles.y < 180)
+                            {
+                                AnimTurnLeft();
+                            }
+                            else
+                            {
+                                AnimTurnRight();
+                            }
                         }
 
-                    }
-                    
-                    if (transform.rotation == patrolTargetsPosition[destIndex].rotation)
-                    {
-                        hasRotated = true;
-                        RotateTime = 0;
-                    }
-                    
+                        RotateTime += (Time.deltaTime * Time.deltaTime) / RotateDuration;
+
+                        if(Vector3.Angle(transform.forward,patrolTargetsPosition[destIndex].forward) < 1)
+                        {
+                            anim.SetBool("IsTurningRight", false);
+                            anim.SetBool("IsTurningLeft", false);
+                            transform.rotation = patrolTargetsPosition[destIndex].rotation;
+                            hasRotated = true;
+                            RotateTime = 0;
+                        }
+
+                    }                                     
 
                     if (hasRotated)
                     {
@@ -91,7 +113,8 @@ public class Enemy_0 : MonoBehaviour
         if (canSee)
         {
 
-            
+            anim.SetBool("IsTurningRight", false);
+            anim.SetBool("IsTurningLeft", false);
             lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
             agent.SetDestination(target.position);
@@ -118,8 +141,7 @@ public class Enemy_0 : MonoBehaviour
             }
         }
         anim.SetFloat("Forward", agent.velocity.sqrMagnitude);
-        Debug.Log(destIndex);
-        Debug.Log(hasRotated);
+        Debug.Log(RotateTime);
     }
 
     IEnumerator GoToNextPoint()
@@ -147,5 +169,19 @@ public class Enemy_0 : MonoBehaviour
             canSee = true;
             target = other.gameObject.transform;
         }
+    }
+
+    private void AnimTurnRight()
+    {
+        anim.SetBool("IsTurningLeft", false);
+        anim.SetBool("IsTurningRight", true);
+        anim.SetFloat("TurningSpeed", RotateTime);
+    }
+
+    private void AnimTurnLeft()
+    {
+        anim.SetBool("IsTurningRight", false);
+        anim.SetBool("IsTurningLeft", true);
+        anim.SetFloat("TurningSpeed", RotateTime);
     }
 }
