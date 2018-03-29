@@ -20,7 +20,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: TurningSpeed
+  - m_Name: Degrees
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -91,25 +91,25 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: cb153fcd3cf1b9541b9e84ce98ba1c76, type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1.4
-    m_CycleOffset: 0
-    m_DirectBlendParameter: TurningSpeed
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 344eece27540964469f3159ae572f608, type: 3}
-    m_Threshold: 1.2
+    m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Forward
     m_Mirror: 0
-  m_BlendParameter: TurningSpeed
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: cb153fcd3cf1b9541b9e84ce98ba1c76, type: 3}
+    m_Threshold: 10
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 0.7
+    m_CycleOffset: 0
+    m_DirectBlendParameter: TurningSpeed
+    m_Mirror: 0
+  m_BlendParameter: Degrees
   m_BlendParameterY: Forward
   m_MinThreshold: 0
-  m_MaxThreshold: 1.2
+  m_MaxThreshold: 10
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -121,25 +121,25 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1a2f3d779d6066843a4e695c08ac726e, type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1.4
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Forward
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 344eece27540964469f3159ae572f608, type: 3}
-    m_Threshold: 1.2
+    m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Forward
     m_Mirror: 0
-  m_BlendParameter: TurningSpeed
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 1a2f3d779d6066843a4e695c08ac726e, type: 3}
+    m_Threshold: 10
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 0.7
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Forward
+    m_Mirror: 0
+  m_BlendParameter: Degrees
   m_BlendParameterY: Forward
   m_MinThreshold: 0
-  m_MaxThreshold: 1.2
+  m_MaxThreshold: 10
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0

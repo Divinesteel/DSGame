@@ -58,29 +58,31 @@ public class Enemy_0 : MonoBehaviour
                     if(agent.velocity == Vector3.zero) {
                    
                         transform.rotation = Quaternion.Slerp(transform.rotation, patrolTargetsPosition[destIndex].rotation, RotateTime);
+                        float Degrees = Mathf.Abs(transform.rotation.eulerAngles.y - patrolTargetsPosition[destIndex].rotation.eulerAngles.y);
 
                         if (transform.rotation.eulerAngles.y < patrolTargetsPosition[destIndex].rotation.eulerAngles.y)
                         {
                             if (patrolTargetsPosition[destIndex].rotation.eulerAngles.y - transform.rotation.eulerAngles.y < 180)
                             {
-                                AnimTurnRight();                                
+                                AnimTurnRight(Degrees);                                
                             }
                             else
                             {
-                                AnimTurnLeft();
+                                AnimTurnLeft(Degrees);
                             }
                         }
                         else
                         {
                             if (transform.rotation.eulerAngles.y - patrolTargetsPosition[destIndex].rotation.eulerAngles.y < 180)
                             {
-                                AnimTurnLeft();
+                                AnimTurnLeft(Degrees);
                             }
                             else
                             {
-                                AnimTurnRight();
+                                AnimTurnRight(Degrees);
                             }
                         }
+                      
 
                         RotateTime += (Time.deltaTime * Time.deltaTime) / RotateDuration;
 
@@ -171,17 +173,17 @@ public class Enemy_0 : MonoBehaviour
         }
     }
 
-    private void AnimTurnRight()
+    private void AnimTurnRight(float deg)
     {
         anim.SetBool("IsTurningLeft", false);
         anim.SetBool("IsTurningRight", true);
-        anim.SetFloat("TurningSpeed", RotateTime);
+        anim.SetFloat("Degrees", deg);
     }
 
-    private void AnimTurnLeft()
+    private void AnimTurnLeft(float deg)
     {
         anim.SetBool("IsTurningRight", false);
         anim.SetBool("IsTurningLeft", true);
-        anim.SetFloat("TurningSpeed", RotateTime);
+        anim.SetFloat("Degrees", deg);
     }
 }
