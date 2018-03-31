@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
     public bool invertHorizontal;
     public bool invertVertical;
 
+    private bool isJumping;
+
     private float time;
 
 
@@ -34,11 +36,26 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        Jump();
+        Move();
+
+
+
+    }
+
+    void FixedUpdate()
+    {
+            rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
+               
+    }
+
+    void Move()
+    {
         float lh = Input.GetAxis("Horizontal");
         float lv = Input.GetAxis("Vertical");
 
         moveInput = new Vector3(lh * InvertAxis(invertHorizontal), 0f, lv * InvertAxis(invertVertical));
-        
+
 
 
         Vector3 cameraForward = mainCamera.transform.forward;
@@ -52,7 +69,7 @@ public class PlayerMovement : MonoBehaviour {
             time = 0;
         }
 
-        if(moveInput.sqrMagnitude > 0)
+        if (moveInput.sqrMagnitude > 0)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookToward), time);
             //Ray lookRay = new Ray(transform.position, lookToward);
@@ -62,25 +79,27 @@ public class PlayerMovement : MonoBehaviour {
 
         }
 
-        
+        moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude, 0, 1);
 
-        moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude,0,1);
-
-        anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);    
-
-
-    }
-
-    void FixedUpdate()
-    {
-            rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
-               
+        anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);
     }
 
     private int InvertAxis(bool direction)
     {
         if (direction) return -1;
         else return 1;
+    }
+
+    void Jump()
+    {
+        isJumping = false;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isJumping = true;
+        }
+
+        anim.SetBool("IsJumping", isJumping);
     }
 
 }

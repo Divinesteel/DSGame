@@ -143,7 +143,6 @@ public class Enemy_0 : MonoBehaviour
             }
         }
         anim.SetFloat("Forward", agent.velocity.sqrMagnitude);
-        Debug.Log(RotateTime);
     }
 
     IEnumerator GoToNextPoint()
