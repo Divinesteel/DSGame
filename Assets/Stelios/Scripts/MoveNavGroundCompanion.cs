@@ -49,17 +49,17 @@ public class MoveNavGroundCompanion : MonoBehaviour
             (transform.position - target.transform.position).y,
             (transform.position - target.transform.position).z);
 
-        if (Mathf.Abs(CompanionPlayerVect.magnitude) < maxDistance)
+        if (Mathf.Abs(CompanionPlayerVect.magnitude) < maxDistance) // check if pet is within command range
         {
             if (Input.GetMouseButtonDown(0))
             {
-                navMeshAgent.isStopped = false;
-                isFollowingTarget = false;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //create ray from camera to mouse position
+                Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
+                if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
+                    navMeshAgent.isStopped = false;
+                    isFollowingTarget = false;
                     navMeshAgent.destination = hit.point;
-                    
                 }
             }
         }

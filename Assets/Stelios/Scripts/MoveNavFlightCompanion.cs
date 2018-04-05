@@ -53,13 +53,13 @@ public class MoveNavFlightCompanion : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                navMeshAgent.isStopped = false;
-                isFollowingTarget = false;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray.origin, ray.direction, out hit))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //create ray from camera to mouse position
+                Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
+                if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
+                    navMeshAgent.isStopped = false;
+                    isFollowingTarget = false;
                     navMeshAgent.destination = hit.point;
-
                 }
             }
         }
