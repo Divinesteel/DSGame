@@ -893,7 +893,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4975280799963634}
-  - component: {fileID: 95370307083669348}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -1259,6 +1258,7 @@ GameObject:
   - component: {fileID: 114238900643142928}
   - component: {fileID: 54456022067775474}
   - component: {fileID: 114726765440590794}
+  - component: {fileID: 95981982851425620}
   m_Layer: 0
   m_Name: Bird_Companion
   m_TagString: FlyingPet
@@ -10753,7 +10753,7 @@ Transform:
   - {fileID: 4879464318943398}
   - {fileID: 4544933498707774}
   m_Father: {fileID: 4789355173861976}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4588757083871704
 Transform:
@@ -11421,7 +11421,7 @@ Transform:
   - {fileID: 4975878994342676}
   - {fileID: 4573860523351958}
   m_Father: {fileID: 4789355173861976}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4691124119745650
 Transform:
@@ -12035,12 +12035,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520697284968952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.26, y: 8, z: 73.89}
+  m_LocalPosition: {x: 64.21, y: 8, z: 74.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4947320559383772}
-  - {fileID: 4689296045978742}
   - {fileID: 4586367840279834}
+  - {fileID: 4689296045978742}
   - {fileID: 4796946591423138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -12194,7 +12194,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209305382845590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9300003, y: 0.4840002, z: -2.1900024}
+  m_LocalPosition: {x: 0.9300003, y: 0.06, z: -2.1900024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4975280799963634}
@@ -13517,7 +13517,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950590912813004}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 80
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -13574,23 +13574,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1099987380396722}
   m_Enabled: 1
---- !u!95 &95370307083669348
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1165406477342874}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9e8e96d31d222394087dd09880b9a261, type: 3}
-  m_Controller: {fileID: 9100000, guid: 664dc4db5b5576e43809c6e8f1c16f4b, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95750617825974626
 Animator:
   serializedVersion: 3
@@ -13625,6 +13608,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95981982851425620
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1209305382845590}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 9e8e96d31d222394087dd09880b9a261, type: 3}
+  m_Controller: {fileID: 9100000, guid: 664dc4db5b5576e43809c6e8f1c16f4b, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108803576772411878
 Light:
   m_ObjectHideFlags: 1
@@ -13635,7 +13635,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 15
   m_Range: 150
   m_SpotAngle: 8
   m_CookieSize: 10
@@ -13748,8 +13748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4586367840279834}
-  maxDistance: 8
-  stoppingDistance: 4
+  maxDistance: 9
+  stoppingDistance: 3
 --- !u!114 &114488270467194842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13764,6 +13764,9 @@ MonoBehaviour:
   moveSpeed: 5
   invertHorizontal: 1
   invertVertical: 0
+  endPos: {fileID: 0}
+  jumpHeight: 0
+  StartPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114498635209169918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13816,8 +13819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4586367840279834}
-  maxDistance: 6.5
-  stoppingDistance: 4
+  maxDistance: 9
+  stoppingDistance: 3
 --- !u!124 &124626979223197562
 Behaviour:
   m_ObjectHideFlags: 1
@@ -14137,7 +14140,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1923039037
   m_Radius: 0.16
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 999
@@ -14145,7 +14148,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.45
+  m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
