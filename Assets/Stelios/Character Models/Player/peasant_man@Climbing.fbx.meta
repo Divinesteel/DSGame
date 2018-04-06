@@ -127,7 +127,7 @@ ModelImporter:
       name: Climbing
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 115
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
