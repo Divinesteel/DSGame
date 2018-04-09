@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Jump()
 	{
-		isAnimJumping = false;   
+        isAnimJumping = false;
 
         if (isRot)
 		{
@@ -124,13 +124,17 @@ public class PlayerMovement : MonoBehaviour {
 				Quaternion endRotation = Quaternion.LookRotation(relativePos);
 
 				transform.rotation = Quaternion.Slerp(transform.rotation, endRotation, rotateTimer);
+            gameObject.RotateAnimation(anim, endRotation);
 
-				rotateTimer += (Time.deltaTime * Time.deltaTime) / 0.1f;
+            rotateTimer += (Time.deltaTime * Time.deltaTime) / 0.2f;
 
 			if (Vector3.Angle(transform.forward,relativePos) < 1)
 			{
+                anim.StopRotate();
+
 				isRot = false;
 				rotateTimer = 0;
+
 				isMov = true;
                 isAnimJumping = true;
                 StartPos = new Vector3 (transform.position.x,transform.position.y,transform.position.z);               
@@ -141,7 +145,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
             float yOffset = jumpHeightValue * (jumpTimer - jumpTimer * jumpTimer);
             transform.position = Vector3.Lerp(StartPos, EndPosValue, jumpTimer) + yOffset * Vector3.up;
-            jumpTimer += Time.deltaTime / 1f;
+            jumpTimer += Time.deltaTime / 0.9f;
             Debug.Log(jumpTimer);
             if (jumpTimer >= 1)
             {

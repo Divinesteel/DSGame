@@ -58,38 +58,14 @@ public class Enemy_0 : MonoBehaviour
                     if(agent.velocity == Vector3.zero) {
                    
                         transform.rotation = Quaternion.Slerp(transform.rotation, patrolTargetsPosition[destIndex].rotation, RotateTime);
-                        float Degrees = Mathf.Abs(transform.rotation.eulerAngles.y - patrolTargetsPosition[destIndex].rotation.eulerAngles.y);
 
-                        if (transform.rotation.eulerAngles.y < patrolTargetsPosition[destIndex].rotation.eulerAngles.y)
-                        {
-                            if (patrolTargetsPosition[destIndex].rotation.eulerAngles.y - transform.rotation.eulerAngles.y < 180)
-                            {
-                                AnimTurnRight(Degrees);                                
-                            }
-                            else
-                            {
-                                AnimTurnLeft(Degrees);
-                            }
-                        }
-                        else
-                        {
-                            if (transform.rotation.eulerAngles.y - patrolTargetsPosition[destIndex].rotation.eulerAngles.y < 180)
-                            {
-                                AnimTurnLeft(Degrees);
-                            }
-                            else
-                            {
-                                AnimTurnRight(Degrees);
-                            }
-                        }
-                      
-
+                        gameObject.RotateAnimation(anim, patrolTargetsPosition[destIndex].rotation); //Sets the object's Animator to rotate either left or right.
+                                           
                         RotateTime += (Time.deltaTime * Time.deltaTime) / RotateDuration;
 
                         if(Vector3.Angle(transform.forward,patrolTargetsPosition[destIndex].forward) < 1)
                         {
-                            anim.SetBool("IsTurningRight", false);
-                            anim.SetBool("IsTurningLeft", false);
+                            anim.StopRotate(); //Stops Animation Rotation.
                             transform.rotation = patrolTargetsPosition[destIndex].rotation;
                             hasRotated = true;
                             RotateTime = 0;
@@ -114,9 +90,7 @@ public class Enemy_0 : MonoBehaviour
 
         if (canSee)
         {
-
-            anim.SetBool("IsTurningRight", false);
-            anim.SetBool("IsTurningLeft", false);
+            anim.StopRotate(); //Stops Animation Rotation.
             lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
             agent.SetDestination(target.position);
@@ -170,19 +144,5 @@ public class Enemy_0 : MonoBehaviour
             canSee = true;
             target = other.gameObject.transform;
         }
-    }
-
-    private void AnimTurnRight(float deg)
-    {
-        anim.SetBool("IsTurningLeft", false);
-        anim.SetBool("IsTurningRight", true);
-        anim.SetFloat("Degrees", deg);
-    }
-
-    private void AnimTurnLeft(float deg)
-    {
-        anim.SetBool("IsTurningRight", false);
-        anim.SetBool("IsTurningLeft", true);
-        anim.SetFloat("Degrees", deg);
     }
 }
