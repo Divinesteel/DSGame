@@ -138,7 +138,7 @@ public class Enemy_0 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag=="Player")
+        if (other.gameObject.tag=="Player" && other.gameObject.GetComponent<PlayerMovement>().isHidden)
         {
             patrolling = false;
             canSee = true;
