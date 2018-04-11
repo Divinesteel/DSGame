@@ -136,9 +136,9 @@ public class Enemy_0 : MonoBehaviour
         hasRotated = false;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag=="Player" && other.gameObject.GetComponent<PlayerMovement>().isHidden)
+        if (other.gameObject.tag=="Player")
         {
             patrolling = false;
             canSee = true;

@@ -3232,7 +3232,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4147797094933068, guid: 2e3b16a7fa57a054d9f85c177e7e0789, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -25.18
+      value: -11.58
       objectReference: {fileID: 0}
     - target: {fileID: 4147797094933068, guid: 2e3b16a7fa57a054d9f85c177e7e0789, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3240,7 +3240,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4147797094933068, guid: 2e3b16a7fa57a054d9f85c177e7e0789, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -9.35
+      value: -25.81
       objectReference: {fileID: 0}
     - target: {fileID: 4147797094933068, guid: 2e3b16a7fa57a054d9f85c177e7e0789, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3265,7 +3265,7 @@ Prefab:
     - target: {fileID: 54672151910616178, guid: 2e3b16a7fa57a054d9f85c177e7e0789,
         type: 2}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1996799514261206, guid: 2e3b16a7fa57a054d9f85c177e7e0789, type: 2}
       propertyPath: m_TagString
@@ -10706,7 +10706,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 49cb66d9d95ee804b8079f53463d64bd, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9d9b23ef93c32bc489dbe5978d28c826, type: 2}
 --- !u!114 &1307310933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10734,7 +10734,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: a23137c101f8abb41af431a2f8ca02c0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1e7a029ed98078846970141d7e5e1a61, type: 2}
 --- !u!1 &1316852958
 GameObject:
   m_ObjectHideFlags: 0

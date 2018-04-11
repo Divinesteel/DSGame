@@ -31,8 +31,6 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 EndPosValue;
     private float jumpHeightValue;
 
-    public bool isHidden;
-
     // Use this for initialization
     void Start () {
         col = GetComponent<Collider>();
@@ -42,7 +40,6 @@ public class PlayerMovement : MonoBehaviour {
 		time = 0;
 		rotateTimer = 0;
         jumpTimer = 0;
-        isHidden = false;
 	}
 	
 	// Update is called once per frame
