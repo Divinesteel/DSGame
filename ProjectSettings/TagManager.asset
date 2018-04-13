@@ -11,6 +11,7 @@ TagManager:
   - Item
   - GroundDig
   - PlayerInteractable
+  - Player_Hidden
   layers:
   - Default
   - TransparentFX

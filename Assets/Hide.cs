@@ -18,15 +18,15 @@ public class Hide : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerMovement>().isHidden= true;
+            other.gameObject.tag = "Player_Hidden";
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player_Hidden")
         {
-            other.gameObject.GetComponent<PlayerMovement>().isHidden = false;
+            other.gameObject.tag = "Player";
         }
     }
 }
