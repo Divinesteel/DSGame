@@ -12,6 +12,7 @@ TagManager:
   - GroundDig
   - PlayerInteractable
   - Player_Hidden
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Flying
   - Player
   - Wild
-  - Route Boundaries
+  - 
   - 
   - 
   - 

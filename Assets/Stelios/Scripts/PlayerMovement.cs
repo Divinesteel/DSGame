@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public float moveSpeed;
-	public bool invertHorizontal;
-	public bool invertVertical;
-	public Transform endPos;
-	public float jumpHeight;
+    public float moveSpeed;
+    public bool invertHorizontal;
+    public bool invertVertical;
+    public Transform endPos;
+    public float jumpHeight;
+    public float gravityMultiplier;
 
     private Collider col;
-	private Rigidbody rb;
-	private Vector3 moveInput;
-	private Vector3 moveVelocity;
-	private Vector3 lookToward;
-	private Camera mainCamera;
-	private Animator anim;
-	private bool isAnimJumping;
-	private float time;
+    private Rigidbody rb;
+    private Vector3 moveInput;
+    private Vector3 moveVelocity;
+    private Vector3 lookToward;
+    private Camera mainCamera;
+    private Animator anim;
+    private bool isAnimJumping;
+    private float time;
 
-	private float rotateTimer;
-	private float jumpTimer;
-	private bool isRot;
-	private bool isMov;
+    private float rotateTimer;
+    private float jumpTimer;
+    private bool isRot;
+    private bool isMov;
 
     public Vector3 StartPos;
     private bool isJumping;
@@ -32,19 +33,19 @@ public class PlayerMovement : MonoBehaviour {
     private float jumpHeightValue;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         col = GetComponent<Collider>();
-		rb = GetComponent<Rigidbody>();
-		mainCamera = Camera.main;
-		anim = GetComponent<Animator>();
-		time = 0;
-		rotateTimer = 0;
+        rb = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
+        anim = GetComponent<Animator>();
+        time = 0;
+        rotateTimer = 0;
         jumpTimer = 0;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && endPos != null && jumpHeight != 0)
         {
             isJumping = true;
@@ -63,108 +64,108 @@ public class PlayerMovement : MonoBehaviour {
         {
             Jump();
         }
-		
-		Move();
-	}
 
-	void FixedUpdate()
-	{
-			rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
-			   
-	}
+        Move();
+    }
 
-	void Move()
-	{
-		float lh = Input.GetAxis("Horizontal");
-		float lv = Input.GetAxis("Vertical");
+    void FixedUpdate()
+    {
+        rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
+        if (moveInput != Vector3.zero) rb.AddForce(0, Physics.gravity.y*rb.mass*gravityMultiplier, 0);
+    }
 
-		moveInput = new Vector3(lh * InvertAxis(invertHorizontal), 0f, lv * InvertAxis(invertVertical));
+    void Move()
+    {
+        float lh = Input.GetAxis("Horizontal");
+        float lv = Input.GetAxis("Vertical");
+
+        moveInput = new Vector3(lh * InvertAxis(invertHorizontal), 0f, lv * InvertAxis(invertVertical));
 
 
 
-		Vector3 cameraForward = mainCamera.transform.forward;
-		cameraForward.y = 0;
+        Vector3 cameraForward = mainCamera.transform.forward;
+        cameraForward.y = 0;
 
-		Quaternion cameraRelativeRotation = Quaternion.FromToRotation(Vector3.forward, cameraForward);
-		lookToward = cameraRelativeRotation * moveInput;
+        Quaternion cameraRelativeRotation = Quaternion.FromToRotation(Vector3.forward, cameraForward);
+        lookToward = cameraRelativeRotation * moveInput;
 
-		if (lh + lv == 0)
-		{
-			time = 0;
-		}
+        if (lh + lv == 0)
+        {
+            time = 0;
+        }
 
-		if (moveInput.sqrMagnitude > 0)
-		{
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookToward), time);
-			//Ray lookRay = new Ray(transform.position, lookToward);
-			time += Time.deltaTime / 1;
-			//transform.LookAt(lookRay.GetPoint(1));
+        if (moveInput.sqrMagnitude > 0)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookToward), time);
+            //Ray lookRay = new Ray(transform.position, lookToward);
+            time += Time.deltaTime / 1;
+            //transform.LookAt(lookRay.GetPoint(1));
 
-		}
+        }
 
-		moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude, 0, 1);
+        moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude, 0, 1);
 
-		anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);
-	}
+        anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);
+    }
 
-	private int InvertAxis(bool direction)
-	{
-		if (direction) return -1;
-		else return 1;
-	}
+    private int InvertAxis(bool direction)
+    {
+        if (direction) return -1;
+        else return 1;
+    }
 
-	void Jump()
-	{
+    void Jump()
+    {
         isAnimJumping = false;
 
         if (isRot)
-		{
-				Vector3 endPosition0Y = new Vector3(EndPosValue.x, transform.position.y, EndPosValue.z);
-				Vector3 relativePos = endPosition0Y - transform.position;
-				Quaternion endRotation = Quaternion.LookRotation(relativePos);
+        {
+            Vector3 endPosition0Y = new Vector3(EndPosValue.x, transform.position.y, EndPosValue.z);
+            Vector3 relativePos = endPosition0Y - transform.position;
+            Quaternion endRotation = Quaternion.LookRotation(relativePos);
 
-				transform.rotation = Quaternion.Slerp(transform.rotation, endRotation, rotateTimer);
+            transform.rotation = Quaternion.Slerp(transform.rotation, endRotation, rotateTimer);
             gameObject.RotateAnimation(anim, endRotation);
 
             rotateTimer += (Time.deltaTime * Time.deltaTime) / 0.2f;
 
-			if (Vector3.Angle(transform.forward,relativePos) < 1)
-			{
+            if (Vector3.Angle(transform.forward, relativePos) < 1)
+            {
                 anim.StopRotate();
 
-				isRot = false;
-				rotateTimer = 0;
+                isRot = false;
+                rotateTimer = 0;
 
-				isMov = true;
+                isMov = true;
                 isAnimJumping = true;
-                StartPos = new Vector3 (transform.position.x,transform.position.y,transform.position.z);               
+                StartPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             }
-		}
+        }
 
-		if (isMov)
-		{
+        if (isMov)
+        {
             float yOffset = jumpHeightValue * (jumpTimer - jumpTimer * jumpTimer);
             transform.position = Vector3.Lerp(StartPos, EndPosValue, jumpTimer) + yOffset * Vector3.up;
             jumpTimer += Time.deltaTime / 0.9f;
             Debug.Log(jumpTimer);
             if (jumpTimer >= 1)
             {
-                isMov = false;               
+                isMov = false;
                 jumpTimer = 0;
                 rb.isKinematic = false;
                 col.enabled = true;
             }
-		}
+        }
 
         anim.SetBool("IsJumping", isAnimJumping);
     }
 
+    public void SetJumpDestination(Transform pos, float h)
+    {
+        endPos = pos;
+        jumpHeight = h;
+    }
 
 
-	public void SetJumpDestination(Transform pos,float h)
-	{
-		endPos = pos;
-		jumpHeight = h;
-	}
 
 }
