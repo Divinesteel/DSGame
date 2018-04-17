@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BridgeTrigger : MonoBehaviour {
 
+    public GameObject bridgeGround;
     public GameObject block;
 
     Animation animation;
@@ -25,6 +26,7 @@ public class BridgeTrigger : MonoBehaviour {
             isBridgeFalling = animation.isPlaying;
             if (!isBridgeFalling)
             {
+                bridgeGround.SetActive(true);
                 block.SetActive(false);
                 isBridgeTriggered = false;
             }           
