@@ -13,13 +13,24 @@ public class BridgeTrigger : MonoBehaviour {
     bool isBridgeTriggered;
     bool isBridgeFalling;
 
-	// Use this for initialization
-	void Start () {
+    public bool isLeftColumnDestroyed;
+    public bool isRightColumnDestroyed;
+
+    // Use this for initialization
+    void Start () {
         animation = GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(isLeftColumnDestroyed && isRightColumnDestroyed)
+        {
+            FallBridge();
+
+            isLeftColumnDestroyed = false;
+            isRightColumnDestroyed = false;
+        }
 
         if (isBridgeTriggered)
         {
@@ -27,7 +38,7 @@ public class BridgeTrigger : MonoBehaviour {
             if (!isBridgeFalling)
             {
                 bridgeGround.SetActive(true);
-                block.SetActive(false);
+                Destroy(block);
                 isBridgeTriggered = false;
             }           
         }
