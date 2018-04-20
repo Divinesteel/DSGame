@@ -51,4 +51,14 @@ public class BridgeTrigger : MonoBehaviour {
         isBridgeFalling = true;
     }
 
+    public void DestroyRightColumn()
+    {
+        isRightColumnDestroyed = true;
+    }
+
+    public void DestroyLeftColumn()
+    {
+        isLeftColumnDestroyed = true;
+    }
+
 }

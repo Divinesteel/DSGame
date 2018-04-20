@@ -6,6 +6,9 @@ public class DominoTrigger : FlyingPetClickInteractable
 {
     private Rigidbody[] rbs;
     private Animation animation;
+
+    public BridgeTrigger Bridge;
+
     private bool hasBeenTriggered;
     private bool hasBeenDestroyed;
 
@@ -54,6 +57,8 @@ public class DominoTrigger : FlyingPetClickInteractable
                     rb.AddTorque(new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50)));
 
                 }
+
+                Bridge.DestroyRightColumn();
 
                 hasBeenTriggered = true;
             }

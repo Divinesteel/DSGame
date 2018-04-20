@@ -2372,15 +2372,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4271346960733644, guid: 5433d4c57e988324a99ba038c73fb2f9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 13.6
+      value: 13.2
       objectReference: {fileID: 0}
     - target: {fileID: 4271346960733644, guid: 5433d4c57e988324a99ba038c73fb2f9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -26.3
+      value: -26.4
       objectReference: {fileID: 0}
     - target: {fileID: 4271346960733644, guid: 5433d4c57e988324a99ba038c73fb2f9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 79.4
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: 4271346960733644, guid: 5433d4c57e988324a99ba038c73fb2f9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5819,6 +5819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b9622e54743974a97f8ed31d7e49fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bridge: {fileID: 2091666188}
   BridgeRightColumn: {fileID: 729959539}
 --- !u!136 &587870552
 CapsuleCollider:
@@ -6843,7 +6844,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 53.34
+      value: 52.85
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6851,7 +6852,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 29.59
+      value: 31.44
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalRotation.x
@@ -14159,8 +14160,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516344868}
-  m_LocalRotation: {x: 0.29425153, y: 0.12851934, z: 0.039967116, w: -0.9462037}
-  m_LocalPosition: {x: 24.23111, y: -0.71345234, z: -17.10213}
+  m_LocalRotation: {x: -0.19436167, y: 0.18232591, z: 0.03679557, w: 0.96313393}
+  m_LocalPosition: {x: 17.441277, y: -3.734908, z: -12.939571}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -16263,8 +16264,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: -0.48178926, y: 0.06090765, z: 0.03359832, w: 0.873522}
-  m_LocalPosition: {x: 28.527245, y: -2.5862055, z: -10.207718}
+  m_LocalRotation: {x: -0.42412043, y: -0, z: -0, w: 0.90560585}
+  m_LocalPosition: {x: 19.12841, y: -12.633099, z: -26.048174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -18908,6 +18909,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bridgeGround: {fileID: 1574913723}
   block: {fileID: 292016277}
+  isLeftColumnDestroyed: 0
+  isRightColumnDestroyed: 0
 --- !u!1 &2091978796
 GameObject:
   m_ObjectHideFlags: 0
