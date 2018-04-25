@@ -43,7 +43,6 @@ public class FlyingPetInteract : Pet {
                 {
                     if (base.interactableObjects.Find(x => x.GetInstanceID() == hit.collider.gameObject.GetInstanceID()) != null){
                         base.interact = true;
-                        Debug.Log(hit.collider.gameObject.GetInstanceID());
                         base.instanceID = hit.collider.gameObject.GetInstanceID();
                     }
                     

@@ -59,12 +59,15 @@ public class BurriedBarrel : Burried {
         }
         else
         {
-
-            if (!hasBeenThrownToRiver && playerInteract.isInteracting) 
+            if(playerInteract != null)
             {
-                barelAnim.Play("Animation_BarelRiver");
-                hasBeenThrownToRiver = true;
+                if (!hasBeenThrownToRiver && playerInteract.isInteracting)
+                {
+                    barelAnim.Play("Animation_BarelRiver");
+                    hasBeenThrownToRiver = true;
+                }
             }
+            
         }
     }
 

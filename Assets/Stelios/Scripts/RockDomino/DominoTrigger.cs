@@ -60,7 +60,7 @@ public class DominoTrigger : FlyingPetClickInteractable
 
                 Bridge.DestroyRightColumn();
 
-                hasBeenTriggered = true;
+                hasBeenTriggered = true; 
             }
         }
     }

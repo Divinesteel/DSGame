@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlyingPetClickInteractable : MonoBehaviour
 {
-    protected FlyingPetInteract pet; 
+    public FlyingPetInteract pet; 
         // Use this for initialization
     void Start()
     {
