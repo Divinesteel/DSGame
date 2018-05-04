@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour {
 
-	public bool isInteracting;
+	private bool isInteracting;
     public KeyCode keycode;
 
 
@@ -17,11 +17,26 @@ public class PlayerInteract : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown(keycode))
 		{
-			isInteracting = true;
+            Interact();
 		}
 		else if (Input.GetKeyUp(keycode))
 		{
-			isInteracting = false;
+            StopInteract();
 		}
 	}
+
+    public void Interact()
+    {
+        isInteracting = true;
+    }
+    public void StopInteract()
+    {
+        isInteracting = false;
+    }
+
+    public bool InteractStatus()
+    {
+        return isInteracting;
+    }
+
 }

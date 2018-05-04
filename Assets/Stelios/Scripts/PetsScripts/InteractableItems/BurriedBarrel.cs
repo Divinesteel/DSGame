@@ -61,7 +61,7 @@ public class BurriedBarrel : Burried {
         {
             if(playerInteract != null)
             {
-                if (!hasBeenThrownToRiver && playerInteract.isInteracting)
+                if (!hasBeenThrownToRiver && playerInteract.InteractStatus())
                 {
                     barelAnim.Play("Animation_BarelRiver");
                     hasBeenThrownToRiver = true;
