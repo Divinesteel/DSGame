@@ -10,10 +10,15 @@ public class FlyingPetInteract : Pet {
     public bool IsTweeting;
     public KeyCode TweetingKey;
 
+    private AudioSource tweetSound;
+    private float tweetVolume;
+    private bool stopTweeting;
+    private bool hasFinishedTweeting;
+
     private RaycastHit hit;
     // Use this for initialization
     void Start () {
-		
+        tweetSound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -25,14 +30,19 @@ public class FlyingPetInteract : Pet {
             base.instanceID = null;
         }
 
+        HasFinishedTweetingController();
+
         if (Input.GetKeyDown(TweetingKey))
         {
-            IsTweeting = true;
-        }
+            Tweet();
+        }   
+        
         else if (Input.GetKeyUp(TweetingKey))
         {
-            IsTweeting = false;
+            StopTweet();
         }
+
+        LowerTweetVolumeOnStop();
 
         if (Input.GetMouseButtonDown(1)) //CLICK INTERACT
         {
@@ -51,16 +61,57 @@ public class FlyingPetInteract : Pet {
         }
     }
 
-    public void Sing()
+    public void Tweet()
     {
+        
+        if (!tweetSound.isPlaying)
+        {           
+            tweetSound.Play();  
+        } 
+
+        tweetVolume = 1;
+        tweetSound.volume = tweetVolume;
         IsTweeting = true;
     }
 
-    public void StopSinging()
+    private void LowerTweetVolumeOnStop()
+    {
+        if (!IsTweeting)
+        {
+            if (tweetSound.volume > 0)
+            {
+                tweetSound.volume -= Time.deltaTime;
+            }
+            else
+            {
+                if (tweetSound.isPlaying)
+                {
+                    tweetSound.Stop();
+                }
+            }
+        }
+    }
+
+    private void HasFinishedTweetingController()
+    {
+        hasFinishedTweeting = false;
+        if (IsTweeting)
+        {
+            if (tweetSound.clip.length == tweetSound.time)
+            {
+                hasFinishedTweeting = true;
+            }
+        }
+    }
+
+    public bool HasFinishedTweetingStatus()
+    {
+        return hasFinishedTweeting;
+    }
+
+    public void StopTweet()
     {
         IsTweeting = false;
     }
-
-
 
 }

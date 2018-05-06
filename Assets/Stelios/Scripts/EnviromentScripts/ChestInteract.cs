@@ -24,9 +24,9 @@ public class ChestInteract : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            if (other.gameObject.GetComponent<PlayerInteract>().isInteracting && isChestClosed)
+            if (other.gameObject.GetComponent<PlayerInteract>().InteractStatus() && isChestClosed)
             {
-                if (other.gameObject.GetComponent<Inventory>().Key)
+                if (other.gameObject.GetComponent<Inventory>().FindItemOnInventory("Key") != null)
                 {
                     isChestClosed = false;
                     anim.Play("Open_Chest");
