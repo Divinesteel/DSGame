@@ -1384,10 +1384,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   patrolTargetsTime:
-  - 2
   - 0
-  - 2
+  - 0
+  - 0
+  - 0
   RotateDuration: 0.5
   canSee: 0
 --- !u!136 &136151720702756266
@@ -1512,7 +1514,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 0.7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 999

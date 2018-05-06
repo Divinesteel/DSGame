@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class InventoryItem : ScriptableObject {
 
-    private string itemName;
+    public string itemName;
 
     public void SetItem(string name)
     {

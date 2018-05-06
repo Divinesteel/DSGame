@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, endRotation, rotateTimer);
             gameObject.RotateAnimation(anim, endRotation);
 
-            rotateTimer += (Time.deltaTime * Time.deltaTime) / 0.2f;
+            rotateTimer += (Time.deltaTime * Time.deltaTime) / 0.05f;
 
             if (Vector3.Angle(transform.forward, relativePos) < 1)
             {
