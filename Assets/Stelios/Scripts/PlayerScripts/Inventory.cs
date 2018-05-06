@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    public bool Key;
+    
+    public List<InventoryItem> ItemList;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public void AddItemToInventory(string name)
+    {
+        InventoryItem a = ScriptableObject.CreateInstance<InventoryItem>();
+        a.SetItem(name);
+        ItemList.Add(a);
+    }
+
+    public void RemoveItemFromInventory(string name)
+    {
+        ItemList.Remove(ItemList.Find(x => x.getName() == name));
+    }
+
+    public InventoryItem FindItemOnInventory(string name)
+    {
+        return ItemList.Find(x => x.getName() == name);
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
