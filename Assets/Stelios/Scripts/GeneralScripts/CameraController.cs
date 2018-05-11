@@ -24,6 +24,12 @@ public class CameraController : MonoBehaviour {
 
     private float time;
 
+    private bool lockUp;
+    private bool lockDown;
+    private bool lockLeft;
+    private bool lockRight;
+    private bool checkLock;
+
     enum Direction {Up,Down,Left,Right,UpLeft,UpRight,DownLeft,DownRight};
 
     Direction direction;
@@ -54,75 +60,44 @@ public class CameraController : MonoBehaviour {
                          && !Input.GetKey(KeyCode.A)
                          && !Input.GetKey(KeyCode.S)
                          && !Input.GetKey(KeyCode.D)))
-        {           
+        {
+            checkLock = false;
 
             if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x <= panBorderThickness + 20) 
-            {   
-                if(invertCamera) direction = Direction.DownRight;
-                else direction = Direction.UpLeft;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+            {
+                ControlCameraMovement(Direction.DownRight, Direction.UpLeft,lockDown,lockUp,lockRight,lockLeft);
             }
             else if (Input.mousePosition.y >= Screen.height - panBorderThickness - 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
-                if(invertCamera) direction = Direction.DownLeft;
-                else direction = Direction.UpRight;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.DownLeft, Direction.UpRight,lockDown,lockUp,lockLeft,lockRight);
             }
             else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x <= panBorderThickness + 20)
             {
-                if(invertCamera) direction = Direction.UpRight;
-                else direction = Direction.DownLeft;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.UpRight, Direction.DownLeft,lockUp,lockDown,lockRight,lockLeft);
             }
             else if (Input.mousePosition.y <= panBorderThickness + 20 && Input.mousePosition.x >= Screen.width - panBorderThickness - 20)
             {
-                if(invertCamera) direction = Direction.UpLeft;
-                else direction = Direction.DownRight;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.UpLeft, Direction.DownRight,lockUp,lockDown,lockLeft,lockRight);
             }
 
             else if (Input.mousePosition.y >= Screen.height - panBorderThickness)
             {
-                if(invertCamera) direction = Direction.Down;
-                else direction = Direction.Up;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.Down, Direction.Up,lockDown,lockUp);
             }
             else if (Input.mousePosition.y <= panBorderThickness)
             {
-                if(invertCamera) direction = Direction.Up;
-                else direction = Direction.Down;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.Up, Direction.Down,lockUp,lockDown);
             }
             else if (Input.mousePosition.x <= panBorderThickness)
             {
-                if(invertCamera) direction = Direction.Right;
-                else direction = Direction.Left;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.Right, Direction.Left,lockRight,lockLeft);
             }
             else if (Input.mousePosition.x >= Screen.width - panBorderThickness)
             {
-                if(invertCamera) direction = Direction.Left;
-                else direction = Direction.Right;
-                panSpeed = cameraSpeed;
-                isFollowingTarget = false;
-                time = 0;
+                ControlCameraMovement(Direction.Left, Direction.Right,lockLeft,lockRight);
             }
-         
-            if (isFollowingTarget == false)
+
+            if (isFollowingTarget == false && checkLock)
             {
                 if(panSpeed > 0)
                 {
@@ -167,6 +142,8 @@ public class CameraController : MonoBehaviour {
                             MovingCameraPosition = new Vector3(transform.position.x - panSpeed * Time.deltaTime,
                                                transform.position.y,
                                                transform.position.z + panSpeed * Time.deltaTime);
+                            break;
+                        default:
                             break;
                     }
 
@@ -220,5 +197,77 @@ public class CameraController : MonoBehaviour {
         }
         
     }
-    
+    private void ControlCameraMovement(Direction a, Direction b, bool aa, bool ba, bool ab = false, bool bb = false)
+    {
+        if (invertCamera)
+        {
+            if(!aa && !ab)
+            {
+                direction = a;
+                checkLock = true;
+            }    
+        }
+        else
+        {
+            if(!ba && !bb)
+            {
+                direction = b;
+                checkLock = true;
+            }          
+        }
+        panSpeed = cameraSpeed;
+        isFollowingTarget = false;
+        time = 0;
+    }
+
+    public void LockUp()
+    {
+        lockUp = true;
+    }
+    public void UnlockUp()
+    {
+        lockUp = false;
+    }
+    public void LockDown()
+    {
+        lockDown = true;
+    }
+    public void UnlockDown()
+    {
+        lockDown = false;
+    }
+    public void LockLeft()
+    {
+        lockLeft = true;
+    }
+    public void UnlockLeft()
+    {
+        lockLeft = false;
+    }
+    public void LockRight()
+    {
+        lockRight = true;
+    }
+    public void UnlockRight()
+    {
+        lockRight = false;
+    }
+
+    public void SetPanVertical(float z)
+    {
+        panLimit.z = z;
+    }
+    public void SetPanHorizontal(float x)
+    {
+        panLimit.x = x;
+    }
+    public void SetPanVerticalToDefault()
+    {
+        panLimit.z = 3;
+    }
+    public void SetPanHorizontalToDefaultfloat()
+    {
+        panLimit.x = 3;
+    }
+
 }
