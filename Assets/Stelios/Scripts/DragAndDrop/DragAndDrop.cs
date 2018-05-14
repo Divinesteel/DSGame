@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour {
-
+    
     public Inventory inventoryPlayer;
     public InventoryUIBar inventoryBar;
 
-    public string draggedName;
+    private string draggedName;
 
     private Vector3 mousePos;
 
@@ -29,7 +29,7 @@ public class DragAndDrop : MonoBehaviour {
 
     public void RemoveDraggedItem()
     {
-        RemoveFromInventoryOnDrop(draggedName);
+        //RemoveFromInventoryOnDrop(draggedName);
         draggedName = null;   
     }
     
@@ -47,9 +47,18 @@ public class DragAndDrop : MonoBehaviour {
         }
     }
 
-    public void RemoveFromInventoryOnDrop(string name)
+    public Inventory GetInventory()
     {
-        inventoryPlayer.RemoveItemFromInventory(name);
-        inventoryBar.RemoveItemFromBar(name);
+        return inventoryPlayer;
+    }
+
+    public InventoryUIBar GetInventoryBar()
+    {
+        return inventoryBar;
+    }
+
+    public string GetDraggedName()
+    {
+        return draggedName;
     }
 }

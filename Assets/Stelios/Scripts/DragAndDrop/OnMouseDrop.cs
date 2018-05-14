@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class OnMouseDrop : MonoBehaviour {
 
-    
+    public DragAndDrop dragAndDropSystem;
 
     // Use this for initialization
     void Start () {
@@ -22,4 +22,15 @@ public abstract class OnMouseDrop : MonoBehaviour {
     }
 
     abstract protected void OnDrop();
+
+    protected void RemoveFromInventoryItemFromInventory(string name)
+    {
+        dragAndDropSystem.GetInventory().RemoveItemFromInventory(name);
+        dragAndDropSystem.GetInventoryBar().RemoveItemFromBar(name);
+    }
+
+    protected DragAndDrop GetDragAndDropSystem()
+    {
+        return dragAndDropSystem;
+    }
 }
