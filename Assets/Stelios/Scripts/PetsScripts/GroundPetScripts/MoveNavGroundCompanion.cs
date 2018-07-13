@@ -57,7 +57,6 @@ public class MoveNavGroundCompanion : MonoBehaviour
                 Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
-                    Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 12) // 9 = Ground, 12 = Wind
                     {
                         navMeshAgent.isStopped = false;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GroundPetClickInteractable : MonoBehaviour
 {
+    public GroundPetInteract pet;
 
     // Use this for initialization
     void Start()
@@ -21,6 +22,7 @@ public class GroundPetClickInteractable : MonoBehaviour
     {
         if (col.gameObject.tag == "GroundPet")
         {
+            pet = col.gameObject.GetComponent<GroundPetInteract>();
             Pet petscript = col.gameObject.GetComponent<Pet>();
             petscript.AddInteractable(gameObject);
         }
@@ -30,6 +32,7 @@ public class GroundPetClickInteractable : MonoBehaviour
     {
         if (col.gameObject.tag == "GroundPet")
         {
+            pet = null;
             Pet petscript = col.gameObject.GetComponent<Pet>();
             petscript.RemoveInteractable(gameObject);
         }
