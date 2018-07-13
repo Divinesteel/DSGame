@@ -63,6 +63,11 @@ public class GroundPetInteract : Pet
         IsDigging = false;
     }
 
+    public bool IsDiggingStatus()
+    {
+        return IsDigging;
+    }
+
 
 
 }
