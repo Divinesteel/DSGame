@@ -94,9 +94,13 @@ public class Enemy_0 : MonoBehaviour
             lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
             agent.SetDestination(target.position);
+            agent.speed = 2f;
 
             if (agent.remainingDistance < agent.stoppingDistance)
             {
+                anim.SetBool("Attack", true);
+                anim.SetLayerWeight(1, 1);
+                KillPlayer();
                 //anim.SetBool("Attack", true);
             }
             else
@@ -144,5 +148,10 @@ public class Enemy_0 : MonoBehaviour
             canSee = true;
             target = other.gameObject.transform;
         }
+    }
+
+    void KillPlayer()
+    {
+
     }
 }

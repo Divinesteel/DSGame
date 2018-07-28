@@ -296,7 +296,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -14274,7 +14274,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -14801,7 +14801,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -18958,15 +18958,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 34.13
+      value: 62.37
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.17
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 34.5
+      value: 70.08
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalRotation.x
@@ -23919,10 +23919,15 @@ Prefab:
       propertyPath: patrolTargetsPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1028598127}
-    - target: {fileID: 137176651684051496, guid: a672dd83e4114b8438a1d1138d288ed3,
+    - target: {fileID: 195947347775606260, guid: a672dd83e4114b8438a1d1138d288ed3,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: m_StoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 136870467211498090, guid: a672dd83e4114b8438a1d1138d288ed3,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a672dd83e4114b8438a1d1138d288ed3, type: 2}
@@ -24614,7 +24619,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -25377,7 +25382,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -25503,7 +25508,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -27250,8 +27255,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516344868}
-  m_LocalRotation: {x: -0.37239906, y: 0.036176134, z: 0.014524866, w: 0.9272536}
-  m_LocalPosition: {x: 6.7379, y: -17.768263, z: -29.60523}
+  m_LocalRotation: {x: 0.46390846, y: 0.0013303958, z: 0.0006967639, w: -0.8858819}
+  m_LocalPosition: {x: 35.61017, y: -3.3783197, z: 39.93792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -32987,7 +32992,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.84900004, y: 3.3460002, z: 2.7580001}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.012, y: 2.9980001, z: 0.208}
   m_TimeToStationary: 0.5
@@ -37476,8 +37481,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: -0.37239906, y: 0.036176134, z: 0.014524866, w: 0.9272536}
-  m_LocalPosition: {x: 6.7379, y: -17.768263, z: -29.60523}
+  m_LocalRotation: {x: -0.48316535, y: 0.041993074, z: 0.023208944, w: 0.8742135}
+  m_LocalPosition: {x: 28.17649, y: -10.886108, z: 22.16375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
