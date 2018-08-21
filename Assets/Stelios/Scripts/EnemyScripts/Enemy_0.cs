@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy_0 : MonoBehaviour
 {
+    public PlayerController playerController;
 
     NavMeshAgent agent;
     Animator anim;
@@ -17,7 +18,6 @@ public class Enemy_0 : MonoBehaviour
     public Transform[] patrolTargetsPosition;
     public float[] patrolTargetsTime;
     public float RotateDuration;
-
     private int destIndex;
 
     bool arrived;
@@ -100,7 +100,15 @@ public class Enemy_0 : MonoBehaviour
             {
                 anim.SetBool("Attack", true);
                 anim.SetLayerWeight(1, 1);
-                KillPlayer();
+
+                Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
+                if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5)
+                {
+                    KillPlayer();
+                }
+
+                
+                
                 //anim.SetBool("Attack", true);
             }
             else
@@ -152,6 +160,6 @@ public class Enemy_0 : MonoBehaviour
 
     void KillPlayer()
     {
-
+        playerController.KillPlayer();
     }
 }

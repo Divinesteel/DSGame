@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpHeight;
     public float gravityMultiplier;
 
+    private PlayerController playerController;
     private Collider col;
     private Rigidbody rb;
     private Vector3 moveInput;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        playerController = GetComponent<PlayerController>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
@@ -46,6 +48,14 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (playerController.GetPlayerStatus() == PlayerController.PlayerStat.Dead) //Checks whether player is Dead or Alive, so that he behaves accordingly.
+        {
+            moveVelocity = new Vector3(0, 0, 0);
+            moveInput = new Vector3(0, 0, 0);
+            return;
+        }
+         
+
         if (Input.GetKeyDown(KeyCode.Space) && endPos != null && jumpHeight != 0)
         {
             isJumping = true;
@@ -72,6 +82,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
         if (moveInput != Vector3.zero) rb.AddForce(0, Physics.gravity.y*rb.mass*gravityMultiplier, 0);
+        anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);
     }
 
     void Move()
@@ -105,7 +116,7 @@ public class PlayerMovement : MonoBehaviour {
 
         moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude, 0, 1);
 
-        anim.SetFloat("Forward", moveVelocity.magnitude / moveSpeed);
+        
     }
 
     private int InvertAxis(bool direction)
@@ -147,7 +158,6 @@ public class PlayerMovement : MonoBehaviour {
             float yOffset = jumpHeightValue * (jumpTimer - jumpTimer * jumpTimer);
             transform.position = Vector3.Lerp(StartPos, EndPosValue, jumpTimer) + yOffset * Vector3.up;
             jumpTimer += Time.deltaTime / 0.9f;
-            Debug.Log(jumpTimer);
             if (jumpTimer >= 1)
             {
                 isMov = false;
@@ -166,6 +176,7 @@ public class PlayerMovement : MonoBehaviour {
         jumpHeight = h;
     }
 
+    
 
 
 }
