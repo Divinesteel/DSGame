@@ -105,6 +105,7 @@ public class Enemy_0 : MonoBehaviour
                 if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5)
                 {
                     KillPlayer();
+                    canSee = false;
                 }
 
                 

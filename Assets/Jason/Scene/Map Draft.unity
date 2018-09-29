@@ -25207,6 +25207,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114795411434198756, guid: a672dd83e4114b8438a1d1138d288ed3,
         type: 2}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1990227108}
+    - target: {fileID: 114795411434198756, guid: a672dd83e4114b8438a1d1138d288ed3,
+        type: 2}
       propertyPath: patrolTargetsPosition.Array.data[0]
       value: 
       objectReference: {fileID: 354989506}
@@ -25225,16 +25230,6 @@ Prefab:
       propertyPath: patrolTargetsPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1028598127}
-    - target: {fileID: 195947347775606260, guid: a672dd83e4114b8438a1d1138d288ed3,
-        type: 2}
-      propertyPath: m_StoppingDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 136870467211498090, guid: a672dd83e4114b8438a1d1138d288ed3,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a672dd83e4114b8438a1d1138d288ed3, type: 2}
   m_IsPrefabParent: 0
@@ -39813,8 +39808,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: 0.4200671, y: 0.004374786, z: 0.0020254771, w: -0.9074803}
-  m_LocalPosition: {x: 78.72353, y: -8.825571, z: -14.183331}
+  m_LocalRotation: {x: 0.34458703, y: 0.102802426, z: 0.037995383, w: -0.9323346}
+  m_LocalPosition: {x: 39.824722, y: -8.630842, z: 29.739807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
