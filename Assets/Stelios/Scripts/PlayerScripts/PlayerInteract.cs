@@ -7,15 +7,20 @@ public class PlayerInteract : MonoBehaviour {
 	private bool isInteracting;
     public KeyCode keycode;
 
+    private PlayerController playerController;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    // Use this for initialization
+    void Start () {
+        playerController = GetComponent<PlayerController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(keycode))
+
+        if (playerController.GetPlayerStatus() == PlayerController.PlayerStat.Dead) return; //Checks whether player is Dead or Alive, so that he behaves accordingly.
+
+        if (Input.GetKeyDown(keycode))
 		{
             Interact();
 		}
