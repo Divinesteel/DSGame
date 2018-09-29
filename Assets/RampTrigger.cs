@@ -12,8 +12,6 @@ public class RampTrigger : MonoBehaviour
     Animator animation;
     Collider weightCollider;
 
-    //bool isRampTriggered;
-    //bool isRampFalling;
     public bool isWeightRemoved;
 
     // Use this for initialization
@@ -30,31 +28,23 @@ public class RampTrigger : MonoBehaviour
         if (isWeightRemoved)
         {
             FallRamp();
+            GetComponent<BoxCollider>().enabled = false;
         }
-
-        //if (isRampTriggered)
-        //{
-        //    isRampFalling = animation.isPlaying;
-        //    if (!isRampFalling)
-        //    {
-        //        rampGround.SetActive(true);
-        //        isRampTriggered = false;
-        //    }
-        //}
 
     }
 
     public void FallRamp()
     {
-        //isRampTriggered = true;
-        //animation.Play("RampFall");
-         animation.SetTrigger("RampTrigger");
-        //isRampFalling = true; if(Input.GetKeyDown("p"))
+        animation.SetTrigger("RampTrigger");
     }
 
     public void OnTriggerExit(Collider weightCollider)
     {
-        isWeightRemoved = true;
+        if (weightCollider.gameObject.name == "Weight")
+        {
+            isWeightRemoved = true;
+        }
+        
     }
 
 }
