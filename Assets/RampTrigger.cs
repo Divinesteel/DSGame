@@ -11,6 +11,7 @@ public class RampTrigger : MonoBehaviour
 
     Animator animation;
     Collider weightCollider;
+    public GameObject block;
 
     public bool isWeightRemoved;
 
@@ -23,19 +24,13 @@ public class RampTrigger : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    { 
         if (isWeightRemoved)
         {
-            FallRamp();
-            GetComponent<BoxCollider>().enabled = false;
+            animation.SetTrigger("RampTrigger");
+            block.GetComponent<BoxCollider>().enabled = false;
         }
 
-    }
-
-    public void FallRamp()
-    {
-        animation.SetTrigger("RampTrigger");
     }
 
     public void OnTriggerExit(Collider weightCollider)
