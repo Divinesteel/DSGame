@@ -33,7 +33,6 @@ public class BoulderTrigger : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             playerInteract = other.gameObject.GetComponent<PlayerInteract>();
-
         }
     }
 
@@ -41,5 +40,4 @@ public class BoulderTrigger : MonoBehaviour {
     {
         isboulderRolling = true;
     }
-
 }
