@@ -24,6 +24,7 @@ public class BoulderTrigger : MonoBehaviour {
             if (isboulderRolling)
             { 
                 boulderAnim.SetTrigger("Boulder Trigger");
+                isboulderRolling = false;
             }
         }
     }
@@ -33,11 +34,11 @@ public class BoulderTrigger : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             playerInteract = other.gameObject.GetComponent<PlayerInteract>();
+            if (playerInteract.InteractStatus())
+            {
+                isboulderRolling = true;
+            }
         }
     }
 
-    protected void OnPlayerInteract()
-    {
-        isboulderRolling = true;
-    }
 }
