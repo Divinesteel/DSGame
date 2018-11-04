@@ -31,7 +31,7 @@ public class BoulderTrigger : MonoBehaviour {
 
     protected void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
             playerInteract = other.gameObject.GetComponent<PlayerInteract>();
             if (playerInteract.InteractStatus())
