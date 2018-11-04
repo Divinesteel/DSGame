@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BridgeTrigger : MonoBehaviour {
 
@@ -40,6 +41,7 @@ public class BridgeTrigger : MonoBehaviour {
                 bridgeGround.SetActive(true);
                 Destroy(block);
                 isBridgeTriggered = false;
+                bridgeGround.GetComponent<NavMeshObstacle>().enabled = false;
             }           
         }
 	}

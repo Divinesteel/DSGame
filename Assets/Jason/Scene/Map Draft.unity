@@ -101,7 +101,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
+    agentSlope: 60
     agentClimb: 0.5
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
@@ -8776,10 +8776,10 @@ MonoBehaviour:
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.02
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 6f0d904e86c305e4eb93049ac083f84e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fc93a92fa6161934dbff67721ee43876, type: 2}
 --- !u!114 &487441236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8804,10 +8804,10 @@ MonoBehaviour:
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.02
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: eb0274b05fce8594ba9e40afdac57414, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f0ee835e9f233a247b9d311286f660e3, type: 2}
 --- !u!1 &487785359
 GameObject:
   m_ObjectHideFlags: 0
@@ -20284,15 +20284,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 69.36
+      value: 37.58
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 9.96
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 50.35
+      value: 32.63
       objectReference: {fileID: 0}
     - target: {fileID: 4789355173861976, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
       propertyPath: m_LocalRotation.x
@@ -20338,6 +20338,41 @@ Prefab:
         type: 2}
       propertyPath: m_CullingMask.m_Bits
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 65962083859038748, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195332157074203564, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195332157074203564, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195502289831561238, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195502289831561238, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54781053682919114, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54781053682919114, guid: 7a4621e19e488864488a80c24a6d27be,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a4621e19e488864488a80c24a6d27be, type: 2}
@@ -27714,7 +27749,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4311992109187122, guid: 01f1825f7bfe9d640ac1a235078d91f0, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 54352156889006636, guid: 01f1825f7bfe9d640ac1a235078d91f0,
         type: 2}
@@ -33598,7 +33633,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 5, y: 0.19, z: 5}
+  m_Extents: {x: 5, y: 0.155, z: 5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -35306,9 +35341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ccddb181da99439792d9f5f00a5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rampGround: {fileID: 0}
+  rampGround: {fileID: 1782878006}
   weight: {fileID: 433906823}
-  block: {fileID: 0}
   isWeightRemoved: 0
 --- !u!65 &1695370887
 BoxCollider:
@@ -40147,8 +40181,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: -0.3842388, y: 0.027084958, z: 0.0112825, w: 0.9227674}
-  m_LocalPosition: {x: 15.139252, y: -6.595625, z: -19.953323}
+  m_LocalRotation: {x: -0.17604963, y: 0.35445365, z: 0.06813812, w: 0.91582006}
+  m_LocalPosition: {x: 18.418762, y: 1.4610748, z: -17.328451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -40187,13 +40221,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782878006}
-  m_LocalRotation: {x: -0.3704331, y: 0.9277885, z: -0.034728814, w: -0.027959293}
-  m_LocalPosition: {x: -2.0973592, y: -1.8564334, z: 0.021859407}
-  m_LocalScale: {x: 0.56937456, y: 1.4450095, z: 0.20351271}
+  m_LocalRotation: {x: -0.34478635, y: 0.93839085, z: -0.013641572, w: -0.018946303}
+  m_LocalPosition: {x: -1.98, y: -1.835, z: 0.017998934}
+  m_LocalScale: {x: 0.5204498, y: 1.4450095, z: 0.20351271}
   m_Children: []
   m_Father: {fileID: 1415880224}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.216, y: -178.50002, z: -40.320004}
 --- !u!208 &1782878008
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -40203,7 +40237,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 5, y: 0.12, z: 5}
+  m_Extents: {x: 5, y: 0.205, z: 5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -49170,6 +49204,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 74613242}
     m_Modifications:
+    - target: {fileID: 114795411434198756, guid: a672dd83e4114b8438a1d1138d288ed3,
+        type: 2}
+      propertyPath: patrolTargetsTime.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114795411434198756, guid: a672dd83e4114b8438a1d1138d288ed3,
+        type: 2}
+      propertyPath: patrolTargetsPosition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4947027443979380, guid: a672dd83e4114b8438a1d1138d288ed3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0

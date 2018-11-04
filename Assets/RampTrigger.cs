@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RampTrigger : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class RampTrigger : MonoBehaviour
 
     Animator animation;
     Collider weightCollider;
-    public GameObject block;
 
     public bool isWeightRemoved;
 
@@ -28,7 +28,7 @@ public class RampTrigger : MonoBehaviour
         if (isWeightRemoved)
         {
             animation.SetTrigger("RampTrigger");
-            block.GetComponent<BoxCollider>().enabled = false;
+            rampGround.GetComponent<NavMeshObstacle>().enabled = false;
         }
 
     }
