@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
@@ -8,13 +9,14 @@ public class Inventory : MonoBehaviour {
     
     public List<InventoryItem> ItemList;
 
-    public void AddItemToInventory(string name)
+	public void AddItemToInventory(string name, Sprite img)
     {
         InventoryItem a = ScriptableObject.CreateInstance<InventoryItem>();
-        a.SetItem(name);
+        a.SetName(name);
+		a.SetImage(img);
         ItemList.Add(a);
 
-        inventoryBar.AddItemToBar(name);
+        inventoryBar.AddItemToBar(name,img);
     }
 
     public void RemoveItemFromInventory(string name)

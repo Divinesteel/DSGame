@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class BoulderTrigger : MonoBehaviour {
 
+	public BoulderTargetX XStatus;
+	public Enemy_0 Enemy;
+
     private PlayerInteract playerInteract;
     private Animator boulderAnim;
+	private bool isAnimPlaying;
+	private float animTime;
+	public bool hasAnimFinished;
 
-    public bool isboulderRolling;
+	public bool isBoulderTriggered;
 
     // Use this for initialization
     void Start () {
 
         boulderAnim = GetComponent<Animator>();
-        isboulderRolling = false;
+		isBoulderTriggered = false;
+		isAnimPlaying = false;
+
 
     }
 	
@@ -21,23 +29,33 @@ public class BoulderTrigger : MonoBehaviour {
 	void Update () {
         if (playerInteract != null)
         {
-            if (isboulderRolling)
+			if (isBoulderTriggered)
             { 
                 boulderAnim.SetTrigger("Boulder Trigger");
-                isboulderRolling = false;
+                isBoulderTriggered = false;
             }
         }
+
+		if (hasAnimFinished) 
+		{
+			Debug.Log ("KILL");
+			Enemy.KIllThisEnemy ();
+		}
     }
 
     protected void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
-            playerInteract = other.gameObject.GetComponent<PlayerInteract>();
-            if (playerInteract.InteractStatus())
-            {
-                isboulderRolling = true;
-            }
+			if (XStatus.GetXStatus()) //Checks if enemy is on X mark
+			{
+				playerInteract = other.gameObject.GetComponent<PlayerInteract>();
+				if (playerInteract.InteractStatus())
+				{
+					isBoulderTriggered = true;
+				}
+			}
+            
         }
     }
 

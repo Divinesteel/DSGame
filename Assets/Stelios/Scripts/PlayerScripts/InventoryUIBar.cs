@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InventoryUIBar : MonoBehaviour {
 
     public GameObject invButtons;
-
+	public Sprite defaultSlot;
     public Text[] invItemText;
 
 	// Use this for initialization
@@ -19,7 +19,7 @@ public class InventoryUIBar : MonoBehaviour {
 		
 	}
 
-    public void AddItemToBar(string itemName)
+	public void AddItemToBar(string itemName, Sprite itemImage)
     {
         int i = 0;
         while (!invItemText[i].text.Equals(""))
@@ -27,7 +27,10 @@ public class InventoryUIBar : MonoBehaviour {
             i += 1;
         }
 
-        invItemText[i].text = itemName;
+		invItemText[i].text = itemName;
+		invItemText [i].GetComponentInParent<Image> ().sprite = itemImage;
+
+
     }
 
     public void RemoveItemFromBar(string name)
@@ -39,6 +42,7 @@ public class InventoryUIBar : MonoBehaviour {
             if (invItemText[i].text.Equals(name))
             {
                 invItemText[i].text = null;
+				invItemText[i].GetComponentInParent<Image>().sprite = defaultSlot;
                 removed = true;
             }
             i += 1;

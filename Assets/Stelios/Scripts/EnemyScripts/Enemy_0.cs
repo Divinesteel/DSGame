@@ -163,4 +163,9 @@ public class Enemy_0 : MonoBehaviour
     {
         playerController.KillPlayer();
     }
+
+	public void KIllThisEnemy()
+	{
+		this.gameObject.SetActive (false);
+	}
 }

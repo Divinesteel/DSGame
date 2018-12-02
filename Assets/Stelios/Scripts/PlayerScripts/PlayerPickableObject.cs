@@ -6,7 +6,7 @@ public class PlayerPickableObject : PlayerInteractableObject {
 
     protected override void OnPlayerInteract()
     {
-        GetPlayerObject().GetComponent<Inventory>().AddItemToInventory(this.name);
+		GetPlayerObject().GetComponent<Inventory>().AddItemToInventory(GetComponent<CrystalObject>().name,GetComponent<CrystalObject>().image);
         Destroy(this.gameObject);
     }
 
