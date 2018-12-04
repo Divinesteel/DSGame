@@ -75,12 +75,12 @@ AnimationClip:
       - serializedVersion: 2
         time: 1
         value: {x: 64.11, y: 5.04, z: 48.85}
-        inSlope: {x: -0.13717213, y: 0, z: -0.13711984}
-        outSlope: {x: -0.13717213, y: 0, z: -0.13711984}
+        inSlope: {x: -0.13717213, y: -25.32639, z: -0.13711984}
+        outSlope: {x: -0.13717213, y: 4.899405, z: -0.13711984}
         tangentMode: 0
       - serializedVersion: 2
         time: 1.0833334
-        value: {x: 64.09, y: 5.22, z: 48.83}
+        value: {x: 64.09, y: 5.145402, z: 48.83}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -112,7 +112,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 1.6666666
+        time: 1
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -239,12 +239,12 @@ AnimationClip:
       - serializedVersion: 2
         time: 1
         value: 5.04
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        inSlope: -25.32639
+        outSlope: 4.899405
+        tangentMode: 1
       - serializedVersion: 2
         time: 1.0833334
-        value: 5.22
+        value: 5.145402
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -461,7 +461,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 1.6666666
+        time: 1
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -507,4 +507,11 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1
+    functionName: ExplodeDust
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

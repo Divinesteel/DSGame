@@ -27,13 +27,11 @@ public class BoulderTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (playerInteract != null)
+		if (isBoulderTriggered)
         {
-			if (isBoulderTriggered)
-            { 
-                boulderAnim.SetTrigger("Boulder Trigger");
-                isBoulderTriggered = false;
-            }
+            Enemy.StopMoving();
+            boulderAnim.SetTrigger("Boulder Trigger");
+            isBoulderTriggered = false;
         }
 
 		if (hasAnimFinished) 
@@ -57,6 +55,11 @@ public class BoulderTrigger : MonoBehaviour {
 			}
             
         }
+    }
+
+    public void ExplodeDust()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
     }
 
 }

@@ -19,6 +19,7 @@ public class Enemy_0 : MonoBehaviour
     public float[] patrolTargetsTime;
     public float RotateDuration;
     private int destIndex;
+    private bool stopMoving;
 
     bool arrived;
     private int prevDestPoint;
@@ -39,12 +40,13 @@ public class Enemy_0 : MonoBehaviour
         canSee = false;
         RotateTime = 0;
         patrolling = false;
+        stopMoving = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathPending)
+        if (agent.pathPending || stopMoving)
         {
             return;
         }
@@ -168,4 +170,9 @@ public class Enemy_0 : MonoBehaviour
 	{
 		this.gameObject.SetActive (false);
 	}
+
+    public void StopMoving()
+    {
+        stopMoving = true;
+    }
 }
