@@ -15,10 +15,17 @@ public class BoulderTargetX : MonoBehaviour {
 		
 	}
 
-	protected void OnTriggerStay(Collider other)
+	protected void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "EnemyBody") {
 			isTargetOnX = true;
+		}
+	}
+
+	protected void OnTriggerExit(Collider other)
+	{
+		if (other.tag == "EnemyBody") {
+			isTargetOnX = false;
 		}
 	}
 
