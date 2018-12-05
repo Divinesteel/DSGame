@@ -1247,8 +1247,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636808782919116}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.22620073, z: -0, w: 0.97408074}
+  m_LocalPosition: {x: -3.25, y: 0, z: -0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4521366177435768}
@@ -1256,7 +1256,7 @@ Transform:
   - {fileID: 4871699012436064}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 26.147001, z: 0}
 --- !u!4 &4970768464226498
 Transform:
   m_ObjectHideFlags: 1
@@ -1339,7 +1339,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018471396486038}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1383,13 +1383,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   patrolTargetsPosition:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   patrolTargetsTime:
-  - 0
-  - 0
-  - 0
   - 0
   RotateDuration: 0.5
   canSee: 0
