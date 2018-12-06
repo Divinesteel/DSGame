@@ -5,14 +5,15 @@ using UnityEngine.AI;
 
 public class MoveNavGroundCompanion : MonoBehaviour
 {
+    public Transform target;
+    public float maxDistance;
+    public float stoppingDistance;
 
     private NavMeshAgent navMeshAgent;
     private RaycastHit hit;
-    public Transform target;
     private bool isFollowingTarget;
-    public float maxDistance;
     private Animator anim;
-    public float stoppingDistance;
+    private NavMeshPath pathToTarget;
 
     // Use this for initialization
     void Start()
@@ -28,19 +29,29 @@ public class MoveNavGroundCompanion : MonoBehaviour
     {
         if (isFollowingTarget)
         {
-            
-            navMeshAgent.destination = target.transform.position;
-            anim.SetFloat("Walking", navMeshAgent.velocity.sqrMagnitude);
-            
+            pathToTarget = new NavMeshPath();
+            navMeshAgent.CalculatePath(target.transform.position, pathToTarget);//Checks if there is available path to Player
 
-            if (navMeshAgent.remainingDistance < stoppingDistance)
+            if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
             {
-                navMeshAgent.isStopped = true;               
+
             }
             else
             {
-                navMeshAgent.isStopped = false;
+                navMeshAgent.destination = target.transform.position;
+                anim.SetFloat("Walking", navMeshAgent.velocity.sqrMagnitude);
+
+
+                if (navMeshAgent.remainingDistance < stoppingDistance)
+                {
+                    navMeshAgent.isStopped = true;
+                }
+                else
+                {
+                    navMeshAgent.isStopped = false;
+                }
             }
+            
         }
 
         //Ray CompanionPlayerRay = new Ray(transform.position, target.transform.position - transform.position);
@@ -59,9 +70,21 @@ public class MoveNavGroundCompanion : MonoBehaviour
                 {
                     if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 12) // 9 = Ground, 12 = Wind
                     {
-                        navMeshAgent.isStopped = false;
                         isFollowingTarget = false;
-                        navMeshAgent.destination = hit.point;
+
+                        pathToTarget = new NavMeshPath();
+                        navMeshAgent.CalculatePath(hit.point, pathToTarget);//Checks if there is Available Path to Destination
+
+                        if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
+                        {
+
+                        }
+                        else
+                        {
+                            navMeshAgent.isStopped = false;
+                            navMeshAgent.destination = hit.point;
+                        }
+                        
                     }
                 }
             }

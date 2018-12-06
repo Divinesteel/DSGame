@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveNavFlightCompanion : MonoBehaviour
-{
-
-    private NavMeshAgent navMeshAgent;
-    private RaycastHit hit;
-    public Transform target;
-    private bool isFollowingTarget;
+{ 
+    public Transform target;  
     public float maxDistance;
-    private Animator anim;
     public float stoppingDistance;
 
+    private Animator anim;
+    private NavMeshPath pathToTarget;
+    private bool isFollowingTarget;
+    private NavMeshAgent navMeshAgent;
+    private RaycastHit hit;
 
     // Use this for initialization
     void Start()
@@ -29,17 +29,26 @@ public class MoveNavFlightCompanion : MonoBehaviour
     {
         if (isFollowingTarget)
         {
+            pathToTarget = new NavMeshPath();
+            navMeshAgent.CalculatePath(target.transform.position, pathToTarget); //Checks if there is available path to Player
 
-            navMeshAgent.destination = target.transform.position;
-
-
-            if (navMeshAgent.remainingDistance < stoppingDistance)
+            if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
             {
-                navMeshAgent.isStopped = true;
+
             }
             else
             {
-                navMeshAgent.isStopped = false;
+                navMeshAgent.destination = target.transform.position;
+
+
+                if (navMeshAgent.remainingDistance < stoppingDistance)
+                {
+                    navMeshAgent.isStopped = true;
+                }
+                else
+                {
+                    navMeshAgent.isStopped = false;
+                }
             }
         }
 
@@ -58,10 +67,20 @@ public class MoveNavFlightCompanion : MonoBehaviour
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
                     if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 10) // 9 = Ground, 10 = Flying
-                    {
-                        navMeshAgent.isStopped = false;
+                    {                     
                         isFollowingTarget = false;
-                        navMeshAgent.destination = hit.point;
+                                          
+                        pathToTarget = new NavMeshPath();
+                        navMeshAgent.CalculatePath(hit.point, pathToTarget); //Checks if there is Available Path to Destination
+                        if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
+                        {
+
+                        }
+                        else
+                        {
+                            navMeshAgent.destination = hit.point;
+                            navMeshAgent.isStopped = false;
+                        }
                     }    
                 }
             }

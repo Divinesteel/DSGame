@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RiverBarrel : MonoBehaviour {
 
+    public SetPetCursorOnHover cursorScript;
+
     private bool exploded;
     private bool isBarrelAtTriggerPosition;
 
@@ -22,6 +24,7 @@ public class RiverBarrel : MonoBehaviour {
     
     public void setBarelReady()
     {
+        cursorScript.Active = true;
         isBarrelAtTriggerPosition = true;
     }
 

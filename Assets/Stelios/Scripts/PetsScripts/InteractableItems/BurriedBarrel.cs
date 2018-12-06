@@ -34,7 +34,8 @@ public class BurriedBarrel : Burried {
                     if (!hasDigAnimationStarted)
                     {
                         barelAnim.Play();
-                        hasDigAnimationStarted = true;
+                        hasDigAnimationStarted = true;                        
+                        
                     }
 
                     if (hasDigAnimationPaused)
@@ -65,6 +66,10 @@ public class BurriedBarrel : Burried {
                 {
                     barelAnim.Play("Animation_BarelRiver");
                     hasBeenThrownToRiver = true;
+                    foreach (CapsuleCollider cc in GetComponents<CapsuleCollider>())
+                    {
+                        cc.enabled = false;
+                    }
                 }
             }
             

@@ -28,7 +28,7 @@ public class RampTrigger : MonoBehaviour
         if (isWeightRemoved)
         {
             animation.SetTrigger("RampTrigger");
-            rampGround.GetComponent<NavMeshObstacle>().enabled = false;
+            
         }
 
     }
@@ -42,6 +42,10 @@ public class RampTrigger : MonoBehaviour
         
     }
 
+    public void OnAnimationFinish()
+    {
+        rampGround.GetComponent<NavMeshObstacle>().enabled = false;
+    }
 
 }
 
