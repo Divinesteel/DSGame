@@ -36,7 +36,6 @@ public class BoulderTrigger : MonoBehaviour {
 
 		if (hasAnimFinished) 
 		{
-			Debug.Log ("KILL");
 			Enemy.KIllThisEnemy ();
 		}
     }
