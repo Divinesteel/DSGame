@@ -21,7 +21,7 @@ public class Burried : MonoBehaviour {
 
         if(groundPetInteract != null)
         {
-            isPetDigging = groundPetInteract.IsDigging;
+            isPetDigging = groundPetInteract.GetInteractStatus();
             if(isPetDigging == true && !hasBeingDigged)
             {
                 DustParticleSystem.Play();
@@ -49,7 +49,8 @@ public class Burried : MonoBehaviour {
         if (other.gameObject.tag == "GroundPet")
         {
             groundPetInteract = other.GetComponent<GroundPetInteract>();
-
+            Pet petscript = other.gameObject.GetComponent<Pet>();
+            petscript.AddInteractable(gameObject);
         }
     }
 
@@ -58,7 +59,8 @@ public class Burried : MonoBehaviour {
         if(other.gameObject.tag == "GroundPet")
         {
             groundPetInteract = null;
-            isPetDigging = false;
+            Pet petscript = other.gameObject.GetComponent<Pet>();
+            petscript.RemoveInteractable(gameObject);
         }
     }
 }

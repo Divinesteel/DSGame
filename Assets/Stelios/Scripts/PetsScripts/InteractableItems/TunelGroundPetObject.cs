@@ -31,7 +31,7 @@ public class TunelGroundPetObject : MonoBehaviour {
 
         if (groundPet != null)
         {
-            if (groundPet.IsDiggingStatus())
+            if (groundPet.GetInteractStatus())
             {
                 DigTunel();
             }

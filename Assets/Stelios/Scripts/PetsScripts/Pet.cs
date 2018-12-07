@@ -29,4 +29,9 @@ public class Pet : MonoBehaviour {
         interactableObjects.Remove(go);
     }
 
+    public bool GetInteractStatus()
+    {
+        return interact;
+    }
+
 }
