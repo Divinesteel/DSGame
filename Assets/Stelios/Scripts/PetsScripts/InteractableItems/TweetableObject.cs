@@ -27,6 +27,8 @@ public abstract class TweetableObject : MonoBehaviour {
         if(other.gameObject.tag == "FlyingPet")
         {
             flyingPet = other.gameObject.GetComponent<FlyingPetInteract>();
+            Pet petscript = other.gameObject.GetComponent<Pet>();
+            petscript.AddInteractable(gameObject);
         }
     }
 
@@ -35,6 +37,8 @@ public abstract class TweetableObject : MonoBehaviour {
         if (other.gameObject.tag == "FlyingPet")
         {
             flyingPet = null;
+            Pet petscript = other.gameObject.GetComponent<Pet>();
+            petscript.RemoveInteractable(gameObject);
         }
     }
 
