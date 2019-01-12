@@ -28,13 +28,13 @@ public class FlyingPetInteract : Pet {
 
         if (Input.GetMouseButtonDown(1)) //CLICK INTERACT
         {
-            Debug.Log("triggered");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray.origin, ray.direction, out hit))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.tag == "FlyingInteractable")
                 {
-                    Debug.Log("triggeredFLYING");
                     if (base.interactableObjects.Find(x => x.GetInstanceID() == hit.collider.gameObject.GetInstanceID()) != null) {
                         base.interact = true;
                         base.instanceID = hit.collider.gameObject.GetInstanceID();
