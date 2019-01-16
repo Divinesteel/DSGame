@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CaveMechanism : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CaveMechanism : MonoBehaviour
     public CaveButton button2;
 
     public Animator anim;
+    public GameObject meshLink;
+    public NavMeshObstacle meshObstacle;
 
     void Start()
     {
@@ -25,6 +28,8 @@ public class CaveMechanism : MonoBehaviour
         if (button1Pressed && button2Pressed)
         {
             anim.SetBool("ButtonsArePressed", true); //Sets Animator "ButtonsArePressed" To True
+            meshLink.SetActive(true);
+            meshObstacle.enabled = false;
         }
     }
 
