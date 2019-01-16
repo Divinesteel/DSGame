@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CrystalWindTweet : TweetableObject {
 
+    public bool tweetable;
     private Animation animation;
 
     void Start()
@@ -16,5 +17,10 @@ public class CrystalWindTweet : TweetableObject {
     {
         animation.Play();
         GetComponents<CapsuleCollider>()[0].enabled = false;
+    }
+
+    public bool TweetableStatus()
+    {
+        return tweetable;
     }
 }

@@ -16,6 +16,7 @@ public class FlyingPetInteract : Pet {
     private bool hasFinishedTweeting;
 
     private RaycastHit hit;
+    private GameObject interactableObject;
     // Use this for initialization
     void Start() {
         tweetSound = GetComponent<AudioSource>();
@@ -35,7 +36,8 @@ public class FlyingPetInteract : Pet {
                 Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject.tag == "FlyingInteractable")
                 {
-                    if (base.interactableObjects.Find(x => x.GetInstanceID() == hit.collider.gameObject.GetInstanceID()) != null) {
+                    interactableObject = base.interactableObjects.Find(x => x.GetInstanceID() == hit.collider.gameObject.GetInstanceID());
+                    if (interactableObject != null) {
                         base.interact = true;
                         base.instanceID = hit.collider.gameObject.GetInstanceID();
                     }
@@ -67,28 +69,34 @@ public class FlyingPetInteract : Pet {
             }
         }
 
-        if (interact)
+        if (interactableObject != null)
         {
-            if (!tweetSound.isPlaying)
+            if ((interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == true) && !hasFinishedTweeting)
             {
-                tweetSound.Play();
+
+                if (!tweetSound.isPlaying)
+                {
+                    tweetSound.Play();
+                }
+
+                tweetVolume = 1;
+                tweetSound.volume = tweetVolume;
+                IsTweeting = true;
             }
-
-            tweetVolume = 1;
-            tweetSound.volume = tweetVolume;
-            IsTweeting = true;
+            else if (interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == false)
+            {
+                IsTweeting = false;
+            }
         }
+        
 
-        else if (!interact)
-        {
-            IsTweeting = false;
-        }
+        
 
         if (!IsTweeting)
         {
             if (tweetSound.volume > 0)
             {
-                tweetSound.volume -= Time.deltaTime;
+                tweetSound.volume -= Time.deltaTime * 2;
             }
             else
             {

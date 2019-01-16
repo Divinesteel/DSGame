@@ -5,17 +5,29 @@ using UnityEngine;
 public class FlyingPetPickUpCrystal : MonoBehaviour {
 
     private FlyingPetInteract flyingPetInteract;
-
+    private bool hasBeenTriggered;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        hasBeenTriggered = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (flyingPetInteract != null)
+        {
+            if (flyingPetInteract.GetInteractStatus() && !hasBeenTriggered)
+            {
+                hasBeenTriggered = true;
+            }
+        }
+
+        if (hasBeenTriggered)
+        {
+            transform.position = new Vector3(flyingPetInteract.gameObject.transform.position.x, flyingPetInteract.gameObject.transform.position.y + (float)0.9, flyingPetInteract.gameObject.transform.position.z);
+        }
+
+    }
 
     void OnTriggerEnter(Collider other)
     {

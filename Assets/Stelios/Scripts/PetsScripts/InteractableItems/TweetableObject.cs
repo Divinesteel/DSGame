@@ -5,17 +5,18 @@ using UnityEngine;
 public abstract class TweetableObject : MonoBehaviour {
 
     private FlyingPetInteract flyingPet;
+    private bool hasBeenTriggered;
 
 	// Use this for initialization
 	protected void Start () {
-		
-	}
+        hasBeenTriggered = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if(flyingPet != null)
         {
-            if (flyingPet.HasFinishedTweetingStatus())
+            if (flyingPet.HasFinishedTweetingStatus() && !hasBeenTriggered)
             {
                 OnTweetFinish();
             }
