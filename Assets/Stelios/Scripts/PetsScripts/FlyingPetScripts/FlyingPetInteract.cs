@@ -20,6 +20,7 @@ public class FlyingPetInteract : Pet {
     // Use this for initialization
     void Start() {
         tweetSound = GetComponent<AudioSource>();
+        hasFinishedTweeting = false;
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class FlyingPetInteract : Pet {
 
     protected void TweetController()
     {
-        hasFinishedTweeting = false;
+
         if (IsTweeting)
         {
             if (tweetSound.clip.length == tweetSound.time)

@@ -19,6 +19,7 @@ public abstract class TweetableObject : MonoBehaviour {
             if (flyingPet.HasFinishedTweetingStatus() && !hasBeenTriggered)
             {
                 OnTweetFinish();
+                hasBeenTriggered = true;
             }
         }
 	}

@@ -69577,8 +69577,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: 0.40185523, y: 0.46095106, z: 0.2463591, w: -0.7518934}
-  m_LocalPosition: {x: 82.52263, y: -10.214884, z: 5.220028}
+  m_LocalRotation: {x: -0.29073513, y: 0.17660376, z: 0.054693274, w: 0.938772}
+  m_LocalPosition: {x: 80.94307, y: -8.641615, z: 2.432396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -76416,6 +76416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aeed2469d1192f48a7675543d1c0f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweetable: 0
 --- !u!136 &1887444613
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -76613,6 +76614,11 @@ Prefab:
         type: 2}
       propertyPath: m_Center.x
       value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 114125856731575490, guid: 36503447f5372ab4495dd42ec08684df,
+        type: 2}
+      propertyPath: tweetable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136869090278997348, guid: 36503447f5372ab4495dd42ec08684df, type: 2}
