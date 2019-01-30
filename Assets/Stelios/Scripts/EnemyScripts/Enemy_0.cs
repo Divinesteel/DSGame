@@ -175,4 +175,14 @@ public class Enemy_0 : MonoBehaviour
     {
         stopMoving = true;
     }
+
+    public void ResetState()
+    {
+        patrolling = false;
+        canSee = false;
+        //lastKnownPosition = patrolTargetsPosition[destIndex].position;
+        //agent.SetDestination(target.position);
+        transform.position = patrolTargetsPosition[0].position;
+        transform.rotation = patrolTargetsPosition[0].rotation;
+    }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BoulderTrigger : MonoBehaviour {
 
-	public BoulderTargetX XStatus;
+    public GameObject player;
+    public BoulderTargetX XStatus;
 	public Enemy_0 Enemy;
 
     private PlayerInteract playerInteract;
@@ -51,7 +52,8 @@ public class BoulderTrigger : MonoBehaviour {
 				{
 					isBoulderTriggered = true;
 				}
-			}
+                player.GetComponent<CheckpointCtrl>().SaveCheckpoint();
+            }
             
         }
     }

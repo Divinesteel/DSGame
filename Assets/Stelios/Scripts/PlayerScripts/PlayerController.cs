@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    CheckpointCtrl checkpoint;
+
     public enum PlayerStat {Alive, Dead};
     public PlayerStat PlayerStatus;
 
@@ -20,11 +22,12 @@ public class PlayerController : MonoBehaviour {
 
     public void KillPlayer()
     {
-        PlayerStatus = PlayerStat.Dead;
-        SetKinematicOnRagdoll(false);
-        GetComponent<Animator>().enabled = false;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        GetComponent<Rigidbody>().isKinematic = true;
+        //PlayerStatus = PlayerStat.Dead;
+        //SetKinematicOnRagdoll(false);
+        //GetComponent<Animator>().enabled = false;
+        //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<CheckpointCtrl>().LoadCheckpoint();
     }
 
     public PlayerStat GetPlayerStatus()
