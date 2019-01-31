@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 
 public class Enemy_0 : MonoBehaviour
 {
@@ -10,7 +12,6 @@ public class Enemy_0 : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     Vector3 lastKnownPosition;
-
     bool patrolling;
 
     private Transform target;
@@ -24,6 +25,7 @@ public class Enemy_0 : MonoBehaviour
     bool arrived;
     private int prevDestPoint;
     public bool canSee;
+    private float startingSpeed;
 
     Vector3 lookTowards;
 
@@ -34,6 +36,7 @@ public class Enemy_0 : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        startingSpeed = agent.speed;
         anim = GetComponent<Animator>();
         destIndex = 0;
         lastKnownPosition = patrolTargetsPosition[destIndex].position;
@@ -95,29 +98,60 @@ public class Enemy_0 : MonoBehaviour
             anim.StopRotate(); //Stops Animation Rotation.
             lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
-            agent.SetDestination(target.position);
+
             agent.speed = 2f;
 
-            if (agent.remainingDistance < agent.stoppingDistance)
+            //NavMeshPath path = new NavMeshPath();
+            //agent.CalculatePath(target.position, path);
+            double x = Math.Pow(transform.position.x - target.transform.position.x, 2);
+            double y = Math.Pow(transform.position.y - target.transform.position.y, 2);
+            double z = Math.Pow(transform.position.z - target.transform.position.z, 2);
+            double distance = Math.Sqrt(x + y + z);
+
+            agent.destination = target.position;
+
+            if (distance <= agent.stoppingDistance + 1)
             {
+                Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
                 anim.SetBool("Attack", true);
                 anim.SetLayerWeight(1, 1);
-
-                Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
-                if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5)
+                if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.60)
                 {
+                    GetComponent<AudioSource>().Play();
                     KillPlayer();
                     canSee = false;
                 }
+            }
 
-                
-                
-                //anim.SetBool("Attack", true);
-            }
-            else
-            {
-                //anim.SetBool("Attack", false);
-            }
+
+            //if (path.status == NavMeshPathStatus.PathComplete)
+            //{
+            //    agent.path = path;
+
+            //    if (agent.remainingDistance < agent.stoppingDistance)
+            //    {
+            //        Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
+            //        anim.SetBool("Attack", true);
+            //        anim.SetLayerWeight(1, 1);
+            //        if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.8)
+            //        {
+
+            //            KillPlayer();
+            //            canSee = false;
+            //        }
+
+
+
+            //        //anim.SetBool("Attack", true);
+            //    }
+            //    else
+            //    {
+            //        //anim.SetBool("Attack", false);
+            //    }
+            //}
+
+
+
         }
         else
         {
@@ -178,11 +212,15 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-        patrolling = false;
-        canSee = false;
-        //lastKnownPosition = patrolTargetsPosition[destIndex].position;
-        //agent.SetDestination(target.position);
-        transform.position = patrolTargetsPosition[0].position;
-        transform.rotation = patrolTargetsPosition[0].rotation;
+        agent.speed = startingSpeed;
+        anim.SetBool("Attack", false);
+        anim.SetLayerWeight(1, 0);
+        hasRotated = false;
+        arrived = false;
+        patrolling = true;
+
+        transform.position = patrolTargetsPosition[destIndex].position;
+        transform.rotation = patrolTargetsPosition[destIndex].rotation;
+
     }
 }

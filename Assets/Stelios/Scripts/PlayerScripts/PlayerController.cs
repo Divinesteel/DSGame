@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    CheckpointCtrl checkpoint;
+    public CheckpointCtrl checkpoint;
 
     public enum PlayerStat {Alive, Dead};
     public PlayerStat PlayerStatus;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
         //GetComponent<Animator>().enabled = false;
         //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         //GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        checkpoint.GetComponent<CheckpointCtrl>().LoadCheckpoint();
     }
 
     public PlayerStat GetPlayerStatus()
