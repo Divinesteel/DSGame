@@ -17,12 +17,12 @@ public class Click_Light : MonoBehaviour {
 
 		while (true)
 		{
-			if(Input.GetKeyDown(KeyCode.LeftAlt) && !isFlashLightOn)
+			if(Input.GetKeyDown(KeyCode.Mouse2) && !isFlashLightOn)
 			{
 				yield return StartCoroutine(ActivateLightIntensity(light, maxIntensity, duration));
 				isFlashLightOn = true;
 			}
-            else if(!Input.GetKey(KeyCode.LeftAlt) && isFlashLightOn)
+            else if(!Input.GetKey(KeyCode.Mouse2) && isFlashLightOn)
             {
                 yield return StartCoroutine(DeactivateLightIntensity(light, light.intensity, duration));
                 isFlashLightOn = false;

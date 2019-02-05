@@ -219,8 +219,8 @@ public class Enemy_0 : MonoBehaviour
         arrived = false;
         patrolling = true;
 
-        transform.position = patrolTargetsPosition[destIndex].position;
-        transform.rotation = patrolTargetsPosition[destIndex].rotation;
+        transform.position = patrolTargetsPosition[0].position;
+        transform.rotation = patrolTargetsPosition[0].rotation;
 
     }
 }

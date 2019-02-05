@@ -16,6 +16,7 @@ TagManager:
   - MouseDrop
   - GroundInteractable
   - EnemyBody
+  - MapBoundary
   layers:
   - Default
   - TransparentFX
