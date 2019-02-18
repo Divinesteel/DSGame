@@ -19336,7 +19336,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: fc93a92fa6161934dbff67721ee43876, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f0ee835e9f233a247b9d311286f660e3, type: 2}
 --- !u!114 &487441236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19364,7 +19364,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.033333335
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: f0ee835e9f233a247b9d311286f660e3, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fc93a92fa6161934dbff67721ee43876, type: 2}
 --- !u!1 &487785359
 GameObject:
   m_ObjectHideFlags: 0
@@ -35509,10 +35509,10 @@ Transform:
   - {fileID: 1632674116}
   - {fileID: 332445199}
   - {fileID: 103070357}
-  - {fileID: 1101848786}
   - {fileID: 1687129510}
-  - {fileID: 893970257}
+  - {fileID: 1101848786}
   - {fileID: 1205632977}
+  - {fileID: 893970257}
   - {fileID: 1447585060}
   - {fileID: 1692693870}
   - {fileID: 1046038826}
@@ -62312,7 +62312,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 5, y: 0.155, z: 5}
+  m_Extents: {x: 5, y: 0.87, z: 5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -76395,8 +76395,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1776996474}
-  m_LocalRotation: {x: -0.3591572, y: 0.22221558, z: 0.0884859, w: 0.90210676}
-  m_LocalPosition: {x: 2.0123482, y: -23.879904, z: -38.749508}
+  m_LocalRotation: {x: -0.4532144, y: 0.09698338, z: 0.04968123, w: 0.8847162}
+  m_LocalPosition: {x: 2.3995056, y: -1.8680544, z: -13.228542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 283933619}
@@ -76451,7 +76451,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 5, y: 0.205, z: 5}
+  m_Extents: {x: 5, y: 0.45, z: 5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
