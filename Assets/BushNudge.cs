@@ -20,12 +20,9 @@ public class BushNudge : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (IsPlayer(other))
         {
-            other.gameObject.tag = "Player_Hidden";
-        }
-        if (other.gameObject.tag == "Player_Hidden")
-        {
+
             if (frames <= 10)
             {
                 frames++;
@@ -41,9 +38,30 @@ public class BushNudge : MonoBehaviour {
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Player_Hidden")
+            if (IsPlayer(other))
             {
                 frames = 0;
             }
         }
+
+    bool IsPlayer(Collider other)
+    {
+        try
+        {
+            PlayerController pc = other.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (System.Exception)
+        {
+            return false;
+        }
+    }
+
     }

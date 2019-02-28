@@ -22,8 +22,10 @@ public class CaveEntrance : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        Debug.Log("Entered");
+        if (other.gameObject.tag == "Player")
         {
+            Debug.Log("Player entered");
             foreach (MeshRenderer rnd in topBoldersRenderers)
             {
             rnd.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;

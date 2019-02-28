@@ -122,40 +122,9 @@ public class Enemy_0 : MonoBehaviour
                     canSee = false;
                 }
             }
-
-
-            //if (path.status == NavMeshPathStatus.PathComplete)
-            //{
-            //    agent.path = path;
-
-            //    if (agent.remainingDistance < agent.stoppingDistance)
-            //    {
-            //        Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
-            //        anim.SetBool("Attack", true);
-            //        anim.SetLayerWeight(1, 1);
-            //        if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.8)
-            //        {
-
-            //            KillPlayer();
-            //            canSee = false;
-            //        }
-
-
-
-            //        //anim.SetBool("Attack", true);
-            //    }
-            //    else
-            //    {
-            //        //anim.SetBool("Attack", false);
-            //    }
-            //}
-
-
-
-        }
+                    }
         else
         {
-            //anim.SetBool("Attack", false);
             if (!patrolling)
             {
                 agent.SetDestination(lastKnownPosition);

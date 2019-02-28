@@ -29,11 +29,11 @@ public class SetPetCursorOnHover : MonoBehaviour {
         {
             if (cursorPet == CursorType.Feather)
             {
-                Cursor.SetCursor((Texture2D)AssetDatabase.LoadAssetAtPath("Assets/_Main Project/Icons/CursorFeather.png", typeof(Texture2D)), new Vector2(0, 0), CursorMode.Auto);
+                  Cursor.SetCursor(Resources.Load<Texture2D>("CursorFeather"), new Vector2(0, 0), CursorMode.Auto);
             }
             else
             {
-                Cursor.SetCursor((Texture2D)AssetDatabase.LoadAssetAtPath("Assets/_Main Project/Icons/CursorPaw.png", typeof(Texture2D)), new Vector2(0, 0), CursorMode.Auto);
+                  Cursor.SetCursor(Resources.Load<Texture2D>("CursorPaw"), new Vector2(0, 0), CursorMode.Auto);
             }
         }
         
