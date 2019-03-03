@@ -62,7 +62,7 @@ public class MoveNavGroundCompanion : MonoBehaviour
 
         if (Mathf.Abs(CompanionPlayerVect.magnitude) < maxDistance) // check if pet is within command range
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!PauseMenu.gameIsPaused && Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //create ray from camera to mouse position
                 Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point

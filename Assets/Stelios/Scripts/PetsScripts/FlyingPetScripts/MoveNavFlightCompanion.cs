@@ -60,7 +60,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
 
         if (Mathf.Abs(CompanionPlayerVect.magnitude) < maxDistance)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (!PauseMenu.gameIsPaused && Input.GetMouseButtonDown(1))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //create ray from camera to mouse position
                 Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
