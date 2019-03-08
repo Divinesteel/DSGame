@@ -26,7 +26,7 @@ public class FlyingPetInteract : Pet {
     // Update is called once per frame
     void Update() {
 
-        TweetController();
+        
 
         if (Input.GetMouseButtonDown(1)) //CLICK INTERACT
         {
@@ -46,11 +46,14 @@ public class FlyingPetInteract : Pet {
                 }
             }
         }
+        
         else if (Input.GetMouseButtonUp(1))
         {
             base.interact = false;
             base.instanceID = null;
         }
+
+        TweetController();
     }
 
     public bool HasFinishedTweetingStatus()
@@ -72,21 +75,28 @@ public class FlyingPetInteract : Pet {
 
         if (interactableObject != null)
         {
-            if ((interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == true) && !hasFinishedTweeting)
+            try
             {
-
-                if (!tweetSound.isPlaying)
+                if ((interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == true) && !hasFinishedTweeting)
                 {
-                    tweetSound.Play();
-                }
 
-                tweetVolume = 1;
-                tweetSound.volume = tweetVolume;
-                IsTweeting = true;
+                    if (!tweetSound.isPlaying)
+                    {
+                        tweetSound.Play();
+                    }
+
+                    tweetVolume = 1;
+                    tweetSound.volume = tweetVolume;
+                    IsTweeting = true;
+                }
+                else if (interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == false)
+                {
+                    IsTweeting = false;
+                }
             }
-            else if (interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == false)
+            catch
             {
-                IsTweeting = false;
+
             }
         }
         
