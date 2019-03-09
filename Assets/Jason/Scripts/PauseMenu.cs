@@ -1,13 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
+    Transform menuPanel;
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject SettingsMenuUI;
 
+    Event keyEvent;
+    Text buttonText;
+    KeyCode newKey;
+
+    bool waitingForKey;
+
+    void Start()
+    {
+        //Assign menuPanel to the Panel object in our Canvas
+        //Make sure it's not active when the game starts
+        menuPanel = transform.Find("Settings Buttons");
+        //menuPanel.gameObject.SetActive(false);
+        waitingForKey = false;
+
+        /*iterate through each child of the panel and check
+		 * the names of each one. Each if statement will
+		 * set each button's text component to display
+		 * the name of the key that is associated
+		 * with each command. Example: the ForwardKey
+		 * button will display "W" in the middle of it
+		 */
+        for (int i = 0; i < menuPanel.childCount; i++)
+        {
+            if (menuPanel.GetChild(i).name == "Move North Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.north.ToString();
+            else if (menuPanel.GetChild(i).name == "Move South Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.south.ToString();
+            else if (menuPanel.GetChild(i).name == "Move West Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.west.ToString();
+            else if (menuPanel.GetChild(i).name == "Move East Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.east.ToString();
+            else if (menuPanel.GetChild(i).name == "Interact Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            else if (menuPanel.GetChild(i).name == "Order Tiger Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            else if (menuPanel.GetChild(i).name == "Order Bird Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            else if (menuPanel.GetChild(i).name == "Command Range Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            else if (menuPanel.GetChild(i).name == "Command Range Toggle Button")
+                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+        }
+    }
 
     // Update is called once per frame
     void Update () {
@@ -39,6 +84,8 @@ public class PauseMenu : MonoBehaviour {
         gameIsPaused = false;
     }
 
+    #region Settings
+
     public void Settings()
     {
         if (SettingsMenuUI.activeSelf == false)
@@ -50,6 +97,120 @@ public class PauseMenu : MonoBehaviour {
             SettingsMenuUI.SetActive(false);
         }
     }
+
+    void OnGUI()
+    {
+        /*keyEvent dictates what key our user presses
+		 * bt using Event.current to detect the current
+		 * event
+		 */
+        keyEvent = Event.current;
+
+        //Executes if a button gets pressed and
+        //the user presses a key
+        if (keyEvent.isKey && waitingForKey)
+        {
+            newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
+            waitingForKey = false;
+        }
+    }
+
+    /*Buttons cannot call on Coroutines via OnClick().
+	 * Instead, we have it call StartAssignment, which will
+	 * call a coroutine in this script instead, only if we
+	 * are not already waiting for a key to be pressed.
+	 */
+    public void StartAssignment(string keyName)
+    {
+        if (!waitingForKey)
+            StartCoroutine(AssignKey(keyName));
+        Debug.Log("Clicked");
+    }
+
+    //Assigns buttonText to the text component of
+    //the button that was pressed
+    public void SendText(Text text)
+    {
+        buttonText = text;
+    }
+
+    IEnumerator WaitForKey()
+    {
+        while (!keyEvent.isKey)
+            yield return null;
+    }
+
+    /*AssignKey takes a keyName as a parameter. The
+	 * keyName is checked in a switch statement. Each
+	 * case assigns the command that keyName represents
+	 * to the new key that the user presses, which is grabbed
+	 * in the OnGUI() function, above.
+	 */
+    public IEnumerator AssignKey(string keyName)
+    {
+        waitingForKey = true;
+
+        yield return WaitForKey(); //Executes endlessly until user presses a key
+
+        switch (keyName)
+        {
+            case "Move North Button":
+                InputManager.IM.north = newKey; //Set forward to new keycode
+                buttonText.text = InputManager.IM.north.ToString(); //Set button text to new key
+                PlayerPrefs.SetString("northKey", InputManager.IM.north.ToString()); //save new key to PlayerPrefs
+                Debug.Log("aagoo");
+                break;
+            case "Move South Button":
+                InputManager.IM.south = newKey; //set backward to new keycode
+                buttonText.text = InputManager.IM.south.ToString(); //set button text to new key
+                PlayerPrefs.SetString("southKey", InputManager.IM.south.ToString()); //save new key to PlayerPrefs
+                break;
+            case "Move West Button":
+                InputManager.IM.west = newKey; //set left to new keycode
+                buttonText.text = InputManager.IM.west.ToString(); //set button text to new key
+                PlayerPrefs.SetString("westKey", InputManager.IM.west.ToString()); //save new key to playerprefs
+                break;
+            case "Move East Button":
+                InputManager.IM.east = newKey; //set right to new keycode
+                buttonText.text = InputManager.IM.east.ToString(); //set button text to new key
+                PlayerPrefs.SetString("eastKey", InputManager.IM.east.ToString()); //save new key to playerprefs
+                break;
+            case "Interact Button":
+                InputManager.IM.interact = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.interact.ToString(); //set button text to new key
+                PlayerPrefs.SetString("interactKey", InputManager.IM.interact.ToString()); //save new key to playerprefs
+                break;
+            case "Order Tiger Button":
+                InputManager.IM.groundPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.groundPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("groundPetKey", InputManager.IM.groundPet.ToString()); //save new key to playerprefs
+                break;
+            case "Order Bird Button":
+                InputManager.IM.flyingPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.flyingPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("flyingPetKey", InputManager.IM.flyingPet.ToString()); //save new key to playerprefs
+                break;
+            case "Command Range Button":
+                InputManager.IM.commandRange = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.commandRange.ToString(); //set button text to new key
+                PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
+                break;
+        }
+
+        yield return null;
+    }
+
+    public void Toggle()
+    {
+        InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
+        if (InputManager.IM.toggleCommand)
+        {
+            buttonText.text = "Toggle";
+        }
+        else buttonText.text = "Hold";
+        PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
+    }
+    #endregion
 
     public void QuitGame()
     {

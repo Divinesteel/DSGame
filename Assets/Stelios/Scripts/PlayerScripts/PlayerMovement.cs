@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         }
          
 
-        if (Input.GetKeyDown(KeyCode.Space) && endPos != null && jumpHeight != 0)
+        if (Input.GetKeyDown(InputManager.IM.interact) && endPos != null && jumpHeight != 0)
         {
             isJumping = true;
             isRot = true;
