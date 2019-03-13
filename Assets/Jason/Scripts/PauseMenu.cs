@@ -7,22 +7,27 @@ public class PauseMenu : MonoBehaviour {
 
     Transform menuPanel;
     public static bool gameIsPaused = false;
+    //public GameObject TitleScreen;
     public GameObject pauseMenuUI;
     public GameObject SettingsMenuUI;
 
     Event keyEvent;
+    Button BindingButton;
     Text buttonText;
     KeyCode newKey;
 
-    bool waitingForKey;
+    public bool waitingForKey;
+    public bool keyPressed ;
 
     void Start()
     {
+        //buttonText = BindingButton.GetComponent<Text>();
         //Assign menuPanel to the Panel object in our Canvas
         //Make sure it's not active when the game starts
         menuPanel = transform.Find("Settings Buttons");
         //menuPanel.gameObject.SetActive(false);
         waitingForKey = false;
+        keyPressed = false;
 
         /*iterate through each child of the panel and check
 		 * the names of each one. Each if statement will
@@ -112,6 +117,34 @@ public class PauseMenu : MonoBehaviour {
         {
             newKey = keyEvent.keyCode; //Assigns newKey to the key user presses
             waitingForKey = false;
+
+            Debug.Log("Pressed " + newKey);
+
+            keyPressed = true;
+        }
+        else if (keyEvent.isMouse && waitingForKey)
+        {
+            keyPressed = true;
+            if (keyEvent.button == 0 && keyEvent.isMouse)
+            {
+                newKey = KeyCode.Mouse0;
+                Debug.Log("Pressed Mouse0");
+            }
+            else if (keyEvent.button == 1)
+            {
+                newKey = KeyCode.Mouse1;
+                Debug.Log("Pressed Mouse1");
+            }
+            else if (keyEvent.button == 2)
+            {
+                newKey = KeyCode.Mouse2;
+                Debug.Log("Pressed Mouse2");
+            }
+            else if (keyEvent.button > 2)
+            {
+                Debug.Log("Another button in the mouse clicked");
+            }
+            waitingForKey = false;
         }
     }
 
@@ -122,22 +155,40 @@ public class PauseMenu : MonoBehaviour {
 	 */
     public void StartAssignment(string keyName)
     {
+        Debug.Log("Button Pressed.");
         if (!waitingForKey)
             StartCoroutine(AssignKey(keyName));
-        Debug.Log("Clicked");
     }
 
     //Assigns buttonText to the text component of
     //the button that was pressed
     public void SendText(Text text)
     {
-        buttonText = text;
+        //if (waitingForKey)
+        //{
+            buttonText = text;
+        //}
     }
 
     IEnumerator WaitForKey()
     {
-        while (!keyEvent.isKey)
+        int frames = 0;
+        while (!keyEvent.isKey && !keyPressed/*|| frames < 600 || !keyEvent.isMouse*/)
+        {
+            //BindingButton.enabled = false;
+            frames++;
+            if (frames%15 == 0)
+            {
+                buttonText.text = " ";
+            }
+
+            if (frames %30 == 0)
+            {
+                buttonText.text = "_";
+            }
             yield return null;
+        }
+        yield return null;
     }
 
     /*AssignKey takes a keyName as a parameter. The
@@ -150,7 +201,11 @@ public class PauseMenu : MonoBehaviour {
     {
         waitingForKey = true;
 
+        Debug.Log("Waiting for key");
+
         yield return WaitForKey(); //Executes endlessly until user presses a key
+
+        Debug.Log("Key pressed");
 
         switch (keyName)
         {
@@ -158,7 +213,6 @@ public class PauseMenu : MonoBehaviour {
                 InputManager.IM.north = newKey; //Set forward to new keycode
                 buttonText.text = InputManager.IM.north.ToString(); //Set button text to new key
                 PlayerPrefs.SetString("northKey", InputManager.IM.north.ToString()); //save new key to PlayerPrefs
-                Debug.Log("aagoo");
                 break;
             case "Move South Button":
                 InputManager.IM.south = newKey; //set backward to new keycode
@@ -197,6 +251,7 @@ public class PauseMenu : MonoBehaviour {
                 break;
         }
 
+        keyPressed = false;
         yield return null;
     }
 

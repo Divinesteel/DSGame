@@ -20,11 +20,11 @@ public class PlayerInteract : MonoBehaviour {
 
         if (playerController.GetPlayerStatus() == PlayerController.PlayerStat.Dead) return; //Checks whether player is Dead or Alive, so that he behaves accordingly.
 
-        if (Input.GetKeyDown(keycode))
+        if (Input.GetKeyDown(InputManager.IM.interact))
 		{
             Interact();
 		}
-		else if (Input.GetKeyUp(keycode))
+		else if (Input.GetKeyUp(InputManager.IM.interact))
 		{
             StopInteract();
 		}
