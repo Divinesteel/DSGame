@@ -187,9 +187,11 @@ public class Enemy_0 : MonoBehaviour
         hasRotated = false;
         arrived = false;
         patrolling = true;
+        destIndex = 0;
 
         transform.position = patrolTargetsPosition[0].position;
         transform.rotation = patrolTargetsPosition[0].rotation;
+        lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
     }
 }
