@@ -7,9 +7,11 @@ public class PauseMenu : MonoBehaviour {
 
     Transform menuPanel;
     public static bool gameIsPaused = false;
-    //public GameObject TitleScreen;
     public GameObject pauseMenuUI;
+    public GameObject titleMenuUI;
+    public GameObject titleCamera;
     public GameObject SettingsMenuUI;
+    public GameObject HUDUI;
 
     Event keyEvent;
     Button BindingButton;
@@ -24,6 +26,8 @@ public class PauseMenu : MonoBehaviour {
         //buttonText = BindingButton.GetComponent<Text>();
         //Assign menuPanel to the Panel object in our Canvas
         //Make sure it's not active when the game starts
+
+        HUDUI.GetComponent<Canvas>().enabled = false;
         menuPanel = transform.Find("Settings Buttons");
         //menuPanel.gameObject.SetActive(false);
         waitingForKey = false;
@@ -76,15 +80,21 @@ public class PauseMenu : MonoBehaviour {
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI.GetComponent<Canvas>().enabled = true;
+        HUDUI.GetComponent<Canvas>().enabled = false;
+        //pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        SettingsMenuUI.SetActive(false);
+        HUDUI.GetComponent<Canvas>().enabled = true;
+        titleCamera.SetActive(false);
+        pauseMenuUI.GetComponent<Canvas>().enabled = false;
+        titleMenuUI.GetComponent<Canvas>().enabled = false;
+        //pauseMenuUI.SetActive(false);
+        //SettingsMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
@@ -269,7 +279,9 @@ public class PauseMenu : MonoBehaviour {
 
     public void QuitGame()
     {
-        SettingsMenuUI.SetActive(false);
-        Application.Quit();
+        titleCamera.SetActive(true);
+        pauseMenuUI.GetComponent<Canvas>().enabled = false;
+        titleMenuUI.GetComponent<Canvas>().enabled = true;
+        //Application.Quit();
     }
 }
