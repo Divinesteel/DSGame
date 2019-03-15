@@ -11,7 +11,7 @@ public class MoveNavGroundCompanion : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
     private RaycastHit hit;
-    private bool isFollowingTarget;
+    public bool isFollowingTarget;
     private Animator anim;
     private NavMeshPath pathToTarget;
 

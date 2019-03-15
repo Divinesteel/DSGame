@@ -11,7 +11,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
 
     private Animator anim;
     private NavMeshPath pathToTarget;
-    private bool isFollowingTarget;
+    public bool isFollowingTarget;
     private NavMeshAgent navMeshAgent;
     private RaycastHit hit;
 

@@ -8,6 +8,8 @@ public class MovePetOnClick : MonoBehaviour {
     public GameObject pet;
     NavMeshAgent agent;
     public GameObject moveLocation;
+    MoveNavGroundCompanion mgc;
+    MoveNavFlightCompanion mfc;
 
     private int? mousePetCode; 
 
@@ -22,6 +24,16 @@ public class MovePetOnClick : MonoBehaviour {
         {
             if (Input.GetMouseButton((int) mousePetCode))
             {
+                if (pet.tag == "FlyingPet")
+                {
+                    mfc.isFollowingTarget = false;
+                }
+                else if (pet.tag == "GroundPet")
+                {
+                    mgc.isFollowingTarget = false;
+
+                }
+                agent.isStopped = false;
                 agent.destination = moveLocation.transform.position;
             }
         }
@@ -29,12 +41,15 @@ public class MovePetOnClick : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        
         if (pet.tag == "FlyingPet")
         {
+            mfc = pet.GetComponent<MoveNavFlightCompanion>();
             mousePetCode = 1;
         }
         else if (pet.tag == "GroundPet")
         {
+            mgc = pet.GetComponent<MoveNavGroundCompanion>();
             mousePetCode = 0;
         }
     }
