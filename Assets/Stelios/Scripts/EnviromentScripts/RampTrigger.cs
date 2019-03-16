@@ -8,6 +8,7 @@ public class RampTrigger : MonoBehaviour
 
     public GameObject rampGround;
     public GameObject weight;
+    public GameObject block;
 
     Animator animation;
     Collider weightCollider;
@@ -37,6 +38,7 @@ public class RampTrigger : MonoBehaviour
         if (weightCollider.gameObject.name == "Weight")
         {
             isWeightRemoved = true;
+            block.SetActive(false);
         }
         
     }

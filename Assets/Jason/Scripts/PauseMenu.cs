@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-    Transform menuPanel;
+    public GameObject menuPanel;
     public static bool gameIsPaused = false;
-    public GameObject pauseMenuUI;
-    public GameObject titleMenuUI;
+    public GameObject pauseMenuCanvas;
+    public GameObject titleMenuCanvas;
     public GameObject titleCamera;
-    public GameObject SettingsMenuUI;
+    public GameObject SettingsMenuCanvas;
     public GameObject HUDUI;
+    public GameObject NoteCanvas;
 
     Event keyEvent;
     Button BindingButton;
@@ -27,8 +28,10 @@ public class PauseMenu : MonoBehaviour {
         //Assign menuPanel to the Panel object in our Canvas
         //Make sure it's not active when the game starts
 
+        pauseMenuCanvas.SetActive(false);
+        SettingsMenuCanvas.SetActive(false);
         HUDUI.GetComponent<Canvas>().enabled = false;
-        menuPanel = transform.Find("Settings Buttons");
+        //menuPanel = transform.Find("Settings Buttons");
         //menuPanel.gameObject.SetActive(false);
         waitingForKey = false;
         keyPressed = false;
@@ -40,33 +43,40 @@ public class PauseMenu : MonoBehaviour {
 		 * with each command. Example: the ForwardKey
 		 * button will display "W" in the middle of it
 		 */
-        for (int i = 0; i < menuPanel.childCount; i++)
+        for (int i = 0; i < menuPanel.transform.childCount; i++)
         {
-            if (menuPanel.GetChild(i).name == "Move North Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.north.ToString();
-            else if (menuPanel.GetChild(i).name == "Move South Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.south.ToString();
-            else if (menuPanel.GetChild(i).name == "Move West Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.west.ToString();
-            else if (menuPanel.GetChild(i).name == "Move East Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.east.ToString();
-            else if (menuPanel.GetChild(i).name == "Interact Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
-            else if (menuPanel.GetChild(i).name == "Order Tiger Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
-            else if (menuPanel.GetChild(i).name == "Order Bird Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
-            else if (menuPanel.GetChild(i).name == "Command Range Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
-            else if (menuPanel.GetChild(i).name == "Command Range Toggle Button")
-                menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            if (menuPanel.transform.GetChild(i).name == "Move North Button")
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.north.ToString();
+                Debug.Log(InputManager.IM.north.ToString());
+            }
+            else if (menuPanel.transform.GetChild(i).name == "Move South Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.south.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Move West Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.west.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Move East Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.east.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Interact Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Order Tiger Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.groundPet.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Order Bird Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.flyingPet.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Call Back Tiger Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackGroundPet.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Call Back Bird Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackFlyingPet.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Command Range Button")
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.commandRange.ToString();
+            //else if (menuPanel.GetChild(i).name == "Command Range Toggle Button")
+            //    menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.toggleCommand.ToString();
         }
     }
 
     // Update is called once per frame
     void Update () {
 		
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!titleMenuCanvas.activeSelf && Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameIsPaused)
             {
@@ -80,36 +90,38 @@ public class PauseMenu : MonoBehaviour {
 
     void Pause()
     {
-        pauseMenuUI.GetComponent<Canvas>().enabled = true;
-        HUDUI.GetComponent<Canvas>().enabled = false;
-        //pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        NoteCanvas.GetComponent<Canvas>().enabled = false;
         gameIsPaused = true;
+        Debug.Log("Paused.");
+        pauseMenuCanvas.SetActive(true);
+        HUDUI.GetComponent<Canvas>().enabled = false;
+        //pauseMenuCanvas.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void Resume()
     {
+        NoteCanvas.GetComponent<Canvas>().enabled = false;
+        gameIsPaused = false;
         HUDUI.GetComponent<Canvas>().enabled = true;
         titleCamera.SetActive(false);
-        pauseMenuUI.GetComponent<Canvas>().enabled = false;
-        titleMenuUI.GetComponent<Canvas>().enabled = false;
-        //pauseMenuUI.SetActive(false);
-        //SettingsMenuUI.SetActive(false);
+        pauseMenuCanvas.SetActive(false);
+        titleMenuCanvas.SetActive(false);
+        SettingsMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
-        gameIsPaused = false;
     }
 
     #region Settings
 
     public void Settings()
     {
-        if (SettingsMenuUI.activeSelf == false)
+        if (SettingsMenuCanvas.activeSelf == false)
         {
-            SettingsMenuUI.SetActive(true);
+            SettingsMenuCanvas.SetActive(true);
         }
         else
         {
-            SettingsMenuUI.SetActive(false);
+            SettingsMenuCanvas.SetActive(false);
         }
     }
 
@@ -183,22 +195,19 @@ public class PauseMenu : MonoBehaviour {
     IEnumerator WaitForKey()
     {
         int frames = 0;
-        while (!keyEvent.isKey && !keyPressed/*|| frames < 600 || !keyEvent.isMouse*/)
+        while (!keyEvent.isKey && !keyPressed)
         {
-            //BindingButton.enabled = false;
             frames++;
             if (frames%15 == 0)
             {
                 buttonText.text = " ";
             }
-
             if (frames %30 == 0)
             {
                 buttonText.text = "_";
             }
             yield return null;
         }
-        yield return null;
     }
 
     /*AssignKey takes a keyName as a parameter. The
@@ -214,8 +223,6 @@ public class PauseMenu : MonoBehaviour {
         Debug.Log("Waiting for key");
 
         yield return WaitForKey(); //Executes endlessly until user presses a key
-
-        Debug.Log("Key pressed");
 
         switch (keyName)
         {
@@ -254,6 +261,16 @@ public class PauseMenu : MonoBehaviour {
                 buttonText.text = InputManager.IM.flyingPet.ToString(); //set button text to new key
                 PlayerPrefs.SetString("flyingPetKey", InputManager.IM.flyingPet.ToString()); //save new key to playerprefs
                 break;
+            case "Call Back Tiger Button":
+                InputManager.IM.callBackGroundPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.callBackGroundPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("groundPetKey", InputManager.IM.callBackGroundPet.ToString()); //save new key to playerprefs
+                break;
+            case "Call Back Bird Button":
+                InputManager.IM.callBackFlyingPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.callBackFlyingPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("flyingPetKey", InputManager.IM.callBackFlyingPet.ToString()); //save new key to playerprefs
+                break;
             case "Command Range Button":
                 InputManager.IM.commandRange = newKey; //set jump to new keycode
                 buttonText.text = InputManager.IM.commandRange.ToString(); //set button text to new key
@@ -265,23 +282,24 @@ public class PauseMenu : MonoBehaviour {
         yield return null;
     }
 
-    public void Toggle()
-    {
-        InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
-        if (InputManager.IM.toggleCommand)
-        {
-            buttonText.text = "Toggle";
-        }
-        else buttonText.text = "Hold";
-        PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
-    }
+    //public void Toggle()
+    //{
+    //    InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
+    //    if (InputManager.IM.toggleCommand)
+    //    {
+    //        buttonText.text = "Toggle";
+    //    }
+    //    else buttonText.text = "Hold";
+    //    PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
+    //}
     #endregion
 
     public void QuitGame()
     {
         titleCamera.SetActive(true);
-        pauseMenuUI.GetComponent<Canvas>().enabled = false;
-        titleMenuUI.GetComponent<Canvas>().enabled = true;
+        pauseMenuCanvas.SetActive(false);
+        titleMenuCanvas.SetActive(true);
+        Time.timeScale = 1f;
         //Application.Quit();
     }
 }
