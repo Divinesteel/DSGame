@@ -13,12 +13,12 @@ public class InputManager : MonoBehaviour {
     public KeyCode west { get; set; }
     public KeyCode east { get; set; }
     public KeyCode interact { get; set; }
-    public KeyCode groundPet { get; set; }
-    public KeyCode flyingPet { get; set; }
+    public KeyCode orderGroundPet { get; set; }
+    public KeyCode orderFlyingPet { get; set; }
     public KeyCode callBackGroundPet { get; set; }
     public KeyCode callBackFlyingPet { get; set; }
     public KeyCode commandRange { get; set; }
-    //public bool toggleCommand { get; set; }
+    public bool toggleCommand { get; set; }
 
     void Awake()
     {
@@ -44,11 +44,11 @@ public class InputManager : MonoBehaviour {
         west = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("westKey", "A"));
         east = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("eastKey", "D"));
         interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interactKey", "E"));
-        groundPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("groundPetKey", "Mouse0"));
-        flyingPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("flyingPetKey", "Mouse1"));
-        callBackGroundPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackGroundPetKey", "1"));
-        callBackFlyingPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackFlyingPetKey", "2"));
+        orderGroundPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("groundPetKey", "Mouse0"));
+        orderFlyingPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("flyingPetKey", "Mouse1"));
+        callBackGroundPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackGroundPetKey", "Alpha1"));
+        callBackFlyingPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackFlyingPetKey", "Alpha2"));
         commandRange = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("commandRangeKey", "Mouse2"));
-        //toggleCommand = true;
+        toggleCommand = false;
     }
 }

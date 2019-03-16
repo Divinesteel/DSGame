@@ -28,7 +28,7 @@ public class FlyingPetInteract : Pet {
 
         
 
-        if (Input.GetMouseButtonDown(1)) //CLICK INTERACT
+        if (Input.GetKeyDown(InputManager.IM.orderFlyingPet)) //CLICK INTERACT
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             
@@ -47,7 +47,7 @@ public class FlyingPetInteract : Pet {
             }
         }
         
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetKeyUp(InputManager.IM.orderFlyingPet))
         {
             base.interact = false;
             base.instanceID = null;

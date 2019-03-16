@@ -60,7 +60,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
 
         if (Mathf.Abs(CompanionPlayerVect.magnitude) < maxDistance)
         {
-            if (!PauseMenu.gameIsPaused && Input.GetMouseButtonDown(1))
+            if (!PauseMenu.gameIsPaused && Input.GetKeyDown(InputManager.IM.orderFlyingPet))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //create ray from camera to mouse position
                 Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
@@ -86,7 +86,7 @@ public class MoveNavFlightCompanion : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(InputManager.IM.callBackFlyingPet))
         {
             isFollowingTarget = true;
         }

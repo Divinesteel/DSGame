@@ -17,15 +17,31 @@ public class Click_Light : MonoBehaviour {
 
 		while (true)
 		{
-			if(Input.GetKeyDown(KeyCode.Mouse2) && !isFlashLightOn)
-			{
-				yield return StartCoroutine(ActivateLightIntensity(light, maxIntensity, duration));
-				isFlashLightOn = true;
-			}
-            else if(!Input.GetKey(KeyCode.Mouse2) && isFlashLightOn)
+            if(InputManager.IM.toggleCommand)
             {
-                yield return StartCoroutine(DeactivateLightIntensity(light, light.intensity, duration));
-                isFlashLightOn = false;
+                if (Input.GetKeyDown(InputManager.IM.commandRange) && !isFlashLightOn)
+                {
+                    yield return StartCoroutine(ActivateLightIntensity(light, maxIntensity, duration));
+                    isFlashLightOn = true;
+                }
+                else if (Input.GetKeyDown(InputManager.IM.commandRange) && isFlashLightOn)
+                {
+                    yield return StartCoroutine(DeactivateLightIntensity(light, light.intensity, duration));
+                    isFlashLightOn = false;
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(InputManager.IM.commandRange) && !isFlashLightOn)
+                {
+                    yield return StartCoroutine(ActivateLightIntensity(light, maxIntensity, duration));
+                    isFlashLightOn = true;
+                }
+                else if (!Input.GetKey(InputManager.IM.commandRange) && isFlashLightOn)
+                {
+                    yield return StartCoroutine(DeactivateLightIntensity(light, light.intensity, duration));
+                    isFlashLightOn = false;
+                }
             }
 			yield return null;
 		}

@@ -59,17 +59,22 @@ public class PauseMenu : MonoBehaviour {
             else if (menuPanel.transform.GetChild(i).name == "Interact Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Order Tiger Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.groundPet.ToString();
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.orderGroundPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Order Bird Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.flyingPet.ToString();
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.orderFlyingPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Call Back Tiger Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackGroundPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Call Back Bird Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackFlyingPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Command Range Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.commandRange.ToString();
-            //else if (menuPanel.GetChild(i).name == "Command Range Toggle Button")
-            //    menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.toggleCommand.ToString();
+            else if (menuPanel.transform.GetChild(i).name == "Toggle Command Range Button")
+            {
+                if (InputManager.IM.toggleCommand)
+                {
+                    menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Toggle";
+                }else menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Hold";
+            }
         }
     }
 
@@ -186,10 +191,7 @@ public class PauseMenu : MonoBehaviour {
     //the button that was pressed
     public void SendText(Text text)
     {
-        //if (waitingForKey)
-        //{
-            buttonText = text;
-        //}
+        buttonText = text;
     }
 
     IEnumerator WaitForKey()
@@ -252,14 +254,14 @@ public class PauseMenu : MonoBehaviour {
                 PlayerPrefs.SetString("interactKey", InputManager.IM.interact.ToString()); //save new key to playerprefs
                 break;
             case "Order Tiger Button":
-                InputManager.IM.groundPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.groundPet.ToString(); //set button text to new key
-                PlayerPrefs.SetString("groundPetKey", InputManager.IM.groundPet.ToString()); //save new key to playerprefs
+                InputManager.IM.orderGroundPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.orderGroundPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("groundPetKey", InputManager.IM.orderGroundPet.ToString()); //save new key to playerprefs
                 break;
             case "Order Bird Button":
-                InputManager.IM.flyingPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.flyingPet.ToString(); //set button text to new key
-                PlayerPrefs.SetString("flyingPetKey", InputManager.IM.flyingPet.ToString()); //save new key to playerprefs
+                InputManager.IM.orderFlyingPet = newKey; //set jump to new keycode
+                buttonText.text = InputManager.IM.orderFlyingPet.ToString(); //set button text to new key
+                PlayerPrefs.SetString("flyingPetKey", InputManager.IM.orderFlyingPet.ToString()); //save new key to playerprefs
                 break;
             case "Call Back Tiger Button":
                 InputManager.IM.callBackGroundPet = newKey; //set jump to new keycode
@@ -277,21 +279,20 @@ public class PauseMenu : MonoBehaviour {
                 PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
                 break;
         }
-
         keyPressed = false;
         yield return null;
     }
 
-    //public void Toggle()
-    //{
-    //    InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
-    //    if (InputManager.IM.toggleCommand)
-    //    {
-    //        buttonText.text = "Toggle";
-    //    }
-    //    else buttonText.text = "Hold";
-    //    PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
-    //}
+    public void Toggle()
+    {
+        InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
+        if (InputManager.IM.toggleCommand)
+        {
+            buttonText.text = "Toggle";
+        }
+        else buttonText.text = "Hold";
+    }
+
     #endregion
 
     public void QuitGame()

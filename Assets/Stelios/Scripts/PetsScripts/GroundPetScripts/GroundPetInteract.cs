@@ -14,7 +14,7 @@ public class GroundPetInteract : Pet
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //CLICK INTERACT
+        if (Input.GetKeyDown(InputManager.IM.orderGroundPet)) //CLICK INTERACT
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray.origin, ray.direction, out hit))
@@ -30,7 +30,7 @@ public class GroundPetInteract : Pet
                 }
             }
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if(Input.GetKeyUp(InputManager.IM.orderGroundPet))
         {
             if (base.interact)
             {
