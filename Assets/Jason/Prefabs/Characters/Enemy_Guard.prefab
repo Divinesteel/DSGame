@@ -1306,8 +1306,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636808782919116}
-  m_LocalRotation: {x: -0, y: 0.0584882, z: -0, w: 0.9982881}
-  m_LocalPosition: {x: 4.82, y: -0.85, z: 4.76}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4521366177435768}
@@ -1518,7 +1518,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -1582,10 +1582,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   patrolTargetsTime:
-  - 5
-  - 5
-  - 5
-  - 5
+  - 1
+  - 1
+  - 1
+  - 1
   RotateDuration: 0.1
   canSee: 0
 --- !u!136 &136151720702756266

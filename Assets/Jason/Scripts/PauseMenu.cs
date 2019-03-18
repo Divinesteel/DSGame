@@ -46,10 +46,7 @@ public class PauseMenu : MonoBehaviour {
         for (int i = 0; i < menuPanel.transform.childCount; i++)
         {
             if (menuPanel.transform.GetChild(i).name == "Move North Button")
-            {
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.north.ToString();
-                Debug.Log(InputManager.IM.north.ToString());
-            }
             else if (menuPanel.transform.GetChild(i).name == "Move South Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.south.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Move West Button")

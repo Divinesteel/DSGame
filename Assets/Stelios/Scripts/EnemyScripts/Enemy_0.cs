@@ -19,7 +19,7 @@ public class Enemy_0 : MonoBehaviour
     public Transform[] patrolTargetsPosition;
     public float[] patrolTargetsTime;
     public float RotateDuration;
-    private int destIndex;
+    [SerializeField] private int destIndex;
     private bool stopMoving;
 
     bool arrived;
@@ -75,7 +75,6 @@ public class Enemy_0 : MonoBehaviour
                             hasRotated = true;
                             RotateTime = 0;
                         }
-
                     }                                     
 
                     if (hasRotated)
@@ -97,7 +96,6 @@ public class Enemy_0 : MonoBehaviour
         {
             anim.StopRotate(); //Stops Animation Rotation.
             lastKnownPosition = patrolTargetsPosition[destIndex].position;
-
 
             agent.speed = 2f;
 
@@ -181,17 +179,27 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-        agent.speed = startingSpeed;
-        anim.SetBool("Attack", false);
-        anim.SetLayerWeight(1, 0);
-        hasRotated = false;
-        arrived = false;
-        patrolling = true;
-        destIndex = 0;
+        //agent.speed = startingSpeed;
+        //anim.SetBool("Attack", false);
+        //anim.SetLayerWeight(1, 0);
+        //hasRotated = false;
+        //arrived = true;
+        //canSee = false;
+        //patrolling = true;
+        //destIndex = 0;
 
         transform.position = patrolTargetsPosition[0].position;
         transform.rotation = patrolTargetsPosition[0].rotation;
-        lastKnownPosition = patrolTargetsPosition[destIndex].position;
-
+        //lastKnownPosition = patrolTargetsPosition[0].position;
+        //agent.SetDestination(patrolTargetsPosition[destIndex].position);
+        agent = GetComponent<NavMeshAgent>();
+        startingSpeed = agent.speed;
+        anim = GetComponent<Animator>();
+        destIndex = 0;
+        //lastKnownPosition = patrolTargetsPosition[destIndex].position;
+        canSee = false;
+        RotateTime = 0;
+        patrolling = true;
+        stopMoving = false;
     }
 }

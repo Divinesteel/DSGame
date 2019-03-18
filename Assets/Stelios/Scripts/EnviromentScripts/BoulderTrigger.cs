@@ -22,8 +22,6 @@ public class BoulderTrigger : MonoBehaviour {
         boulderAnim = GetComponent<Animator>();
 		isBoulderTriggered = false;
 		isAnimPlaying = false;
-
-
     }
 	
 	// Update is called once per frame

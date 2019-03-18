@@ -19,7 +19,7 @@ public class Climbable : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
             other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(endPosition,height);
         }
@@ -27,7 +27,7 @@ public class Climbable : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
             other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(null,0);
         }
