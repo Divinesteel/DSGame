@@ -12,7 +12,7 @@ public class Enemy_0 : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     Vector3 lastKnownPosition;
-    bool patrolling;
+    [SerializeField] bool patrolling;
 
     private Transform target;
 
@@ -83,7 +83,6 @@ public class Enemy_0 : MonoBehaviour
                         destIndex = (destIndex + 1) % patrolTargetsPosition.Length;
                         StartCoroutine("GoToNextPoint");
                     }
-
                 }
             }
             else
@@ -110,7 +109,7 @@ public class Enemy_0 : MonoBehaviour
 
             if (distance <= agent.stoppingDistance + 1)
             {
-                Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
+                //Debug.Log(anim.GetCurrentAnimatorStateInfo(1).normalizedTime);
                 anim.SetBool("Attack", true);
                 anim.SetLayerWeight(1, 1);
                 if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.60)
@@ -120,7 +119,7 @@ public class Enemy_0 : MonoBehaviour
                     canSee = false;
                 }
             }
-                    }
+        }
         else
         {
             if (!patrolling)
@@ -129,7 +128,6 @@ public class Enemy_0 : MonoBehaviour
                 hasRotated = false;
                 arrived = false;
                 patrolling = true;
-                
             }
         }
         anim.SetFloat("Forward", agent.velocity.sqrMagnitude);
@@ -179,27 +177,30 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-        //agent.speed = startingSpeed;
-        //anim.SetBool("Attack", false);
-        //anim.SetLayerWeight(1, 0);
-        //hasRotated = false;
-        //arrived = true;
-        //canSee = false;
-        //patrolling = true;
-        //destIndex = 0;
+        agent.ResetPath();
 
         transform.position = patrolTargetsPosition[0].position;
         transform.rotation = patrolTargetsPosition[0].rotation;
-        //lastKnownPosition = patrolTargetsPosition[0].position;
-        //agent.SetDestination(patrolTargetsPosition[destIndex].position);
-        agent = GetComponent<NavMeshAgent>();
-        startingSpeed = agent.speed;
-        anim = GetComponent<Animator>();
-        destIndex = 0;
-        //lastKnownPosition = patrolTargetsPosition[destIndex].position;
+
+        agent.speed = startingSpeed;
+        anim.SetBool("Attack", false);
+        anim.SetLayerWeight(1, 0);
+
+        destIndex = 1;
+        //lastKnownPosition = patrolTargetsPosition[1].position;
+        if (patrolTargetsPosition.Length > 1)
+        {
+            agent.SetDestination(patrolTargetsPosition[destIndex].position);
+        }
+
+        hasRotated = false;
+        arrived = true;
         canSee = false;
-        RotateTime = 0;
         patrolling = true;
-        stopMoving = false;
+
+        Debug.Log("Moved enemy to" + transform.position);
+
+        //RotateTime = 0;
+        //stopMoving = false;
     }
 }
