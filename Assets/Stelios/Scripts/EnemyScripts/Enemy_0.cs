@@ -94,7 +94,7 @@ public class Enemy_0 : MonoBehaviour
         if (canSee)
         {
             anim.StopRotate(); //Stops Animation Rotation.
-            lastKnownPosition = patrolTargetsPosition[destIndex].position;
+            //lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
             agent.speed = 2f;
 
@@ -124,7 +124,7 @@ public class Enemy_0 : MonoBehaviour
         {
             if (!patrolling)
             {
-                agent.SetDestination(lastKnownPosition);
+                //agent.SetDestination(lastKnownPosition);
                 hasRotated = false;
                 arrived = false;
                 patrolling = true;
@@ -163,6 +163,7 @@ public class Enemy_0 : MonoBehaviour
     void KillPlayer()
     {
         playerController.KillPlayer();
+        agent.ResetPath();
     }
 
 	public void KIllThisEnemy()
@@ -177,30 +178,20 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-        agent.ResetPath();
+            transform.position = patrolTargetsPosition[0].position;
+            transform.rotation = patrolTargetsPosition[0].rotation;
 
-        transform.position = patrolTargetsPosition[0].position;
-        transform.rotation = patrolTargetsPosition[0].rotation;
+            destIndex = 0;
+            canSee = false;
+            RotateTime = 0;
+            patrolling = false;
+            stopMoving = false;
+            hasRotated = false;
+            arrived = true;
 
-        agent.speed = startingSpeed;
-        anim.SetBool("Attack", false);
-        anim.SetLayerWeight(1, 0);
-
-        destIndex = 1;
-        //lastKnownPosition = patrolTargetsPosition[1].position;
-        if (patrolTargetsPosition.Length > 1)
-        {
-            agent.SetDestination(patrolTargetsPosition[destIndex].position);
-        }
-
-        hasRotated = false;
-        arrived = true;
-        canSee = false;
-        patrolling = true;
-
-        Debug.Log("Moved enemy to" + transform.position);
-
-        //RotateTime = 0;
-        //stopMoving = false;
+            agent.speed = startingSpeed;
+            anim.SetBool("Attack", false);
+            anim.SetLayerWeight(1, 0);
+            agent.ResetPath();
     }
 }
