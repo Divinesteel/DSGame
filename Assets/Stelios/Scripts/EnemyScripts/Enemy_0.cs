@@ -178,8 +178,8 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-            transform.position = patrolTargetsPosition[0].position;
-            transform.rotation = patrolTargetsPosition[0].rotation;
+            transform.position = new Vector3(patrolTargetsPosition[0].transform.position.x, patrolTargetsPosition[0].transform.position.y, patrolTargetsPosition[0].transform.position.z);
+            transform.position = new Vector3(patrolTargetsPosition[0].transform.rotation.x, patrolTargetsPosition[0].transform.rotation.y, patrolTargetsPosition[0].transform.rotation.z);
 
             destIndex = 0;
             canSee = false;
