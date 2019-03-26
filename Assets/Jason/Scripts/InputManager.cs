@@ -49,6 +49,6 @@ public class InputManager : MonoBehaviour {
         callBackGroundPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackGroundPetKey", "Alpha1"));
         callBackFlyingPet = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("callBackFlyingPetKey", "Alpha2"));
         commandRange = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("commandRangeKey", "Mouse2"));
-        toggleCommand = false;
+        toggleCommand = true;
     }
 }

@@ -12,6 +12,12 @@ public class Enemy_0 : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     Vector3 lastKnownPosition;
+
+    Vector3 tempPos;
+    Quaternion tempRot;
+    int tempDest;
+    NavMeshPath tempPath;
+
     [SerializeField] bool patrolling;
 
     private Transform target;
@@ -176,22 +182,38 @@ public class Enemy_0 : MonoBehaviour
         stopMoving = true;
     }
 
+    public void SaveState()
+    {
+        tempPos = transform.position;
+        tempRot = transform.rotation;
+        tempDest = destIndex;
+        tempPath = agent.path;
+    }
+
     public void ResetState()
     {
-            transform.position = new Vector3(patrolTargetsPosition[0].transform.position.x, patrolTargetsPosition[0].transform.position.y, patrolTargetsPosition[0].transform.position.z);
-            transform.position = new Vector3(patrolTargetsPosition[0].transform.rotation.x, patrolTargetsPosition[0].transform.rotation.y, patrolTargetsPosition[0].transform.rotation.z);
+        agent.ResetPath();
+        
+        transform.position = tempPos;
+        transform.rotation = tempRot;
 
-            destIndex = 0;
-            canSee = false;
-            RotateTime = 0;
-            patrolling = false;
-            stopMoving = false;
-            hasRotated = false;
-            arrived = true;
+        agent.speed = startingSpeed;
+        anim.SetBool("Attack", false);
+        anim.SetLayerWeight(1, 0);
 
-            agent.speed = startingSpeed;
-            anim.SetBool("Attack", false);
-            anim.SetLayerWeight(1, 0);
-            agent.ResetPath();
+        destIndex = tempDest;
+
+        if (patrolTargetsPosition.Length > 1)
+        {
+            agent.destination = patrolTargetsPosition[destIndex].position;
+        }
+
+        hasRotated = false;
+        arrived = true;
+        canSee = false;
+        patrolling = true;
+
+        //RotateTime = 0;
+        //stopMoving = false;
     }
 }

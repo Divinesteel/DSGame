@@ -9,8 +9,8 @@ public class DominoTrigger : FlyingPetClickInteractable
 
     public BridgeTrigger Bridge;
 
-    private bool hasBeenTriggered;
-    private bool hasBeenDestroyed;
+    [SerializeField] private bool hasBeenTriggered;
+    [SerializeField] private bool hasBeenDestroyed;
 
     public GameObject BridgeRightColumn;
     private Rigidbody[] bridgerbs;
@@ -18,8 +18,8 @@ public class DominoTrigger : FlyingPetClickInteractable
     // Use this for initialization
     void Start()
     {
-        rbs = transform.parent.gameObject.GetComponentsInChildren<Rigidbody>();
-        animation = transform.parent.transform.parent.GetComponent<Animation>();
+        rbs = transform.gameObject.GetComponentsInChildren<Rigidbody>();
+        animation = transform.parent.GetComponent<Animation>();
         bridgerbs = BridgeRightColumn.GetComponentsInChildren<Rigidbody>();
     }
 
@@ -59,6 +59,7 @@ public class DominoTrigger : FlyingPetClickInteractable
                 }
 
                 Bridge.DestroyRightColumn();
+                transform.GetComponent<BoxCollider>().enabled = false;
 
                 hasBeenTriggered = true; 
             }

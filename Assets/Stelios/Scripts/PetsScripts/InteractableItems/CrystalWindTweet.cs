@@ -6,6 +6,7 @@ public class CrystalWindTweet : TweetableObject {
 
     public bool tweetable;
     private Animation animation;
+    public GameObject animationRoot;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class CrystalWindTweet : TweetableObject {
     protected override void OnTweetFinish()
     {
         animation.Play();
+        animationRoot.GetComponent<Animation>().Play();
         GetComponents<CapsuleCollider>()[0].enabled = false;
     }
 
