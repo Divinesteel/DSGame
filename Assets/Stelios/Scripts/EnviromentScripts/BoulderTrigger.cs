@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoulderTrigger : MonoBehaviour {
 
     public GameObject player;
     public BoulderTargetX XStatus;
 	public Enemy_0 Enemy;
+
+    public GameObject TextPrompt;
+    public Text TextValue;
 
     private PlayerInteract playerInteract;
     private Animator boulderAnim;
@@ -35,8 +39,8 @@ public class BoulderTrigger : MonoBehaviour {
 
 		if (hasAnimFinished) 
 		{
-			Enemy.KIllThisEnemy ();
-		}
+			Enemy.KIllThisEnemy();
+        }
     }
 
     protected void OnTriggerStay(Collider other)
@@ -45,17 +49,28 @@ public class BoulderTrigger : MonoBehaviour {
         {
 			if (XStatus.GetXStatus()) //Checks if enemy is on X mark
 			{
-				playerInteract = other.gameObject.GetComponent<PlayerInteract>();
+                TextValue.text = "Push";
+                TextPrompt.SetActive(true);
+                TextPrompt.transform.position = transform.position + new Vector3(0, 2, 0);
+
+                playerInteract = other.gameObject.GetComponent<PlayerInteract>();
 				if (playerInteract.InteractStatus())
 				{
 					isBoulderTriggered = true;
-				}
-                player.GetComponent<CheckpointCtrl>().SaveCheckpoint();
+                    player.GetComponent<CheckpointCtrl>().SaveCheckpoint();
+                }
             }
-            
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
+        {
+            TextPrompt.SetActive(false);
+            TextValue.text = "Pick Up";
+        }
+    }
     public void ExplodeDust()
     {
         GetComponentInChildren<ParticleSystem>().Play();

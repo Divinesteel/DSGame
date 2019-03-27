@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class PauseMenu : MonoBehaviour {
     public GameObject SettingsMenuCanvas;
     public GameObject HUDUI;
     public GameObject NoteCanvas;
+
+    public Text TextPrompt;
 
     Event keyEvent;
     Button BindingButton;
@@ -54,7 +57,10 @@ public class PauseMenu : MonoBehaviour {
             else if (menuPanel.transform.GetChild(i).name == "Move East Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.east.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Interact Button")
+            {
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
+                TextPrompt.text = InputManager.IM.interact.ToString();
+            }
             else if (menuPanel.transform.GetChild(i).name == "Order Tiger Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.orderGroundPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Order Bird Button")
@@ -249,6 +255,7 @@ public class PauseMenu : MonoBehaviour {
                 InputManager.IM.interact = newKey; //set jump to new keycode
                 buttonText.text = InputManager.IM.interact.ToString(); //set button text to new key
                 PlayerPrefs.SetString("interactKey", InputManager.IM.interact.ToString()); //save new key to playerprefs
+                TextPrompt.text = InputManager.IM.interact.ToString();
                 break;
             case "Order Tiger Button":
                 InputManager.IM.orderGroundPet = newKey; //set jump to new keycode
@@ -294,6 +301,8 @@ public class PauseMenu : MonoBehaviour {
 
     public void QuitGame()
     {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         titleCamera.SetActive(true);
         pauseMenuCanvas.SetActive(false);
         titleMenuCanvas.SetActive(true);

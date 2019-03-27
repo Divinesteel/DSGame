@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BurriedBarrel : Burried {
 
@@ -8,6 +9,9 @@ public class BurriedBarrel : Burried {
 
     private PlayerInteract playerInteract;
     private Animation barelAnim;
+
+    public GameObject TextPrompt;
+    public Text TextValue;
 
     private bool hasDigAnimationStarted;
     private bool hasDigAnimationPaused;
@@ -68,6 +72,8 @@ public class BurriedBarrel : Burried {
                     hasBeenThrownToRiver = true;
                     foreach (CapsuleCollider cc in GetComponents<CapsuleCollider>())
                     {
+                        TextPrompt.SetActive(false);
+                        TextValue.text = "Pick Up";
                         cc.enabled = false;
                     }
                 }
@@ -81,6 +87,12 @@ public class BurriedBarrel : Burried {
         base.OnTriggerEnter(other);
         if (other.gameObject.tag == "Player")
         {
+            if (base.hasBeingDigged)
+            {
+                TextValue.text = "Throw";
+                TextPrompt.SetActive(true);
+                TextPrompt.transform.position = transform.GetChild(0).position + new Vector3(0, 2, 0);
+            }
             playerInteract = other.gameObject.GetComponent<PlayerInteract>();
         }
     }

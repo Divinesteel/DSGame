@@ -169,7 +169,7 @@ public class Enemy_0 : MonoBehaviour
     void KillPlayer()
     {
         playerController.KillPlayer();
-        agent.ResetPath();
+        //agent.ResetPath();
     }
 
 	public void KIllThisEnemy()
@@ -192,7 +192,7 @@ public class Enemy_0 : MonoBehaviour
 
     public void ResetState()
     {
-        agent.ResetPath();
+        //agent.ResetPath();
         
         transform.position = tempPos;
         transform.rotation = tempRot;

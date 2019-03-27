@@ -60,7 +60,7 @@ public class Click_Light : MonoBehaviour {
 
 		while (time < 1f)
 		{
-			light.intensity = maxIntensity * time * time;
+			light.intensity = maxIntensity * time;
 			time += Time.deltaTime / duration;
 			yield return null;
 		}

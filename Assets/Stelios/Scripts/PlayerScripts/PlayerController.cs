@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
         //GetComponent<Animator>().enabled = false;
         //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         //GetComponent<Rigidbody>().isKinematic = true;
-        this.gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
     }
 
     public PlayerStat GetPlayerStatus()

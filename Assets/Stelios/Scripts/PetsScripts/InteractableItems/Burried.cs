@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Burried : MonoBehaviour {
 
-    private bool hasBeingDigged;
+    public bool hasBeingDigged;
     
     public bool isPetDigging;
     public GroundPetInteract groundPetInteract;
