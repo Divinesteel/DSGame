@@ -17,8 +17,10 @@ public class Enemy_0 : MonoBehaviour
     Quaternion tempRot;
     int tempDest;
     NavMeshPath tempPath;
-
-    [SerializeField] bool patrolling;
+    bool temphasRotated ;
+    bool tempArrived;
+    bool tempCanSee;
+    bool tempPatrolling;
 
     private Transform target;
 
@@ -28,19 +30,26 @@ public class Enemy_0 : MonoBehaviour
     [SerializeField] private int destIndex;
     private bool stopMoving;
 
-    bool arrived;
     private int prevDestPoint;
-    public bool canSee;
     private float startingSpeed;
 
     Vector3 lookTowards;
 
     float RotateTime;
-    bool hasRotated;
+
+    [SerializeField] bool hasRotated;
+    [SerializeField] bool patrolling;
+    [SerializeField] bool arrived;
+    [SerializeField] bool canSee;
+    [SerializeField] bool alerted;
+
+    public AudioSource PunchClip;
+    public AudioSource AlertClip;
 
     // Use this for initialization
     void Start()
     {
+        alerted = false;
         agent = GetComponent<NavMeshAgent>();
         startingSpeed = agent.speed;
         anim = GetComponent<Animator>();
@@ -62,6 +71,9 @@ public class Enemy_0 : MonoBehaviour
 
         if (patrolling)
         {
+            transform.Find("Spotlight").GetComponent<Light>().color = new Color(255, 255, 255, 255);
+            transform.Find("Spotlight").GetComponent<Light>().intensity = 0.05f;
+
             if (agent.remainingDistance < agent.stoppingDistance)
             {
                 if (!arrived)
@@ -99,6 +111,14 @@ public class Enemy_0 : MonoBehaviour
 
         if (canSee)
         {
+            if (!alerted)
+            {
+                AlertClip.Play();
+                alerted = true;
+            }
+            transform.Find("Spotlight").GetComponent<Light>().color = new Color(255, 0, 0, 255);
+            transform.Find("Spotlight").GetComponent<Light>().intensity = 0.1f;
+
             anim.StopRotate(); //Stops Animation Rotation.
             //lastKnownPosition = patrolTargetsPosition[destIndex].position;
 
@@ -120,9 +140,10 @@ public class Enemy_0 : MonoBehaviour
                 anim.SetLayerWeight(1, 1);
                 if (anim.GetCurrentAnimatorStateInfo(1).IsName("CrossPunch") && anim.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.60)
                 {
-                    GetComponent<AudioSource>().Play();
+                    PunchClip.Play();
                     KillPlayer();
                     canSee = false;
+                    alerted = false;
                 }
             }
         }
@@ -174,8 +195,11 @@ public class Enemy_0 : MonoBehaviour
 
 	public void KIllThisEnemy()
 	{
-		this.gameObject.SetActive (false);
-	}
+        //this.gameObject.SetActive(false);
+        this.agent.enabled = false;
+        transform.position = new Vector3 (0, -34, 0);
+        //Destroy(this.gameObject);
+    }
 
     public void StopMoving()
     {
@@ -184,6 +208,11 @@ public class Enemy_0 : MonoBehaviour
 
     public void SaveState()
     {
+        temphasRotated = hasRotated ;
+        tempArrived = arrived;
+        tempCanSee = canSee;
+        tempPatrolling = patrolling;
+
         tempPos = transform.position;
         tempRot = transform.rotation;
         tempDest = destIndex;
@@ -193,7 +222,8 @@ public class Enemy_0 : MonoBehaviour
     public void ResetState()
     {
         //agent.ResetPath();
-        
+        //KIllThisEnemy();
+
         transform.position = tempPos;
         transform.rotation = tempRot;
 
@@ -203,15 +233,16 @@ public class Enemy_0 : MonoBehaviour
 
         destIndex = tempDest;
 
-        if (patrolTargetsPosition.Length > 1)
-        {
-            agent.destination = patrolTargetsPosition[destIndex].position;
-        }
+        agent.path = tempPath;
+        //if (patrolTargetsPosition.Length > 1)
+        //{
+        agent.destination = patrolTargetsPosition[destIndex].position;
+        //}
 
-        hasRotated = false;
-        arrived = true;
-        canSee = false;
-        patrolling = true;
+        hasRotated = temphasRotated;
+        arrived = tempArrived;
+        canSee = tempCanSee;
+        patrolling = tempPatrolling;
 
         //RotateTime = 0;
         //stopMoving = false;
