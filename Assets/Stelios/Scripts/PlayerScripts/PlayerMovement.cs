@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookToward), time);
             //Ray lookRay = new Ray(transform.position, lookToward);
-            time += Time.deltaTime / 1;
+            time +=  Time.deltaTime* 7 / 1;
             //transform.LookAt(lookRay.GetPoint(1));
 
         }
