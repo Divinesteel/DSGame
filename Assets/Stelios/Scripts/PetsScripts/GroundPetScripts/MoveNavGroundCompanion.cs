@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class MoveNavGroundCompanion : MonoBehaviour
 {
+    public GameObject onClickParticle;
     public Transform target;
     public float maxDistance;
     public float stoppingDistance;
@@ -70,6 +71,7 @@ public class MoveNavGroundCompanion : MonoBehaviour
                 {
                     if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 12) // 9 = Ground, 12 = Wind
                     {
+                        Instantiate(onClickParticle, new Vector3(hit.point.x,hit.point.y + 0.1f,hit.point.z),onClickParticle.transform.rotation);
                         isFollowingTarget = false;
 
                         pathToTarget = new NavMeshPath();

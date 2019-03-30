@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 EndPosValue;
     private float jumpHeightValue;
 
+    public float lh ;
+    public float lv ;
+
     // Use this for initialization
     void Start() {
         playerController = GetComponent<PlayerController>();
@@ -43,6 +46,8 @@ public class PlayerMovement : MonoBehaviour {
         time = 0;
         rotateTimer = 0;
         jumpTimer = 0;
+        lh = 0;
+        lv = 0;
     }
 
     // Update is called once per frame
@@ -87,8 +92,41 @@ public class PlayerMovement : MonoBehaviour {
 
     void Move()
     {
-        float lh = Input.GetAxis("Horizontal");
-        float lv = Input.GetAxis("Vertical");
+        if (Input.GetKey(InputManager.IM.east))
+        {
+            lh = -(lh*lh + Time.deltaTime * 100);
+            lh = Mathf.Clamp(lh, -1, 0);
+        }
+        else if (Input.GetKey(InputManager.IM.west))
+        {
+            lh = lh*lh + Time.deltaTime * 100;
+            lh = Mathf.Clamp(lh, 0, 1);
+        }
+        else
+        {
+            lh = 0;
+        }
+
+        if (Input.GetKey(InputManager.IM.north))
+        {
+            lv = lv*lv + Time.deltaTime * 100;
+            lv = Mathf.Clamp(lv, 0, 1);
+        }
+        else if (Input.GetKey(InputManager.IM.south))
+        {
+            lv = -(lv*lv + Time.deltaTime * 100);
+            lv = Mathf.Clamp(lv, -1, 0);
+
+        }
+        else
+        {
+            lv = 0;
+          
+        }  
+
+
+        //float lh = Input.GetAxis("Horizontal");
+        //float lv = Input.GetAxis("Vertical");
 
         moveInput = new Vector3(lh * InvertAxis(invertHorizontal), 0f, lv * InvertAxis(invertVertical));
 
@@ -100,7 +138,7 @@ public class PlayerMovement : MonoBehaviour {
         Quaternion cameraRelativeRotation = Quaternion.FromToRotation(Vector3.forward, cameraForward);
         lookToward = cameraRelativeRotation * moveInput;
 
-        if (lh + lv == 0)
+        if (lh == 0 && lv == 0)
         {
             time = 0;
         }

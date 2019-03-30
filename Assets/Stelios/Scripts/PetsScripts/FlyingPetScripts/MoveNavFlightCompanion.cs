@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveNavFlightCompanion : MonoBehaviour
-{ 
+{
+    public GameObject onClickParticle;
     public Transform target;  
     public float maxDistance;
     public float stoppingDistance;
@@ -67,7 +68,8 @@ public class MoveNavFlightCompanion : MonoBehaviour
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
                     if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 10) // 9 = Ground, 10 = Flying
-                    {                     
+                    {
+                        Instantiate(onClickParticle, new Vector3(hit.point.x, hit.point.y + 0.1f, hit.point.z), onClickParticle.transform.rotation);
                         isFollowingTarget = false;
                                           
                         pathToTarget = new NavMeshPath();
