@@ -56,10 +56,12 @@ public class CameraController : MonoBehaviour {
                             Input.mousePosition.y <= panBorderThickness || 
                             Input.mousePosition.x <= panBorderThickness || 
                             Input.mousePosition.x >= Screen.width - panBorderThickness) 
-                         && !Input.GetKey(KeyCode.W)
-                         && !Input.GetKey(KeyCode.A)
-                         && !Input.GetKey(KeyCode.S)
-                         && !Input.GetKey(KeyCode.D)))
+                         && !Input.GetKey(InputManager.IM.north)
+                         && !Input.GetKey(InputManager.IM.west)
+                         && !Input.GetKey(InputManager.IM.south)
+                         && !Input.GetKey(InputManager.IM.east)
+                         )
+                         )
         {
             checkLock = false;
 
@@ -160,7 +162,7 @@ public class CameraController : MonoBehaviour {
         }
        
 
-        if (isReturning || (Input.GetKeyDown(KeyCode.Space) && isFollowingTarget == false))
+        if (isReturning || (Input.GetKeyDown(InputManager.IM.interact) && isFollowingTarget == false))
         {
             //transform.position = target.position + offset; 
             //isFollowingTarget = true;
@@ -184,8 +186,8 @@ public class CameraController : MonoBehaviour {
             }
         }   
         
-        if((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || 
-           Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) && transform.position != target.position + offset) 
+        if((Input.GetKeyDown(InputManager.IM.north) || Input.GetKeyDown(InputManager.IM.west) || 
+           Input.GetKeyDown(InputManager.IM.south) || Input.GetKeyDown(InputManager.IM.east)) && transform.position != target.position + offset) 
         {
             if (!isReturning)
             {
