@@ -301,12 +301,18 @@ public class PauseMenu : MonoBehaviour {
 
     public void QuitGame()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        titleCamera.SetActive(true);
-        pauseMenuCanvas.SetActive(false);
-        titleMenuCanvas.SetActive(true);
-        Time.timeScale = 1f;
+        //titleCamera.SetActive(true);
+        //pauseMenuCanvas.SetActive(false);
+        //titleMenuCanvas.SetActive(true);
+        //Time.timeScale = 1f;
         //Application.Quit();
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Exiting Game...");
+        Application.Quit();
     }
 }

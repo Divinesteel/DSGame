@@ -20,12 +20,14 @@ public class PlayerController : MonoBehaviour {
 
     public void KillPlayer()
     {
-        //PlayerStatus = PlayerStat.Dead;
+        StartCoroutine(WaitTransition());
+        PlayerStatus = PlayerStat.Dead;
         //SetKinematicOnRagdoll(false);
         //GetComponent<Animator>().enabled = false;
         //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         //GetComponent<Rigidbody>().isKinematic = true;
         gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        Debug.Log("First Load");
     }
 
     public PlayerStat GetPlayerStatus()
@@ -48,6 +50,24 @@ public class PlayerController : MonoBehaviour {
         foreach (Rigidbody rb in bodies)
         {
             rb.isKinematic = value;
+        }
+    }
+
+    public void RevivePlayer()
+    {
+        //StartCoroutine(WaitTransition());
+        gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        PlayerStatus = PlayerStat.Alive;
+        Debug.Log("Second Load");
+    }
+
+    IEnumerator WaitTransition()
+    {
+        int frames = 0;
+        while (frames < 601)
+        {
+            frames++;
+            yield return null;
         }
     }
 }

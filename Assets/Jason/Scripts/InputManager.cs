@@ -25,12 +25,12 @@ public class InputManager : MonoBehaviour {
         //Singleton pattern
         if (IM == null)
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             IM = this;
         }
         else if (IM != this)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         /*Assign each keycode when the game starts.
