@@ -81,6 +81,16 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        titleCamera.SetActive(true);
+        pauseMenuCanvas.SetActive(false);
+        SettingsMenuCanvas.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
     // Update is called once per frame
     void Update () {
 		

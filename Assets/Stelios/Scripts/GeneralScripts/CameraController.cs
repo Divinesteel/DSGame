@@ -36,6 +36,11 @@ public class CameraController : MonoBehaviour {
 
     public bool invertCamera;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         transform.position = target.position + offset;
