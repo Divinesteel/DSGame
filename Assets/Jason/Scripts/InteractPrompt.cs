@@ -25,8 +25,8 @@ public class InteractPrompt : MonoBehaviour {
         }
     }
 
-    //private void OnDestroy()
-    //{
-    //    TextPrompt.SetActive(false);
-    //}
+    private void OnDestroy()
+    {
+        TextPrompt.SetActive(false);
+    }
 }
