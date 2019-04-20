@@ -41,25 +41,12 @@ public class BurriedBarrel : Burried {
                         hasDigAnimationStarted = true;                        
                         
                     }
-
-                    if (hasDigAnimationPaused)
-                    {
-                        barelAnim.enabled = true;
-                        hasDigAnimationPaused = false;
-                    }
-
                 }
-                else
-                {
-                    barelAnim.enabled = false;
-                    hasDigAnimationPaused = true;
-                }
-
             }
 
-            if (isPetDigging && !barelAnim.IsPlaying("Animation_BurriedBarel"))
+            if (hasDigAnimationStarted && !barelAnim.IsPlaying("Animation_BurriedBarel"))
             {
-                base.SetDigStatus(true);
+                base.SetDigStatusTrue();
             }
         }
         else

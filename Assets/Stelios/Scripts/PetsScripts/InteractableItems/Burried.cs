@@ -34,9 +34,9 @@ public class Burried : MonoBehaviour {
 
 	}
 
-    protected void SetDigStatus(bool a)
+    protected void SetDigStatusTrue()
     {
-        hasBeingDigged = a;
+        hasBeingDigged = true;
     }
 
     protected bool GetHasBeenDigged()
