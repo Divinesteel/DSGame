@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Pet : MonoBehaviour {
 
+
     [Header("Click Interaction")]
+    public string distantInteractableObject;
     public bool interact;
     public int? instanceID;
     public List<GameObject> interactableObjects;

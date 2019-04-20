@@ -42,9 +42,19 @@ public class FlyingPetInteract : Pet {
                         base.interact = true;
                         base.instanceID = hit.collider.gameObject.GetInstanceID();
                     }
+                    else
+                    {
+                        base.distantInteractableObject = hit.collider.gameObject.name;
+                    }
 
                 }
+                else
+                {
+                    base.distantInteractableObject = "";
+                }
+
             }
+            
         }
         
         else if (Input.GetKeyUp(InputManager.IM.orderFlyingPet))

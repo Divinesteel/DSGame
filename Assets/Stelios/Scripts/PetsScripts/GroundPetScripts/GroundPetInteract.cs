@@ -26,7 +26,15 @@ public class GroundPetInteract : Pet
                         base.interact = true;
                         base.instanceID = hit.collider.gameObject.GetInstanceID();
                     }
+                    else
+                    {
+                        base.distantInteractableObject = hit.collider.gameObject.name;
+                    }
 
+                }
+                else
+                {
+                    base.distantInteractableObject = "";
                 }
             }
         }

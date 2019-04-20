@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour {
     public float lh ;
     public float lv ;
 
+    public float timer;
+
     // Use this for initialization
     void Start() {
         playerController = GetComponent<PlayerController>();
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
         jumpTimer = 0;
         lh = 0;
         lv = 0;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -80,7 +83,9 @@ public class PlayerMovement : MonoBehaviour {
             Jump();
         }
 
+        DisableGravityOnIdle();
         Move();
+
     }
 
     void FixedUpdate()
@@ -155,6 +160,25 @@ public class PlayerMovement : MonoBehaviour {
         moveVelocity = transform.forward * moveSpeed * Mathf.Clamp(moveInput.magnitude, 0, 1);
 
         
+    }
+
+    void DisableGravityOnIdle()
+    {
+        if (!Input.GetKey(InputManager.IM.east) && !Input.GetKey(InputManager.IM.west) && !Input.GetKey(InputManager.IM.north) && !Input.GetKey(InputManager.IM.south))
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            rb.useGravity = true;
+            timer = 0;
+        }
+
+        if (timer > 1)
+        {
+            rb.useGravity = false;
+        }
+
     }
 
     private int InvertAxis(bool direction)
