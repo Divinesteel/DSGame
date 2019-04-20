@@ -83,11 +83,11 @@ public class FlyingPetInteract : Pet {
             }
         }
 
-        if (interactableObject != null)
+        if (interact)
         {
             try
             {
-                if ((interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == true) && !hasFinishedTweeting)
+                if (distantInteractableObject.Equals("Crystal Wind")  && !hasFinishedTweeting)
                 {
 
                     if (!tweetSound.isPlaying)
@@ -99,32 +99,10 @@ public class FlyingPetInteract : Pet {
                     tweetSound.volume = tweetVolume;
                     IsTweeting = true;
                 }
-                else if (interactableObject.gameObject.GetComponent<CrystalWindTweet>().TweetableStatus() == false)
-                {
-                    IsTweeting = false;
-                }
             }
             catch
             {
 
-            }
-        }
-        
-
-        
-
-        if (!IsTweeting)
-        {
-            if (tweetSound.volume > 0)
-            {
-                tweetSound.volume -= Time.deltaTime * 2;
-            }
-            else
-            {
-                if (tweetSound.isPlaying)
-                {
-                    tweetSound.Stop();
-                }
             }
         }
     }
