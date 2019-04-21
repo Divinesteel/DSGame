@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Click_Light : MonoBehaviour {
 
-	private bool isFlashLightOn = false;
+	private bool isFlashLightOn = true;
 	public float maxIntensity;
 	public float duration;
 

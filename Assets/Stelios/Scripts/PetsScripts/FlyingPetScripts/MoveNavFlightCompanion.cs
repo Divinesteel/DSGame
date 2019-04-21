@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class MoveNavFlightCompanion : MonoBehaviour
 {
@@ -67,23 +68,26 @@ public class MoveNavFlightCompanion : MonoBehaviour
                 Debug.DrawRay(hit.point, target.transform.position - hit.point, Color.blue); //create ray from player to hit point
                 if (Physics.Raycast(ray.origin, ray.direction, out hit) && (target.transform.position - hit.point).magnitude < maxDistance)
                 {
-                    if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 10) // 9 = Ground, 10 = Flying
+                    if (!IsPointerOverUIObject())
                     {
-                        Instantiate(onClickParticle, new Vector3(hit.point.x, hit.point.y + 0.1f, hit.point.z), onClickParticle.transform.rotation);
-                        isFollowingTarget = false;
-                                          
-                        pathToTarget = new NavMeshPath();
-                        navMeshAgent.CalculatePath(hit.point, pathToTarget); //Checks if there is Available Path to Destination
-                        if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
+                        if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 10) // 9 = Ground, 10 = Flying
                         {
+                            Instantiate(onClickParticle, new Vector3(hit.point.x, hit.point.y + 0.1f, hit.point.z), onClickParticle.transform.rotation);
+                            isFollowingTarget = false;
 
+                            pathToTarget = new NavMeshPath();
+                            navMeshAgent.CalculatePath(hit.point, pathToTarget); //Checks if there is Available Path to Destination
+                            if (pathToTarget.status == NavMeshPathStatus.PathInvalid || pathToTarget.status == NavMeshPathStatus.PathPartial)
+                            {
+
+                            }
+                            else
+                            {
+                                navMeshAgent.destination = hit.point;
+                                navMeshAgent.isStopped = false;
+                            }
                         }
-                        else
-                        {
-                            navMeshAgent.destination = hit.point;
-                            navMeshAgent.isStopped = false;
-                        }
-                    }    
+                    }
                 }
             }
         }
@@ -97,5 +101,14 @@ public class MoveNavFlightCompanion : MonoBehaviour
 
     }
 
+    //When Touching UI
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
 
 }

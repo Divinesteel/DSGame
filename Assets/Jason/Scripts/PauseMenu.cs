@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuCanvas;
     public GameObject titleMenuCanvas;
+    public GameObject TutorialCanvas;
     public GameObject titleCamera;
     public GameObject SettingsMenuCanvas;
     public GameObject HUDUI;
@@ -69,15 +70,15 @@ public class PauseMenu : MonoBehaviour {
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackGroundPet.ToString();
             else if (menuPanel.transform.GetChild(i).name == "Call Back Bird Button")
                 menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackFlyingPet.ToString();
-            else if (menuPanel.transform.GetChild(i).name == "Command Range Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.commandRange.ToString();
-            else if (menuPanel.transform.GetChild(i).name == "Toggle Command Range Button")
-            {
-                if (InputManager.IM.toggleCommand)
-                {
-                    menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Toggle";
-                }else menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Hold";
-            }
+            //else if (menuPanel.transform.GetChild(i).name == "Command Range Button")
+            //    menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.commandRange.ToString();
+            //else if (menuPanel.transform.GetChild(i).name == "Toggle Command Range Button")
+            //{
+            //    if (InputManager.IM.toggleCommand)
+            //    {
+            //        menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Toggle";
+            //    }else menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = "Hold";
+            //}
         }
     }
 
@@ -94,6 +95,11 @@ public class PauseMenu : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Tutorial();
+        }
+
         if (!titleMenuCanvas.activeSelf && Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameIsPaused)
@@ -140,6 +146,18 @@ public class PauseMenu : MonoBehaviour {
         else
         {
             SettingsMenuCanvas.SetActive(false);
+        }
+    }
+
+    public void Tutorial()
+    {
+        if (TutorialCanvas.activeSelf == false)
+        {
+            TutorialCanvas.SetActive(true);
+        }
+        else
+        {
+            TutorialCanvas.SetActive(false);
         }
     }
 
