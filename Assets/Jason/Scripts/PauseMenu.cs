@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class PauseMenu : MonoBehaviour {
 
     public GameObject menuPanel;
@@ -149,17 +150,6 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
-    public void Tutorial()
-    {
-        if (TutorialCanvas.activeSelf == false)
-        {
-            TutorialCanvas.SetActive(true);
-        }
-        else
-        {
-            TutorialCanvas.SetActive(false);
-        }
-    }
 
     void OnGUI()
     {
@@ -305,27 +295,41 @@ public class PauseMenu : MonoBehaviour {
                 buttonText.text = InputManager.IM.callBackFlyingPet.ToString(); //set button text to new key
                 PlayerPrefs.SetString("flyingPetKey", InputManager.IM.callBackFlyingPet.ToString()); //save new key to playerprefs
                 break;
-            case "Command Range Button":
-                InputManager.IM.commandRange = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.commandRange.ToString(); //set button text to new key
-                PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
-                break;
+            //case "Command Range Button":
+            //    InputManager.IM.commandRange = newKey; //set jump to new keycode
+            //    buttonText.text = InputManager.IM.commandRange.ToString(); //set button text to new key
+            //    PlayerPrefs.SetString("commandRangeKey", InputManager.IM.commandRange.ToString()); //save new key to playerprefs
+            //    break;
         }
         keyPressed = false;
         yield return null;
     }
 
-    public void Toggle()
-    {
-        InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
-        if (InputManager.IM.toggleCommand)
-        {
-            buttonText.text = "Toggle";
-        }
-        else buttonText.text = "Hold";
-    }
+    //public void Toggle()
+    //{
+    //    InputManager.IM.toggleCommand = !InputManager.IM.toggleCommand;
+    //    if (InputManager.IM.toggleCommand)
+    //    {
+    //        buttonText.text = "Toggle";
+    //    }
+    //    else buttonText.text = "Hold";
+    //}
+
 
     #endregion
+
+
+    public void Tutorial()
+    {
+        if (TutorialCanvas.activeSelf == false)
+        {
+            TutorialCanvas.SetActive(true);
+        }
+        else
+        {
+            TutorialCanvas.SetActive(false);
+        }
+    }
 
     public void QuitGame()
     {

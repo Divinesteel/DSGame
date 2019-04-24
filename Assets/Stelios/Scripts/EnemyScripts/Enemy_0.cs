@@ -17,6 +17,9 @@ public class Enemy_0 : MonoBehaviour
     Quaternion tempRot;
     int tempDest;
     NavMeshPath tempPath;
+
+    bool spotted;
+
     bool temphasRotated ;
     bool tempArrived;
     bool tempCanSee;
@@ -74,7 +77,7 @@ public class Enemy_0 : MonoBehaviour
             transform.Find("Spotlight").GetComponent<Light>().color = new Color(255, 255, 255, 255);
             transform.Find("Spotlight").GetComponent<Light>().intensity = 0.05f;
 
-            if (agent.remainingDistance < agent.stoppingDistance)
+            if (agent.enabled && agent.remainingDistance < agent.stoppingDistance)
             {
                 if (!arrived)
                 {
@@ -109,7 +112,7 @@ public class Enemy_0 : MonoBehaviour
             }
         }
 
-        if (canSee)
+        if (agent.enabled && canSee)
         {
             if (!alerted)
             {
@@ -162,34 +165,67 @@ public class Enemy_0 : MonoBehaviour
 
     IEnumerator GoToNextPoint()
     {
-        if (patrolTargetsPosition.Length == 0)
+        if( agent.enabled)
         {
-            yield break;
+            if (patrolTargetsPosition.Length == 0)
+            {
+                yield break;
+            }
+
+            patrolling = true;
+
+            yield return new WaitForSeconds(patrolTargetsTime[destIndex]);
+
+            arrived = false;
+
+            agent.destination = patrolTargetsPosition[destIndex].position;
+            hasRotated = false;
         }
-
-        patrolling = true;
-
-        yield return new WaitForSeconds(patrolTargetsTime[destIndex]);
-
-        arrived = false;
-
-        agent.destination = patrolTargetsPosition[destIndex].position;
-        hasRotated = false;
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag=="Player")
+        if (other.gameObject.tag == "Player")
         {
+            spotted = true;
+            agent.enabled = true;
+            //agent.SetDestination(lastKnownPosition);
+            //agent.path = tempPath;
+            //destIndex = tempDest;
             patrolling = false;
             canSee = true;
             target = other.gameObject.transform;
+            Debug.Log("man spotted");
+        }
+
+        if (other.gameObject.tag == "GroundPet" && !spotted)
+        {
+            Debug.Log("tiger spotted");
+            transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
+            tempDest = destIndex;
+            tempPath = agent.path;
+            //agent.ResetPath();
+            patrolling = false;
+            agent.enabled = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "GroundPet")
+        {
+            patrolling = true;
+            agent.enabled = true;
+            agent.SetDestination(lastKnownPosition);
+            agent.path = tempPath;
+            destIndex = tempDest;
         }
     }
 
     void KillPlayer()
     {
         playerController.KillPlayer();
+        spotted = false;
         //agent.ResetPath();
     }
 
