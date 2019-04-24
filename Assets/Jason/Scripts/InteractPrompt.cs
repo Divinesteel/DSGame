@@ -8,6 +8,10 @@ public class InteractPrompt : MonoBehaviour {
     public GameObject TextPrompt;
     public Text TextValue;
 
+    private void Start()
+    {
+        TextPrompt.SetActive(false);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")

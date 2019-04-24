@@ -74,7 +74,7 @@ public class BurriedBarrel : Burried {
         base.OnTriggerEnter(other);
         if (other.gameObject.tag == "Player")
         {
-            if (base.hasBeingDigged)
+            if (base.hasBeingDigged && gameObject.name == "BurriedBarel")
             {
                 TextValue.text = "Throw";
                 TextPrompt.SetActive(true);

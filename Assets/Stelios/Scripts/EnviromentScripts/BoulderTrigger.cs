@@ -23,6 +23,9 @@ public class BoulderTrigger : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        //TextPrompt = GameObject.Find("Interact Promt CANVAS");
+        //TextValue = GameObject.Find("Interaction Text").GetComponent<Text>();
+
         boulderAnim = GetComponent<Animator>();
 		isBoulderTriggered = false;
 		isAnimPlaying = false;
