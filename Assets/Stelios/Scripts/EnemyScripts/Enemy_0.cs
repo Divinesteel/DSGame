@@ -45,6 +45,7 @@ public class Enemy_0 : MonoBehaviour
     [SerializeField] bool arrived;
     [SerializeField] bool canSee;
     [SerializeField] bool alerted;
+    [SerializeField] bool tigerGrowling;
 
     public AudioSource PunchClip;
     public AudioSource AlertClip;
@@ -195,13 +196,17 @@ public class Enemy_0 : MonoBehaviour
             patrolling = false;
             canSee = true;
             target = other.gameObject.transform;
-            Debug.Log("man spotted");
+            tigerGrowling = false;
         }
 
         if (other.gameObject.tag == "GroundPet" && !spotted)
         {
-            Debug.Log("tiger spotted");
             transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
+            if (!tigerGrowling)
+            {
+                other.gameObject.GetComponent<AudioSource>().Play();
+                tigerGrowling = true;
+            }
             tempDest = destIndex;
             tempPath = agent.path;
             //agent.ResetPath();
@@ -214,6 +219,8 @@ public class Enemy_0 : MonoBehaviour
     {
         if (other.gameObject.tag == "GroundPet")
         {
+            other.gameObject.GetComponent<AudioSource>().Stop();
+            tigerGrowling = false;
             patrolling = true;
             agent.enabled = true;
             agent.SetDestination(lastKnownPosition);
