@@ -186,6 +186,8 @@ public class Enemy_0 : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        #region Chase Player
+
         if (other.gameObject.tag == "Player")
         {
             spotted = true;
@@ -199,35 +201,53 @@ public class Enemy_0 : MonoBehaviour
             tigerGrowling = false;
         }
 
+        #endregion
+
+        #region Freeze-Scared by Tiger
+
         if (other.gameObject.tag == "GroundPet" && !spotted)
         {
-            transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
-            if (!tigerGrowling)
+            if (Input.GetKey(InputManager.IM.orderGroundPet))
             {
-                other.gameObject.GetComponent<AudioSource>().Play();
-                tigerGrowling = true;
+                transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
+                if (!tigerGrowling)
+                {
+                    other.gameObject.GetComponent<AudioSource>().Play();
+                    tigerGrowling = true;
+                }
+                tempDest = destIndex;
+                tempPath = agent.path;
+                //agent.ResetPath();
+                patrolling = false;
+                agent.enabled = false;
             }
-            tempDest = destIndex;
-            tempPath = agent.path;
-            //agent.ResetPath();
-            patrolling = false;
-            agent.enabled = false;
+            else
+            {
+                other.gameObject.GetComponent<AudioSource>().Stop();
+                tigerGrowling = false;
+                patrolling = true;
+                agent.enabled = true;
+                agent.SetDestination(lastKnownPosition);
+                agent.path = tempPath;
+                destIndex = tempDest;
+            }
         }
+        #endregion
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "GroundPet")
-        {
-            other.gameObject.GetComponent<AudioSource>().Stop();
-            tigerGrowling = false;
-            patrolling = true;
-            agent.enabled = true;
-            agent.SetDestination(lastKnownPosition);
-            agent.path = tempPath;
-            destIndex = tempDest;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "GroundPet")
+    //    {
+    //        other.gameObject.GetComponent<AudioSource>().Stop();
+    //        tigerGrowling = false;
+    //        patrolling = true;
+    //        agent.enabled = true;
+    //        agent.SetDestination(lastKnownPosition);
+    //        agent.path = tempPath;
+    //        destIndex = tempDest;
+    //    }
+    //}
 
     void KillPlayer()
     {
