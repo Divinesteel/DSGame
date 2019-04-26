@@ -75,8 +75,11 @@ public class Enemy_0 : MonoBehaviour
 
         if (patrolling)
         {
-            transform.Find("Spotlight").GetComponent<Light>().color = new Color(255, 255, 255, 255);
-            transform.Find("Spotlight").GetComponent<Light>().intensity = 0.05f;
+            if (!tigerGrowling)
+            {
+                transform.Find("Spotlight").GetComponent<Light>().color = new Color(255, 255, 255, 255);
+                transform.Find("Spotlight").GetComponent<Light>().intensity = 0.05f;
+            }
 
             if (agent.enabled && agent.remainingDistance < agent.stoppingDistance)
             {
@@ -209,6 +212,8 @@ public class Enemy_0 : MonoBehaviour
         {
             if (Input.GetKey(InputManager.IM.orderGroundPet))
             {
+                patrolling = false;
+                agent.enabled = false;
                 transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
                 if (!tigerGrowling)
                 {
@@ -218,8 +223,6 @@ public class Enemy_0 : MonoBehaviour
                 tempDest = destIndex;
                 tempPath = agent.path;
                 //agent.ResetPath();
-                patrolling = false;
-                agent.enabled = false;
             }
             else
             {

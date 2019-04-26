@@ -47,6 +47,8 @@ public class BurriedBarrel : Burried {
             if (hasDigAnimationStarted && !barelAnim.IsPlaying("Animation_BurriedBarel"))
             {
                 base.SetDigStatusTrue();
+
+                GetComponent<BoxCollider>().enabled = false;
             }
         }
         else
@@ -57,11 +59,12 @@ public class BurriedBarrel : Burried {
                 {
                     barelAnim.Play("Animation_BarelRiver");
                     hasBeenThrownToRiver = true;
+
                     foreach (CapsuleCollider cc in GetComponents<CapsuleCollider>())
                     {
+                        cc.enabled = false;
                         TextPrompt.SetActive(false);
                         TextValue.text = "Pick Up";
-                        cc.enabled = false;
                     }
                 }
             }

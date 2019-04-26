@@ -10,7 +10,6 @@ public class PortalActivation : MonoBehaviour {
     public GameObject crystalFire;
     public GameObject crystalWind;
     public GameObject magicCircle;
-    public GameObject BrightFloor;
     public GameObject players;
     public GameObject white;
     private Image image;
@@ -23,15 +22,14 @@ public class PortalActivation : MonoBehaviour {
         image = white.GetComponent<Image>();
         white.SetActive(false);
         magicCircle.SetActive(false);
-        BrightFloor.SetActive(false);
         EndText.SetActive(false);
     }
-    // Update is called once per frame
+
     void Update () {
-		if (crystalWater.activeSelf && crystalEarth.activeSelf && crystalFire.activeSelf && crystalWind.activeSelf && !magicCircle.activeSelf && !BrightFloor.activeSelf)
+		if (crystalWater.activeSelf && crystalEarth.activeSelf && crystalFire.activeSelf && crystalWind.activeSelf && !magicCircle.activeSelf )
         {
             magicCircle.SetActive(true);
-            BrightFloor.SetActive(true);
+            GetComponent<Renderer>().material.color = new Color(2, 5, 10, 0.1f);
         }
 	}
 
@@ -44,8 +42,7 @@ public class PortalActivation : MonoBehaviour {
                 white.SetActive(true);
                 Color curColor = image.color;
                 float alphaDiff = Mathf.Abs(curColor.a - targetAlpha);
-                //Debug.Log(curColor.a);
-                //Debug.Log(targetAlpha);
+                
                 if (alphaDiff > 0.0001f)
                 {
                     curColor.a = Mathf.Lerp(curColor.a, targetAlpha, FadeRate * Time.deltaTime);
