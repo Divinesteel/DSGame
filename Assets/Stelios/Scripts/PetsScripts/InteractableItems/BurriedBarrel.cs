@@ -92,6 +92,8 @@ public class BurriedBarrel : Burried {
         base.OnTriggerExit(other);
         if(other.gameObject.tag == "Player")
         {
+            TextPrompt.SetActive(false);
+            TextValue.text = "Pick Up";
             playerInteract = null;
         }
     }

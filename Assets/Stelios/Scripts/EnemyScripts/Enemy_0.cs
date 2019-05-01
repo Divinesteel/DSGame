@@ -20,10 +20,11 @@ public class Enemy_0 : MonoBehaviour
 
     bool spotted;
 
-    bool temphasRotated ;
-    bool tempArrived;
-    bool tempCanSee;
-    bool tempPatrolling;
+    [SerializeField] private bool tempAlive;
+    [SerializeField] private bool temphasRotated ;
+    [SerializeField] private bool tempArrived;
+    [SerializeField] private bool tempCanSee;
+    [SerializeField] private bool tempPatrolling;
 
     private Transform target;
 
@@ -40,12 +41,13 @@ public class Enemy_0 : MonoBehaviour
 
     float RotateTime;
 
-    [SerializeField] bool hasRotated;
-    [SerializeField] bool patrolling;
-    [SerializeField] bool arrived;
-    [SerializeField] bool canSee;
-    [SerializeField] bool alerted;
-    [SerializeField] bool tigerGrowling;
+    [SerializeField] private bool alive;
+    [SerializeField] private bool hasRotated;
+    [SerializeField] private bool patrolling;
+    [SerializeField] private bool arrived;
+    [SerializeField] private bool canSee;
+    [SerializeField] private bool alerted;
+    [SerializeField] private bool tigerGrowling;
 
     public AudioSource PunchClip;
     public AudioSource AlertClip;
@@ -53,6 +55,7 @@ public class Enemy_0 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        alive = true;
         alerted = false;
         agent = GetComponent<NavMeshAgent>();
         startingSpeed = agent.speed;
@@ -193,8 +196,9 @@ public class Enemy_0 : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
+            GameObject.FindWithTag("GroundPet").GetComponent<AudioSource>().Stop();
             spotted = true;
-            agent.enabled = true;
+            agent.isStopped = false;
             //agent.SetDestination(lastKnownPosition);
             //agent.path = tempPath;
             //destIndex = tempDest;
@@ -213,15 +217,15 @@ public class Enemy_0 : MonoBehaviour
             if (Input.GetKey(InputManager.IM.orderGroundPet))
             {
                 patrolling = false;
-                agent.enabled = false;
+                agent.isStopped = true;
                 transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
                 if (!tigerGrowling)
                 {
                     other.gameObject.GetComponent<AudioSource>().Play();
                     tigerGrowling = true;
                 }
-                tempDest = destIndex;
-                tempPath = agent.path;
+                //tempDest = destIndex;
+                //tempPath = agent.path;
                 //agent.ResetPath();
             }
             else
@@ -229,10 +233,10 @@ public class Enemy_0 : MonoBehaviour
                 other.gameObject.GetComponent<AudioSource>().Stop();
                 tigerGrowling = false;
                 patrolling = true;
-                agent.enabled = true;
-                agent.SetDestination(lastKnownPosition);
-                agent.path = tempPath;
-                destIndex = tempDest;
+                agent.isStopped = false;
+                //agent.SetDestination(lastKnownPosition);
+                //agent.path = tempPath;
+                //destIndex = tempDest;
             }
         }
         #endregion
@@ -256,12 +260,15 @@ public class Enemy_0 : MonoBehaviour
     {
         playerController.KillPlayer();
         spotted = false;
+        alive = false;
         //agent.ResetPath();
     }
 
 	public void KIllThisEnemy()
 	{
         //this.gameObject.SetActive(false);
+
+        GameObject.FindWithTag("GroundPet").GetComponent<AudioSource>().Stop();
         this.agent.enabled = false;
         transform.position = new Vector3 (0, -34, 0);
         //Destroy(this.gameObject);
@@ -278,6 +285,7 @@ public class Enemy_0 : MonoBehaviour
         tempArrived = arrived;
         tempCanSee = canSee;
         tempPatrolling = patrolling;
+        tempAlive = alive;
 
         tempPos = transform.position;
         tempRot = transform.rotation;
@@ -290,27 +298,31 @@ public class Enemy_0 : MonoBehaviour
         //agent.ResetPath();
         //KIllThisEnemy();
 
-        transform.position = tempPos;
-        transform.rotation = tempRot;
+        if (agent.enabled)
+        {
+            transform.position = tempPos;
+            transform.rotation = tempRot;
 
-        agent.speed = startingSpeed;
-        anim.SetBool("Attack", false);
-        anim.SetLayerWeight(1, 0);
+            agent.speed = startingSpeed;
+            anim.SetBool("Attack", false);
+            anim.SetLayerWeight(1, 0);
 
-        destIndex = tempDest;
+            destIndex = tempDest;
 
-        agent.path = tempPath;
-        //if (patrolTargetsPosition.Length > 1)
-        //{
-        agent.destination = patrolTargetsPosition[destIndex].position;
-        //}
+            agent.path = tempPath;
+            //if (patrolTargetsPosition.Length > 1)
+            //{
+            agent.destination = patrolTargetsPosition[destIndex].position;
+            //}
 
-        hasRotated = temphasRotated;
-        arrived = tempArrived;
-        canSee = tempCanSee;
-        patrolling = tempPatrolling;
+            hasRotated = temphasRotated;
+            arrived = tempArrived;
+            canSee = tempCanSee;
+            patrolling = tempPatrolling;
 
-        //RotateTime = 0;
-        //stopMoving = false;
+            //RotateTime = 0;
+            //stopMoving = false;
+        }
     }
+
 }

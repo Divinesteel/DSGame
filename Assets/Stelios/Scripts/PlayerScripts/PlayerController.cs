@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         //GetComponent<Animator>().enabled = false;
         //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         //GetComponent<Rigidbody>().isKinematic = true;
-        gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        CheckpointCtrl.CPC.LoadCheckpoint();
         Debug.Log("First Load");
     }
 
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     public void RevivePlayer()
     {
         //StartCoroutine(WaitTransition());
-        gameObject.GetComponent<CheckpointCtrl>().LoadCheckpoint();
+        CheckpointCtrl.CPC.LoadCheckpoint();
         PlayerStatus = PlayerStat.Alive;
         Debug.Log("Second Load");
     }

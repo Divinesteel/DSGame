@@ -16,9 +16,9 @@ public class CrystalWindTweet : TweetableObject {
 
     protected override void OnTweetFinish()
     {
-        animation.Play();
         animationRoot.GetComponent<Animation>().Play();
         GetComponents<CapsuleCollider>()[0].enabled = false;
+        animation.Play();
     }
 
     public bool TweetableStatus()

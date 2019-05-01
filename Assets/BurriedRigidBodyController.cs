@@ -8,7 +8,7 @@ public class BurriedRigidBodyController : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<NavMeshAgent>().enabled = false;
+        //GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
         GetComponent<NavMeshObstacle>().enabled = true;
     }
@@ -19,8 +19,8 @@ public class BurriedRigidBodyController : MonoBehaviour {
         {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<BoxCollider>().enabled = true;
-            GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<NavMeshObstacle>().enabled = false;
+            //GetComponent<NavMeshAgent>().enabled = true;
+            //GetComponent<NavMeshObstacle>().enabled = false;
         }
 	}
 }

@@ -60,7 +60,7 @@ public class BoulderTrigger : MonoBehaviour {
 				if (playerInteract.InteractStatus())
 				{
 					isBoulderTriggered = true;
-                    player.GetComponent<CheckpointCtrl>().SaveCheckpoint();
+                    CheckpointCtrl.CPC.SaveCheckpoint();
                 }
             }
         }

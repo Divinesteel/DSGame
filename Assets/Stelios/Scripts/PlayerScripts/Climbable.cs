@@ -18,15 +18,16 @@ public class Climbable : MonoBehaviour {
     //    TextPrompt = GameObject.Find("Interact Prompt CANVAS");
     //    TextValue = GameObject.Find("Interaction Text").GetComponent<Text>();
     //}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    // Update is called once per frame
+    void Update()
+    {
+
         if (TextPrompt.activeSelf)
         {
             TextPrompt.transform.position = GameObject.Find("Peasant_Man").transform.position + new Vector3(0, 2.5f, 0);
         }
-	}
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,10 +41,18 @@ public class Climbable : MonoBehaviour {
         }
     }
 
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    TextValue.text = "Climb";
+    //    TextPrompt.SetActive(true);
+    //    TextPrompt.transform.position = other.gameObject.transform.position + new Vector3(0, 2, 0);
+    //}
+
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
+            Debug.Log("hmmmm");
             TextPrompt.SetActive(false);
             TextValue.text = "Pick Up";
             other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(null,0);            

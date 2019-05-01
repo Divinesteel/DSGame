@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class BridgeTrigger : MonoBehaviour {
 
-    public GameObject checkPointController;
     public GameObject bridgeGround;
     public GameObject block;
 
@@ -48,7 +47,7 @@ public class BridgeTrigger : MonoBehaviour {
 
     public void FallBridge()
     {
-        checkPointController.GetComponent<CheckpointCtrl>().SaveCheckpoint();
+        CheckpointCtrl.CPC.SaveCheckpoint();
         isBridgeTriggered = true;
         animation.Play("Animation_Bridge");
         isBridgeFalling = true;
