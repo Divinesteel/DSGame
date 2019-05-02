@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
+    public static PauseMenu PM;
+
     public GameObject menuPanel;
     public static bool gameIsPaused = false;
     public GameObject pauseMenuCanvas;
@@ -18,6 +20,7 @@ public class PauseMenu : MonoBehaviour {
     public GameObject NoteCanvas;
 
     public Text TextPrompt;
+    public Text TigerButton;
 
     Event keyEvent;
     Button BindingButton;
@@ -51,26 +54,43 @@ public class PauseMenu : MonoBehaviour {
         for (int i = 0; i < menuPanel.transform.childCount; i++)
         {
             if (menuPanel.transform.GetChild(i).name == "Move North Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.north.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.north.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Move South Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.south.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.south.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Move West Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.west.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.west.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Move East Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.east.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.east.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Interact Button")
             {
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.interact.ToString();
-                TextPrompt.text = InputManager.IM.interact.ToString();
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.interact.ToString());
+                TextPrompt.text = TranslateInput(InputManager.IM.interact.ToString());
             }
             else if (menuPanel.transform.GetChild(i).name == "Order Tiger Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.orderGroundPet.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.orderGroundPet.ToString());
+                TigerButton.text = TranslateInput(InputManager.IM.orderGroundPet.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Order Bird Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.orderFlyingPet.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.orderFlyingPet.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Call Back Tiger Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackGroundPet.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.callBackGroundPet.ToString());
+            }
             else if (menuPanel.transform.GetChild(i).name == "Call Back Bird Button")
-                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.callBackFlyingPet.ToString();
+            {
+                menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = TranslateInput(InputManager.IM.callBackFlyingPet.ToString());
+            }
             //else if (menuPanel.transform.GetChild(i).name == "Command Range Button")
             //    menuPanel.transform.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.commandRange.ToString();
             //else if (menuPanel.transform.GetChild(i).name == "Toggle Command Range Button")
@@ -83,13 +103,44 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
+    private string TranslateInput (string input)
+    {
+        switch (input)
+        {
+            case "Alpha1":
+                return "1";
+            case "Alpha2":
+                return "2";
+            case "Alpha3":
+                return "3";
+            case "Mouse0":
+                return "Left Mouse Btn";
+            case "Mouse1":
+                return "Right Mouse Btn";
+            case "Mouse2":
+                return "Middle Mouse Btn";
+            default:
+                return input;
+        }
+    }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (PM == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            PM = this;
+        }
+        else if (PM != this)
+        {
+            Destroy(gameObject);
+        }
+
         titleCamera.SetActive(true);
         pauseMenuCanvas.SetActive(false);
         SettingsMenuCanvas.SetActive(false);
+        HUDUI.GetComponent<Canvas>().enabled = false;
+        TutorialCanvas.SetActive(false);
         Time.timeScale = 1f;
     }
 
@@ -149,8 +200,7 @@ public class PauseMenu : MonoBehaviour {
             SettingsMenuCanvas.SetActive(false);
         }
     }
-
-
+    
     void OnGUI()
     {
         /*keyEvent dictates what key our user presses
@@ -251,48 +301,49 @@ public class PauseMenu : MonoBehaviour {
         {
             case "Move North Button":
                 InputManager.IM.north = newKey; //Set forward to new keycode
-                buttonText.text = InputManager.IM.north.ToString(); //Set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.north.ToString()); //Set button text to new key
                 PlayerPrefs.SetString("northKey", InputManager.IM.north.ToString()); //save new key to PlayerPrefs
                 break;
             case "Move South Button":
                 InputManager.IM.south = newKey; //set backward to new keycode
-                buttonText.text = InputManager.IM.south.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.south.ToString()); //set button text to new key
                 PlayerPrefs.SetString("southKey", InputManager.IM.south.ToString()); //save new key to PlayerPrefs
                 break;
             case "Move West Button":
                 InputManager.IM.west = newKey; //set left to new keycode
-                buttonText.text = InputManager.IM.west.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.west.ToString()); //set button text to new key
                 PlayerPrefs.SetString("westKey", InputManager.IM.west.ToString()); //save new key to playerprefs
                 break;
             case "Move East Button":
                 InputManager.IM.east = newKey; //set right to new keycode
-                buttonText.text = InputManager.IM.east.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.east.ToString()); //set button text to new key
                 PlayerPrefs.SetString("eastKey", InputManager.IM.east.ToString()); //save new key to playerprefs
                 break;
             case "Interact Button":
                 InputManager.IM.interact = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.interact.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.interact.ToString()); //set button text to new key
                 PlayerPrefs.SetString("interactKey", InputManager.IM.interact.ToString()); //save new key to playerprefs
-                TextPrompt.text = InputManager.IM.interact.ToString();
+                TextPrompt.text = TranslateInput(InputManager.IM.interact.ToString());
                 break;
             case "Order Tiger Button":
                 InputManager.IM.orderGroundPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.orderGroundPet.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.orderGroundPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("groundPetKey", InputManager.IM.orderGroundPet.ToString()); //save new key to playerprefs
                 break;
             case "Order Bird Button":
                 InputManager.IM.orderFlyingPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.orderFlyingPet.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.orderFlyingPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("flyingPetKey", InputManager.IM.orderFlyingPet.ToString()); //save new key to playerprefs
                 break;
             case "Call Back Tiger Button":
                 InputManager.IM.callBackGroundPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.callBackGroundPet.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.callBackGroundPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("groundPetKey", InputManager.IM.callBackGroundPet.ToString()); //save new key to playerprefs
+                TigerButton.text = TranslateInput(InputManager.IM.orderGroundPet.ToString());
                 break;
             case "Call Back Bird Button":
                 InputManager.IM.callBackFlyingPet = newKey; //set jump to new keycode
-                buttonText.text = InputManager.IM.callBackFlyingPet.ToString(); //set button text to new key
+                buttonText.text = TranslateInput(InputManager.IM.callBackFlyingPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("flyingPetKey", InputManager.IM.callBackFlyingPet.ToString()); //save new key to playerprefs
                 break;
             //case "Command Range Button":

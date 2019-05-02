@@ -19,6 +19,7 @@ public class FlyingPetPickUpCrystal : MonoBehaviour {
             if (flyingPetInteract.GetInteractStatus() && !hasBeenTriggered)
             {
                 hasBeenTriggered = true;
+                GetComponent<SetPetCursorOnHover>().Active = false;
             }
         }
 

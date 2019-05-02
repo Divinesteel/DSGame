@@ -19,6 +19,7 @@ public class CrystalWindTweet : TweetableObject {
         animationRoot.GetComponent<Animation>().Play();
         GetComponents<CapsuleCollider>()[0].enabled = false;
         animation.Play();
+        GetComponent<SetPetCursorOnHover>().Active = false;
     }
 
     public bool TweetableStatus()

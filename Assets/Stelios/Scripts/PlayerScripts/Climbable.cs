@@ -41,22 +41,23 @@ public class Climbable : MonoBehaviour {
         }
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    TextValue.text = "Climb";
-    //    TextPrompt.SetActive(true);
-    //    TextPrompt.transform.position = other.gameObject.transform.position + new Vector3(0, 2, 0);
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
+        {
+            TextValue.text = "Climb";
+            TextPrompt.SetActive(true);
+            TextPrompt.transform.position = other.gameObject.transform.position + new Vector3(0, 2, 0);
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
-            Debug.Log("hmmmm");
             TextPrompt.SetActive(false);
             TextValue.text = "Pick Up";
             other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(null,0);            
         }
     }
-
 }

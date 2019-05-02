@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Paper : MonoBehaviour {
 
-    public GameObject player;
     private PlayerInteract playerInteract;
 
     public GameObject NoteCanvas;
@@ -14,7 +13,8 @@ public class Paper : MonoBehaviour {
     {
         NoteCanvas.GetComponent<Canvas>().enabled = false;
     }
-    protected void OnTriggerStay(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {

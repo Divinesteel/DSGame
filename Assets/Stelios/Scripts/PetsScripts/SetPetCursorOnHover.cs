@@ -45,5 +45,10 @@ public class SetPetCursorOnHover : MonoBehaviour {
         Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
     }
 
+    private void OnDestroy()
+    {
+        Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
+    }
+
 
 }

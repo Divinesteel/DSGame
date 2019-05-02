@@ -87,6 +87,21 @@ public class BurriedBarrel : Burried {
         }
     }
 
+    protected void OnTriggerStay(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if (other.gameObject.tag == "Player")
+        {
+            if (base.hasBeingDigged && gameObject.name == "BurriedBarel")
+            {
+                TextValue.text = "Throw";
+                TextPrompt.SetActive(true);
+                TextPrompt.transform.position = transform.GetChild(0).position + new Vector3(0, 2, 0);
+            }
+            playerInteract = other.gameObject.GetComponent<PlayerInteract>();
+        }
+    }
+
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
