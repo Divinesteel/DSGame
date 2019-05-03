@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
             EndPosValue = new Vector3(endPos.position.x, endPos.position.y, endPos.position.z);
             jumpHeightValue = jumpHeight;
             rb.isKinematic = true;
-            col.enabled = false;
+            //col.enabled = false;
 
             //set to exit because of exitTrigger
             jumpHeight = 0;
@@ -225,7 +225,7 @@ public class PlayerMovement : MonoBehaviour {
                 isMov = false;
                 jumpTimer = 0;
                 rb.isKinematic = false;
-                col.enabled = true;
+                //col.enabled = true;
             }
         }
 

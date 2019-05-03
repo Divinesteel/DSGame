@@ -8,7 +8,7 @@ public class TextRemover : MonoBehaviour {
     public GameObject TextPrompt;
     public Text TextValue;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {

@@ -33,6 +33,10 @@ public class Climbable : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
+            if (GetComponent<Rigidbody>() != null)
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+            }
             TextValue.text = "Climb";
             TextPrompt.SetActive(true);
             TextPrompt.transform.position = other.gameObject.transform.position + new Vector3(0, 2, 0);
@@ -48,6 +52,8 @@ public class Climbable : MonoBehaviour {
             TextValue.text = "Climb";
             TextPrompt.SetActive(true);
             TextPrompt.transform.position = other.gameObject.transform.position + new Vector3(0, 2, 0);
+
+            other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(endPosition, height);
         }
     }
 
@@ -55,6 +61,10 @@ public class Climbable : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player_Hidden")
         {
+            if (GetComponent<Rigidbody>() != null)
+            {
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
             TextPrompt.SetActive(false);
             TextValue.text = "Pick Up";
             other.gameObject.GetComponent<PlayerMovement>().SetJumpDestination(null,0);            

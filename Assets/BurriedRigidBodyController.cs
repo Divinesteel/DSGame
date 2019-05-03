@@ -15,12 +15,14 @@ public class BurriedRigidBodyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (GetComponentInParent<BurriedBarrel>().hasBeingDigged == true)
+        if (GetComponentInParent<Burried>().hasBeingDigged == true )
         {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<BoxCollider>().enabled = true;
             //GetComponent<NavMeshAgent>().enabled = true;
             //GetComponent<NavMeshObstacle>().enabled = false;
+            GetComponentInParent<Burried>().hasBeingDigged = false;
+            GetComponentInParent<Burried>().enabled = false;
         }
 	}
 }

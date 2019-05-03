@@ -20,11 +20,11 @@ public class Enemy_0 : MonoBehaviour
 
     bool spotted;
 
-    [SerializeField] private bool tempAlive;
-    [SerializeField] private bool temphasRotated ;
-    [SerializeField] private bool tempArrived;
-    [SerializeField] private bool tempCanSee;
-    [SerializeField] private bool tempPatrolling;
+    private bool tempAlive;
+    private bool temphasRotated ;
+    private bool tempArrived;
+    private bool tempCanSee;
+    private bool tempPatrolling;
 
     private Transform target;
 
@@ -242,19 +242,16 @@ public class Enemy_0 : MonoBehaviour
         #endregion
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.tag == "GroundPet")
-    //    {
-    //        other.gameObject.GetComponent<AudioSource>().Stop();
-    //        tigerGrowling = false;
-    //        patrolling = true;
-    //        agent.enabled = true;
-    //        agent.SetDestination(lastKnownPosition);
-    //        agent.path = tempPath;
-    //        destIndex = tempDest;
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "GroundPet")
+        {
+            other.gameObject.GetComponent<AudioSource>().Stop();
+            tigerGrowling = false;
+            patrolling = true;
+            agent.isStopped = false;
+        }
+    }
 
     void KillPlayer()
     {

@@ -57,11 +57,16 @@ public class BoulderTrigger : MonoBehaviour {
                 TextPrompt.transform.position = transform.position + new Vector3(0, 2, 0);
 
                 playerInteract = other.gameObject.GetComponent<PlayerInteract>();
-				if (playerInteract.InteractStatus())
+				if (playerInteract.InteractStatus() && !isBoulderTriggered)
 				{
 					isBoulderTriggered = true;
                     CheckpointCtrl.CPC.SaveCheckpoint();
+                    //isBoulderTriggered = false;
                 }
+            }
+            else
+            {
+                TextPrompt.SetActive(false);
             }
         }
     }
