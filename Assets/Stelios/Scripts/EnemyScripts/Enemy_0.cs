@@ -249,7 +249,10 @@ public class Enemy_0 : MonoBehaviour
             other.gameObject.GetComponent<AudioSource>().Stop();
             tigerGrowling = false;
             patrolling = true;
-            agent.isStopped = false;
+            if (agent.enabled)
+            {
+                agent.isStopped = false;
+            }
         }
     }
 

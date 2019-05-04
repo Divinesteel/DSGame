@@ -8,9 +8,6 @@ public class BridgeTrigger : MonoBehaviour {
     public GameObject bridgeGround;
     public GameObject block;
 
-    public GameObject TutorialCanvas;
-    public GameObject UICanvas;
-
     Animation animation;
 
     bool isBridgeTriggered;
@@ -22,7 +19,6 @@ public class BridgeTrigger : MonoBehaviour {
     // Use this for initialization
     void Start () {
         animation = GetComponent<Animation>();
-        TutorialCanvas.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -45,9 +41,6 @@ public class BridgeTrigger : MonoBehaviour {
                 Destroy(block);
                 isBridgeTriggered = false;
                 bridgeGround.GetComponent<NavMeshObstacle>().enabled = false;
-                TutorialCanvas.SetActive(true);
-                UICanvas.GetComponent<Canvas>().enabled = false;
-                Time.timeScale = 0f;
             }           
         }
 	}
@@ -70,10 +63,4 @@ public class BridgeTrigger : MonoBehaviour {
         isLeftColumnDestroyed = true;
     }
 
-    public void CloseTutorial()
-    {
-        TutorialCanvas.SetActive(false);
-        UICanvas.GetComponent<Canvas>().enabled = true;
-        Time.timeScale = 1f;
-    }
 }
