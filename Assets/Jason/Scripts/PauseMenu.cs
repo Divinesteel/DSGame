@@ -329,6 +329,7 @@ public class PauseMenu : MonoBehaviour {
                 InputManager.IM.orderGroundPet = newKey; //set jump to new keycode
                 buttonText.text = TranslateInput(InputManager.IM.orderGroundPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("groundPetKey", InputManager.IM.orderGroundPet.ToString()); //save new key to playerprefs
+                TigerButton.text = TranslateInput(InputManager.IM.orderGroundPet.ToString());
                 break;
             case "Order Bird Button":
                 InputManager.IM.orderFlyingPet = newKey; //set jump to new keycode
@@ -339,7 +340,6 @@ public class PauseMenu : MonoBehaviour {
                 InputManager.IM.callBackGroundPet = newKey; //set jump to new keycode
                 buttonText.text = TranslateInput(InputManager.IM.callBackGroundPet.ToString()); //set button text to new key
                 PlayerPrefs.SetString("groundPetKey", InputManager.IM.callBackGroundPet.ToString()); //save new key to playerprefs
-                TigerButton.text = TranslateInput(InputManager.IM.orderGroundPet.ToString());
                 break;
             case "Call Back Bird Button":
                 InputManager.IM.callBackFlyingPet = newKey; //set jump to new keycode

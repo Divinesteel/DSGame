@@ -76,7 +76,7 @@ public class Enemy_0 : MonoBehaviour
             return;
         }
 
-        if (patrolling)
+        if (patrolling && !tigerGrowling)
         {
             if (!tigerGrowling)
             {
@@ -172,7 +172,7 @@ public class Enemy_0 : MonoBehaviour
 
     IEnumerator GoToNextPoint()
     {
-        if( agent.enabled)
+        if (agent.enabled && !tigerGrowling)
         {
             if (patrolTargetsPosition.Length == 0)
             {
@@ -190,12 +190,22 @@ public class Enemy_0 : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "GroundPet" && !spotted)
+        {
+            temphasRotated = hasRotated;
+        }
+     }
+
+
     void OnTriggerStay(Collider other)
     {
         #region Chase Player
 
         if (other.gameObject.tag == "Player")
         {
+            anim.SetBool("isScared", false);
             GameObject.FindWithTag("GroundPet").GetComponent<AudioSource>().Stop();
             spotted = true;
             agent.isStopped = false;
@@ -221,6 +231,9 @@ public class Enemy_0 : MonoBehaviour
                 transform.Find("Spotlight").GetComponent<Light>().color = new Color(0, 80, 255, 255);
                 if (!tigerGrowling)
                 {
+                    hasRotated = true;
+                    anim.SetBool("isScared", true);
+                    anim.SetTrigger("Scared");
                     other.gameObject.GetComponent<AudioSource>().Play();
                     tigerGrowling = true;
                 }
@@ -230,6 +243,9 @@ public class Enemy_0 : MonoBehaviour
             }
             else
             {
+                hasRotated = temphasRotated;
+                anim.SetBool("isScared", false);
+                //anim.SetTrigger("Unscared");
                 other.gameObject.GetComponent<AudioSource>().Stop();
                 tigerGrowling = false;
                 patrolling = true;
@@ -246,6 +262,9 @@ public class Enemy_0 : MonoBehaviour
     {
         if (other.gameObject.tag == "GroundPet")
         {
+            hasRotated = temphasRotated;
+            anim.SetBool("isScared", false);
+            //anim.SetTrigger("Unscared");
             other.gameObject.GetComponent<AudioSource>().Stop();
             tigerGrowling = false;
             patrolling = true;
