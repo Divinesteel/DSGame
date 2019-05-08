@@ -30,7 +30,7 @@ public class InteractPrompt : MonoBehaviour {
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         TextPrompt.SetActive(false);
     }

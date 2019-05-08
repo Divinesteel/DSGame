@@ -121,6 +121,7 @@ public class Enemy_0 : MonoBehaviour
 
         if (agent.enabled && canSee)
         {
+            CheckpointCtrl.CPC.playerDetected = true;
             if (!alerted)
             {
                 AlertClip.Play();
