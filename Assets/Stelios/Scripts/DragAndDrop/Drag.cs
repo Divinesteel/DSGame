@@ -26,7 +26,7 @@ public class Drag : MonoBehaviour {
     public void SetDNDName()
     {
         dragAndDropSystem.SetDraggedItem(text.text);
-        if (text != null && Input.GetKey(InputManager.IM.orderGroundPet))
+        if (!text.text.Equals("") && Input.GetKey(KeyCode.Mouse0))
         {
             //GetComponentInParent<Image>().sprite = ...;
             image = GetComponentInParent<Image>();
